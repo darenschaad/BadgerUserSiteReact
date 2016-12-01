@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import base from '../base';
+import OurCarousel from './OurCarousel';
 
 class App extends Component {
   constructor() {
@@ -26,6 +27,7 @@ class App extends Component {
     return (
       <div className="App">
         <h1>Hello</h1>
+        <OurCarousel />
       </div>
     );
   }
