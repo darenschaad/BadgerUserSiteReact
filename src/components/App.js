@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import base from '../base';
+import OurCarousel from './OurCarousel';
 // import BadgeList from './BadgeList';
 
 class App extends Component {
@@ -32,6 +33,7 @@ class App extends Component {
     return (
       <div className="App">
         <h1>Hello</h1>
+        <OurCarousel />
       </div>
     );
   }
