@@ -1,18 +1,6 @@
 import React, {Component} from 'react';
-import { Router, Route, Link, browserHistory } from 'react-router'
 
 class Badge extends Component{
-  constructor() {
-    super();
-    this.state = {
-      badge: '',
-    }
-  }
-  componentDidMount() {
-    this.setState({
-      badge: this.props.params.pushId,
-    })
-  }
   render() {
     const imageStyle = {
       height: 'auto',
