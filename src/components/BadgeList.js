@@ -3,7 +3,6 @@ import Badge from './Badge';
 
 class BadgeList extends Component {
   render(){
-    // console.log(this.props.badges);
     const badgeListMap = this.props.badgeArray.map((item, idx) => {
       return(
         <div key={idx}>
