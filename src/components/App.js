@@ -8,10 +8,11 @@ class App extends Component {
     super();
     this.state = {
       badges: { },
+      loading: true,
     };
   }
 
-  componentWillMount(){
+  componentDidMount(){
     // base.fetch('badges', {
     //   context:this,
     //   state: 'badges',
@@ -24,16 +25,32 @@ class App extends Component {
     // }).catch(error => {
     //   //handle error
     // });
-    this.ref = base.syncState(`badges`, {context: this, state: "badges", asArray: true});
-
+    this.ref = base.syncState(`/badges`, {
+      context: this,
+      state: "badges",
+      asArray: true,
+      then() {
+        this.setState({ loading: false })
+      }
+    });
   }
 
+  // updateAppState(currentBadges) {
+  //   this.setState({ badges: currentBadges });
+  // }
+
   render() {
-    // console.log(this.state.badges);
+    if (!this.state.loading) {
+      console.log(this.state.badges);
+    }
     return (
       <div className="App">
-        <h1>Hello</h1>
-        <OurCarousel />
+
+        { this.state.loading === true ? <h3> LOADING... </h3> :
+          <div>
+            <OurCarousel />
+          </div>
+        }
       </div>
     );
   }
