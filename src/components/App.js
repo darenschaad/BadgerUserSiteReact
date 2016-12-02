@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import base from '../base';
 import OurCarousel from './OurCarousel';
-// import BadgeList from './BadgeList';
+import BadgeList from './BadgeList';
 
 class App extends Component {
   constructor() {
@@ -45,10 +45,12 @@ class App extends Component {
     }
     return (
       <div className="App">
-
-        { this.state.loading === true ? <h3> LOADING... </h3> :
+        {
+          //set state to true so the page then loads
+          this.state.loading === true ? <h3> LOADING... </h3> :
           <div>
             <OurCarousel />
+            <BadgeList badgeArray={this.state.badges} />
           </div>
         }
       </div>
