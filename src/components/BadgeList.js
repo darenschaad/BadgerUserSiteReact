@@ -1,29 +1,36 @@
 import React, { Component } from 'react';
 import Badge from './Badge';
-import { Link } from 'react-router'
 
 class BadgeList extends Component {
-  render() {
-    return (
-      <div>
-        <div className="master">
+  goToBadge(badge){
+    // console.log(badge.pushId);
+    const badgeId = badge.pushId;
+    console.log(`Going to ${badgeId}`)
+    this.context.router.transitionTo(`/badge/${badgeId}`);
+  }
+
+  render(){
+    const badgeListMap = this.props.badgeArray.map((item, idx) => {
+      return(
+        <div key={idx}>
           <ul>
-            {/* use Link to route around the app */}
-            {this.props.badgeArray.map((badge, idx) => (
-              <li key={badge.pushId}>
-                <Link
-                  to={`/badges/${badge.pushId}`}
-                  activeStyle={{ color: 'red' }}
-                >{badge.name}</Link>
-              </li>
-            ))}
+            <li onClick={() => this.goToBadge(item)}><a>{item.name}</a></li>
           </ul>
         </div>
-        <div className="detail">
-          {this.props.children}
-        </div>
+      );
+    });
+    return(
+      <div>
+        <h1>Hello World</h1>
+        {badgeListMap}
       </div>
-    )
+    );
+
   }
 }
+
+BadgeList.contextTypes = {
+  router: React.PropTypes.object
+}
+
 export default BadgeList;
