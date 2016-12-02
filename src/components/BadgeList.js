@@ -3,7 +3,10 @@ import Badge from './Badge';
 
 class BadgeList extends Component {
   goToBadge(badge){
-    console.log(badge.pushId);
+    // console.log(badge.pushId);
+    const badgeId = badge.pushId;
+    console.log(`Going to ${badgeId}`)
+    this.context.router.transitionTo(`/badge/${badgeId}`);
   }
 
   render(){
@@ -25,4 +28,9 @@ class BadgeList extends Component {
 
   }
 }
+
+BadgeList.contextTypes = {
+  router: React.PropTypes.object
+}
+
 export default BadgeList;

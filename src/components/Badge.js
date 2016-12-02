@@ -11,9 +11,10 @@ class Badge extends Component{
 
     return(
       <div>
-        <h1>{this.props.badges.name}</h1>
-        <img style={imageStyle} src={this.props.badges.imageUrl}></img>
-        <h3>{this.props.badges.description}</h3>
+        <h1>We made It</h1>
+        <h1>{this.props.badge.name}</h1>
+        <img style={imageStyle} src={this.props.badge.imageUrl}></img>
+        <h3>{this.props.badge.description}</h3>
       </div>
 
     );
