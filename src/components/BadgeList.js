@@ -1,24 +1,29 @@
 import React, { Component } from 'react';
 import Badge from './Badge';
+import { Link } from 'react-router'
 
 class BadgeList extends Component {
-  render(){
-    const badgeListMap = this.props.badgeArray.map((item, idx) => {
-      return(
-        <div key={idx}>
-          <Badge
-            badges={item}
-          />
-        </div>
-      );
-    });
-    return(
+  render() {
+    return (
       <div>
-        <h1>Hello World</h1>
-        {badgeListMap}
+        <div className="master">
+          <ul>
+            {/* use Link to route around the app */}
+            {this.props.badgeArray.map((badge, idx) => (
+              <li key={badge.pushId}>
+                <Link
+                  to={`/badges/${badge.pushId}`}
+                  activeStyle={{ color: 'red' }}
+                >{badge.name}</Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="detail">
+          {this.props.children}
+        </div>
       </div>
-    );
-
+    )
   }
 }
 export default BadgeList;

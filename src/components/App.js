@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import base from '../base';
-import OurCarousel from './OurCarousel';
+// import OurCarousel from './OurCarousel';
 import BadgeList from './BadgeList';
 
 class App extends Component {
@@ -13,18 +13,6 @@ class App extends Component {
   }
 
   componentDidMount(){
-    // base.fetch('badges', {
-    //   context:this,
-    //   state: 'badges',
-    //   asArray: true
-    // }).then(data => {
-    //   console.log(data);
-    //   this.setState({
-    //     badges: data
-    //   });
-    // }).catch(error => {
-    //   //handle error
-    // });
     this.ref = base.syncState(`/badges`, {
       context: this,
       state: "badges",
@@ -34,10 +22,6 @@ class App extends Component {
       }
     });
   }
-
-  // updateAppState(currentBadges) {
-  //   this.setState({ badges: currentBadges });
-  // }
 
   render() {
     if (!this.state.loading) {
@@ -49,8 +33,9 @@ class App extends Component {
           //set state to true so the page then loads
           this.state.loading === true ? <h3> LOADING... </h3> :
           <div>
-            <OurCarousel />
-            <BadgeList badgeArray={this.state.badges} />
+            <BadgeList
+              badgeArray={this.state.badges}
+            />
           </div>
         }
       </div>
