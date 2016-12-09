@@ -17,19 +17,12 @@ class BadgeList extends Component {
       );
     });
 
-    if (Object.getOwnPropertyNames(this.props.currentBadge).length == 0) {
-      return(
-        <div>
-          {badgeListMap}
-        </div>
-      );
-    } else {
-      return(
-        <div>
-          <Badge currentBadge={this.props.currentBadge} />
-        </div>
-      );
-    }
+
+    return(
+      <div>
+        {badgeListMap}
+      </div>
+    );
   }
 }
 
