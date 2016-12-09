@@ -28,7 +28,9 @@ class App extends Component {
     this.setState({
       badges: { },
       currentBadge: currentBadge,
-    })
+    });
+    localStorage.setItem(`badge`, JSON.stringify(currentBadge));
+    this.context.router.transitionTo(`/badge/${currentBadge.pushId}`);
   }
 
   render() {
@@ -41,7 +43,7 @@ class App extends Component {
           //set state to true so the page then loads
           this.state.loading === true ? <h3> LOADING... </h3> :
           <div>
-            
+
             <BadgeList
               badgeArray={this.state.badges}
               goToBadge={this.goToBadge.bind(this)}
@@ -52,6 +54,10 @@ class App extends Component {
       </div>
     );
   }
+}
+
+App.contextTypes = {
+  router: React.PropTypes.object
 }
 
 export default App;

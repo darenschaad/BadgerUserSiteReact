@@ -14,12 +14,15 @@ class Badge extends Component{
       maxWidth: '200px',
       maxHeight: '200px',
     }
+    
+    const localStorageRef = localStorage.getItem('badge');
+    const ourBadge = JSON.parse(localStorageRef);
 
     return(
       <div>
-        <h1>{this.props.currentBadge.name}</h1>
-        <img style={imageStyle} src={this.props.currentBadge.imageUrl}></img>
-        <h3>{this.props.currentBadge.description}</h3>
+        <h1>{ourBadge.name}</h1>
+        <img style={imageStyle} src={ourBadge.imageUrl}></img>
+        <h3>{ourBadge.description}</h3>
       </div>
 
     );
