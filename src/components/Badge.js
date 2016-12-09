@@ -1,6 +1,12 @@
 import React, {Component} from 'react';
 
 class Badge extends Component{
+  constructor() {
+    super();
+    // this.state = {
+    //   currentBadge: this.props.currentBadge,
+    // }
+  }
   render() {
     const imageStyle = {
       height: 'auto',
@@ -8,13 +14,15 @@ class Badge extends Component{
       maxWidth: '200px',
       maxHeight: '200px',
     }
+    
+    const localStorageRef = localStorage.getItem('badge');
+    const ourBadge = JSON.parse(localStorageRef);
 
     return(
       <div>
-        <h1>We made It</h1>
-        <h1>{this.props.badge.name}</h1>
-        <img style={imageStyle} src={this.props.badge.imageUrl}></img>
-        <h3>{this.props.badge.description}</h3>
+        <h1>{ourBadge.name}</h1>
+        <img style={imageStyle} src={ourBadge.imageUrl}></img>
+        <h3>{ourBadge.description}</h3>
       </div>
 
     );

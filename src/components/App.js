@@ -10,6 +10,7 @@ class App extends Component {
       badges: { },
       badge: { },
       loading: true,
+      currentBadge: { },
     };
   }
 
@@ -24,6 +25,15 @@ class App extends Component {
     });
   }
 
+  goToBadge(currentBadge){
+    this.setState({
+      badges: { },
+      currentBadge: currentBadge,
+    });
+    localStorage.setItem(`badge`, JSON.stringify(currentBadge));
+    this.context.router.transitionTo(`/badge/${currentBadge.pushId}`);
+  }
+
   render() {
     if (!this.state.loading) {
       console.log(this.state.badges);
@@ -34,14 +44,21 @@ class App extends Component {
           //set state to true so the page then loads
           this.state.loading === true ? <h3> LOADING... </h3> :
           <div>
+
             <BadgeList
               badgeArray={this.state.badges}
+              goToBadge={this.goToBadge.bind(this)}
+              currentBadge={this.state.currentBadge}
             />
           </div>
         }
       </div>
     );
   }
+}
+
+App.contextTypes = {
+  router: React.PropTypes.object
 }
 
 export default App;
