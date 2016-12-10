@@ -4,7 +4,24 @@ class BadgeSearch extends Component {
 
   render() {
     return (
-      <div />
+      <div>
+        <input
+          value={this.props.searchValue}
+          placeholder={'Enter search term'}
+          name={'searchValue'}
+          onChange={this.props.handleInputChange}
+        />
+
+        <select
+          value={this.props.optionValue}
+          placeholder={this.props.optionValue}
+          name={'optionValue'}
+          onChange={this.props.handleInputChange}>
+            <option value="name">Name</option>
+            <option value="creator">Creator</option>
+        </select>
+
+      </div>
     );
   }
 
