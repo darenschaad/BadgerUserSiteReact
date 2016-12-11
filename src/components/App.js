@@ -14,10 +14,12 @@ class App extends Component {
   }
 
   componentDidMount(){
+    //after component mounts, sync with Firebase database and set the badges list equal to this.state.badges empty object
     this.ref = base.syncState(`/badges`, {
       context: this,
       state: "badges",
       asArray: true,
+      //setState loading to false so that everything renders once Firebase has been synced — thus loading is no longer true
       then() {
         this.setState({ loading: false })
       }
@@ -36,7 +38,7 @@ class App extends Component {
     return (
       <div className="App">
         {
-          //set state to true so the page then loads
+          //once this.stat.loading is true after Firebase is synced, the page will render
           this.state.loading === true ? <h3> LOADING... </h3> :
           <div>
 
@@ -52,6 +54,7 @@ class App extends Component {
   }
 }
 
+//surface the router using the App component's context property
 App.contextTypes = {
   router: React.PropTypes.object
 }
