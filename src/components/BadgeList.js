@@ -13,13 +13,15 @@ class BadgeList extends Component {
   }
 
   handleInputChange(event) {
-   this.setState({ [event.target.name]: event.target.value });
+    //using the event object and a computed property, grab state object property name from input/select's name property (i.e. 'searchValue' or 'optionValue') and set the state property equal to the value grabbed from the event object.
+    this.setState({ [event.target.name]: event.target.value });
   }
 
   render(){
     let filteredBadges = this.props.badgeArray.filter(
       (badge) => {
         let searchBy = this.state.optionValue;
+        //use computed property to grab the property from the user (select dropdown) that we should be filtering our list by
         return badge[searchBy].toLowerCase().indexOf(this.state.searchValue.toLowerCase()) !== -1;
       }
     );
@@ -32,21 +34,23 @@ class BadgeList extends Component {
           handleInputChange={this.handleInputChange}
         />
 
-        {filteredBadges.map((badge, idx) => {
-          return(
-            <div key={idx}>
-              <ul>
-                <li onClick={() => this.props.goToBadge(badge)}>
-                  <a>
-                    {badge.name} <br />
-                    {badge.creator}
-                  </a>
-                </li>
-              </ul>
-            </div>
-          );
-        })}
-
+        {
+          //map over filteredBadges to display list of everything from the database, or whatever the user is filtering with their search term.
+          filteredBadges.map((badge, idx) => {
+            return(
+              <div key={idx}>
+                <ul>
+                  <li onClick={() => this.props.goToBadge(badge)}>
+                    <a>
+                      {badge.name} <br />
+                      {badge.creator}
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            );
+          })
+        }
       </div>
     );
   }
