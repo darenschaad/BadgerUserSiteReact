@@ -35,9 +35,6 @@ class App extends Component {
   }
 
   render() {
-    if (!this.state.loading) {
-      console.log(this.state.badges);
-    }
     return (
       <div className="App">
         {
