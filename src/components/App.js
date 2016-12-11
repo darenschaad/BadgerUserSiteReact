@@ -9,7 +9,6 @@ class App extends Component {
     this.state = {
       badges: { },
       loading: true,
-      currentBadge: { },
     };
     this.goToBadge = this.goToBadge.bind(this);
   }
@@ -27,10 +26,6 @@ class App extends Component {
 
   //pass goToBadge the currentBadge parameter, which contains the object with all of the badge information
   goToBadge(currentBadge){
-    this.setState({
-      badges: { },
-      currentBadge: currentBadge,
-    });
     //pass JSON string containing information from the badge object to local storage so that the browser can help carry that information to each badge's specific route
     localStorage.setItem(`badge`, JSON.stringify(currentBadge));
     //surface router with App.contextTypes below and then transition to a specific badge's route using the currentBadge object's pushId property
