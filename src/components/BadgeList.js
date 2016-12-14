@@ -25,9 +25,13 @@ class BadgeList extends Component {
         return badge[searchBy].toLowerCase().indexOf(this.state.searchValue.toLowerCase()) !== -1;
       }
     );
+    function setBackgroundColor (color){
+      document.body.style.background = color;
+    }
 
     return(
       <div>
+        {setBackgroundColor('#e6ffff')}
         <BadgeSearch
           searchValue={this.state.searchValue}
           optionValue={this.state.optionValue}
