@@ -6,6 +6,9 @@ import BadgeList from './components/BadgeList';
 import Badge from './components/Badge';
 import NotFound from './components/NotFound';
 
+import './styles/normalize.css'
+import './styles/App.scss';
+
 const Root = () => {
   return(
     <BrowserRouter>

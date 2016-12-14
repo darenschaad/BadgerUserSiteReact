@@ -8,6 +8,7 @@ class App extends Component {
     super();
     this.state = {
       badges: { },
+      badge: { },
       loading: true,
     };
     this.goToBadge = this.goToBadge.bind(this);

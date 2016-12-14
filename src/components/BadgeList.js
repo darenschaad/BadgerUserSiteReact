@@ -40,10 +40,10 @@ class BadgeList extends Component {
             return(
               <div key={idx}>
                 <ul>
-                  <li onClick={() => this.props.goToBadge(badge)}>
+                  <li className='hover-hand' onClick={() => this.props.goToBadge(badge)}>
                     <a>
-                      {badge.name} <br />
-                      {badge.creator}
+                    Activity: {badge.name} <br />
+                    Creator: {badge.creator}
                     </a>
                   </li>
                 </ul>
