@@ -45,7 +45,6 @@ class App extends Component {
             <BadgeList
               badgeArray={this.state.badges}
               goToBadge={this.goToBadge}
-              currentBadge={this.state.currentBadge}
             />
           </div>
         }
