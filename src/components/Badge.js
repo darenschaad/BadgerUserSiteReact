@@ -1,16 +1,9 @@
 import React, {Component} from 'react';
 
 class Badge extends Component{
-  // constructor() {
-  //   super();
-  //   this.state = {
-  //     currentBadge: this.props.currentBadge,
-  //   }
-  // }
   render() {
     const localStorageRef = localStorage.getItem('badge');
     const ourBadge = JSON.parse(localStorageRef);
-    // console.log(ourBadge.category);
     const categories = [0,100,200,300,400,500,600,700,800,900];
     const index = categories.indexOf(ourBadge.category);
     const categoryNames = ["000 - GENERAL KNOWLEDGE", "100 - PHILOSOPHY & PSYCHOLOGY", "200 - RELIGION", "300 - SOCIAL SCIENCE", "400 - LANGUAGES", "500 - SCIENCE", "600 - TECHNOLOGY", "700 - ARTS & RECREATION", "800 - LITERATURE", "900 - HISTORY & GEOGRAPHY"]

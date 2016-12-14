@@ -42,11 +42,9 @@ class App extends Component {
           //once this.stat.loading is true after Firebase is synced, the page will render
           this.state.loading === true ? <h3> LOADING... </h3> :
           <div>
-
             <BadgeList
               badgeArray={this.state.badges}
               goToBadge={this.goToBadge}
-              currentBadge={this.state.currentBadge}
             />
           </div>
         }

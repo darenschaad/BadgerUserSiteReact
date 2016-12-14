@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Badge from './Badge';
 import BadgeSearch from './BadgeSearch';
 
 class BadgeList extends Component {
@@ -59,5 +58,10 @@ class BadgeList extends Component {
     );
   }
 }
+
+BadgeList.PropTypes = {
+  badgeArray: React.PropTypes.array.isRequired,
+  goToBadge: React.PropTypes.func.isRequired
+};
 
 export default BadgeList;
