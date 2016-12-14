@@ -1,0 +1,48 @@
+@font-face {
+  font-family: 'bebas';
+  src: url('../fonts/BebasNeue.otf');
+}
+@font-face {
+  font-family: 'futura';
+  src: url('../fonts/futura-condensed-normal.ttf');
+
+}
+
+body {
+  // background-color: #e6ffff;
+  // background-color: red;
+
+  @media only screen and (min-width: 600px) {
+      /* For tablets: */
+      ;
+  }
+  @media only screen and (min-width: 768px) {
+      /* For desktop: */
+      ;
+  }
+
+}
+
+.detail-image {
+    height: auto;
+    width: auto;
+    max-width: 200px;
+    max-height: 200px;
+}
+
+.hover-hand {
+  cursor: pointer;
+  cursor: hand;
+  display: inline-block;
+}
+
+html {
+  padding: 0;
+  margin: 0;
+}
+
+.category-name {
+  // transform: rotate(-90deg);
+	// transform-origin: right top 0;
+  // float: left;
+}
