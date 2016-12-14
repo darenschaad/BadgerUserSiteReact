@@ -26,8 +26,6 @@ describe('App', () => {
   //   ])).to.equal(true);
   // });
 
-
-
   it('should start with empty badges', () => {
     const wrapper = shallow(<App />);
     expect(wrapper.state('badges')).to.eql({});

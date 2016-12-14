@@ -56,8 +56,8 @@ class BadgeList extends Component {
 }
 
 BadgeList.PropTypes = {
-  goToBadge: React.PropTypes.func.isRequired,
-  badgeArray: React.PropTypes.string
+  badgeArray: React.PropTypes.array.isRequired,
+  goToBadge: React.PropTypes.func.isRequired
 };
 
 export default BadgeList;
