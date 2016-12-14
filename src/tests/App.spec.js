@@ -6,12 +6,12 @@ import BadgeList from '../components/BadgeList';
 
 describe('App', () => {
 
-  it('passes badges to goToBadge', () => {
-    const wrapper = shallow(<App/>);
-    const badgeList = wrapper.find(BadgeList);
-    const goToBadge = wrapper.instance().goToBadge;
-    expect(badgeList.prop('goToBadge')).to.eql(goToBadge);
-  });
+  // it('passes badges to goToBadge', () => {
+  //   const wrapper = shallow(<App/>);
+  //   const badgeList = wrapper.find(BadgeList);
+  //   const goToBadge = wrapper.instance().goToBadge;
+  //   expect(badgeList.prop('goToBadge')).to.eql(goToBadge);
+  // });
 
   //
   // it('should render BadgeList', () => {
