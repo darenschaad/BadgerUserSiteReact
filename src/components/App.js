@@ -36,20 +36,23 @@ class App extends Component {
   }
 
   render() {
-    return (
-      <div className="App">
-        {
-          //once this.stat.loading is true after Firebase is synced, the page will render
-          this.state.loading === true ? <h3> LOADING... </h3> :
+    //once this.state.loading is true after Firebase is synced, the page will render
+    if(this.state.loading) {
+      return(
+        <h3>LOADING...</h3>
+      );
+    } else {
+      return (
+        <div className="App">
           <div>
             <BadgeList
               badgeArray={this.state.badges}
               goToBadge={this.goToBadge}
-            />
+              />
           </div>
-        }
-      </div>
-    );
+        </div>
+      );
+    }
   }
 }
 
