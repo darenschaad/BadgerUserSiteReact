@@ -24,12 +24,16 @@ class BadgeSearch extends Component {
    if(event.target.value.length === 0) {
      this.setState({ searching: false })
    }
- }
+  }
 
 
   render() {
+    function setBackgroundColor (color){
+      document.body.style.background = color;
+    }
     return (
       <div>
+        {setBackgroundColor('#e6ffff')}
         <input
           value={this.state.searchValue}
           placeholder={'Enter search term'}
@@ -52,6 +56,7 @@ class BadgeSearch extends Component {
               badgeArray={this.props.badgeArray}
               optionValue={this.state.optionValue}
               searchValue={this.state.searchValue}
+              goToBadge={this.props.goToBadge}
             />
           :
           <RandomBadge />

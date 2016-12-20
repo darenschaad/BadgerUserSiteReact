@@ -11,13 +11,9 @@ class BadgeList extends Component {
         return badge[searchBy].toLowerCase().indexOf(this.props.searchValue.toLowerCase()) !== -1;
       }
     );
-    function setBackgroundColor (color){
-      document.body.style.background = color;
-    }
 
     return(
       <div>
-        {setBackgroundColor('#e6ffff')}
 
         {
           //map over filteredBadges to display list of everything from the database, or whatever the user is filtering with their search term.
