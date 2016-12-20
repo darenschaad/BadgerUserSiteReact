@@ -21,30 +21,20 @@ class BadgeList extends Component {
 
         {
           //map over filteredBadges to display list of everything from the database, or whatever the user is filtering with their search term.
-          this.state.searching === false ?
-          <div className="RandomBadge">
-            <RandomBadge />
-          </div>
-          :
-            filteredBadges.map((badge, idx) => {
-              return(
-                <div key={idx}>
-                  <ul>
-                    <li className='hover-hand' onClick={() => this.props.goToBadge(badge)}>
-                      <a>
-                      Activity: {badge.name} <br />
-                      Creator: {badge.creator}
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              );
-            })
-          // } else {
-            // return(
-            //
-            // );
-          // }
+          filteredBadges.map((badge, idx) => {
+            return(
+              <div key={idx}>
+                <ul>
+                  <li className='hover-hand' onClick={() => this.props.goToBadge(badge)}>
+                    <a>
+                    Activity: {badge.name} <br />
+                    Creator: {badge.creator}
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            );
+          })
         }
       </div>
     );

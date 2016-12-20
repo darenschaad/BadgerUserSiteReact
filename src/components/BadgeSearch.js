@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-// import RandomBadge from './RandomBadge';
-// import BadgeList from './BadgeList';
+import RandomBadge from './RandomBadge';
+import BadgeList from './BadgeList';
 
 class BadgeSearch extends Component {
   constructor() {
@@ -46,17 +46,19 @@ class BadgeSearch extends Component {
             <option value="creator">Creator</option>
         </select>
 
+        {
+          this.state.searching === true ?
+            <BadgeList
+              badgeArray={this.props.badgeArray}
+              optionValue={this.state.optionValue}
+              searchValue={this.state.searchValue}
+            />
+          :
+          <RandomBadge />
+        }
+
       </div>
     );
-    if(this.props.searching) {
-      return(
-        <p>badgelist</p>
-      )
-    } else {
-      return(
-        <p>random badge</p>
-      )
-    }
   }
 
 }
