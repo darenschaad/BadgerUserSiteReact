@@ -59,7 +59,9 @@ class BadgeSearch extends Component {
               goToBadge={this.props.goToBadge}
             />
           :
-          <RandomBadge />
+          <RandomBadge
+            badgeArray={this.props.badgeArray}
+          />
         }
 
       </div>
