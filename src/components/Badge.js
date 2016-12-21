@@ -21,11 +21,11 @@ class Badge extends Component{
       <div>
         {setBackgroundColor(backgroundColor)}
         <h1 style={{color: textColor}} className="category-name">{ category }</h1>
-        <h1>{ourBadge.name}</h1>
+        <h1 style={{color: textColor}}>{ourBadge.name}</h1>
         <img className='detail-image' src={ourBadge.imageUrl} alt={ourBadge.name}></img>
-        <h3>To do: {ourBadge.description}</h3>
-        <h3>{ourBadge.comments}</h3>
-        <h3>Proof: {ourBadge.proof}</h3>
+        <h3 style={{color: textColor}}>To do: {ourBadge.description}</h3>
+        <h3 style={{color: textColor}}>{ourBadge.comments}</h3>
+        <h3 style={{color: textColor}}>Proof: {ourBadge.proof}</h3>
       </div>
 
     );
