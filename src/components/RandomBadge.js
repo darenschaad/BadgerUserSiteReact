@@ -29,17 +29,22 @@ class RandomBadge extends Component {
       <div>
         <h2>RANDOM BADGES</h2>
         <hr></hr>
-        <h1>Activity: {badge1.name}</h1>
-        <img className='detail-image' src={badge1.imageUrl} alt={badge1.names}></img>
-        <h3>To do: {badge1.description} <br></br> {badge1.comments}</h3>
-        <hr></hr>
-        <h3>Proof: {badge1.proof}</h3>
 
+        <div className='hover-hand' onClick={() => this.props.goToBadge(badge1)}>
+          <h1>Activity: {badge1.name}</h1>
+          <img className='detail-image' src={badge1.imageUrl} alt={badge1.names}></img>
+          <h3>To do: {badge1.description} <br></br> {badge1.comments}</h3>
+          <hr></hr>
+          <h3>Proof: {badge1.proof}</h3>
+        </div>
+
+        <div className='hover-hand' onClick={() => this.props.goToBadge(badge2)}>
           <h1>Activity: {badge2.name}</h1>
           <img className='detail-image' src={badge2.imageUrl} alt={badge2.names}></img>
           <h3>To do: {badge2.description} <br></br> {badge2.comments}</h3>
           <hr></hr>
           <h3>Proof: {badge2.proof}</h3>
+        </div>
       </div>
     );
   }

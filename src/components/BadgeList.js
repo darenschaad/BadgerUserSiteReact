@@ -14,7 +14,6 @@ class BadgeList extends Component {
 
     return(
       <div>
-
         {
           //map over filteredBadges to display list of everything from the database, or whatever the user is filtering with their search term.
           filteredBadges.map((badge, idx) => {
