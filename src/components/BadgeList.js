@@ -14,6 +14,13 @@ class BadgeList extends Component {
 
     return(
       <div>
+        
+        <BadgeSearch
+          searchValue={this.state.searchValue}
+          optionValue={this.state.optionValue}
+          handleInputChange={this.handleInputChange}
+        />
+
         {
           //map over filteredBadges to display list of everything from the database, or whatever the user is filtering with their search term.
           filteredBadges.map((badge, idx) => {
