@@ -14,13 +14,6 @@ class BadgeList extends Component {
 
     return(
       <div>
-        
-        <BadgeSearch
-          searchValue={this.state.searchValue}
-          optionValue={this.state.optionValue}
-          handleInputChange={this.handleInputChange}
-        />
-
         {
           //map over filteredBadges to display list of everything from the database, or whatever the user is filtering with their search term.
           filteredBadges.map((badge, idx) => {
@@ -28,6 +21,7 @@ class BadgeList extends Component {
               <div key={idx}>
                 <ul>
                   <li className='hover-hand' onClick={() => this.props.goToBadge(badge)}>
+                    <img className='list-image' src={badge.imageUrl} alt={badge.name}></img>
                     <a>
                     Activity: {badge.name} <br />
                     Creator: {badge.creator}
