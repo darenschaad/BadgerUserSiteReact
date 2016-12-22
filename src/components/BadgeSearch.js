@@ -7,15 +7,23 @@ class BadgeSearch extends Component {
     super();
     this.state = {
       searchValue: '',
-      optionValue: 'name',
+      // optionValue: 'name',
       searching: false,
     }
     this.handleInputChange = this.handleInputChange.bind(this);
   }
 
+  componentDidMount() {
+    const localStorageRef = localStorage.getItem('searchBy');
+    this.setState({searchValue : localStorageRef});
+    if(localStorageRef.length !== 0){
+      this.setState({searching: true})
+    }
+  }
+
   handleInputChange(event) {
-   console.log(event.target.name);
-   console.log(event.target.value);
+  //  console.log(event.target.name);
+  //  console.log(event.target.value);
    //using the event object and a computed property, grab state object property name from input/select's name property (i.e. 'searchValue' or 'optionValue') and set the state property equal to the value grabbed from the event object.
    this.setState({
      [event.target.name]: event.target.value,
@@ -24,8 +32,7 @@ class BadgeSearch extends Component {
    if(event.target.value.length === 0) {
      this.setState({ searching: false })
    }
-  }
-
+}
 
   render() {
     function setBackgroundColor (color){
@@ -41,14 +48,6 @@ class BadgeSearch extends Component {
           onChange={this.handleInputChange}
         />
 
-        <select
-          value={this.state.optionValue}
-          placeholder={this.state.optionValue}
-          name={'optionValue'}
-          onChange={this.handleInputChange}>
-            <option value="name">Name</option>
-            <option value="creator">Creator</option>
-        </select>
 
         {
           this.state.searching === true ?
@@ -58,10 +57,11 @@ class BadgeSearch extends Component {
               searchValue={this.state.searchValue}
               goToBadge={this.props.goToBadge}
             />
-          :
+            :
           <RandomBadge
             badgeArray={this.props.badgeArray}
             goToBadge={this.props.goToBadge}
+            searchValue={this.state.searchValue}
           />
         }
 
@@ -72,3 +72,16 @@ class BadgeSearch extends Component {
 }
 
 export default BadgeSearch;
+
+
+// dropdown search select
+//
+// <select
+//   value={this.state.optionValue}
+//   placeholder={this.state.optionValue}
+//   name={'optionValue'}
+//   onChange={this.handleInputChange}>
+//     <option value="name">Name</option>
+//     <option value="creator">Creator</option>
+// </select>
+//
