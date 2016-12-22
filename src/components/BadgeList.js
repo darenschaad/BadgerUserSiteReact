@@ -6,15 +6,14 @@ class BadgeList extends Component {
   render(){
     let filteredByTagsBadges = this.props.badgeArray.filter(
       (badge) => {
-        // let searchBy = "tags";
-        //use computed property to grab the property from the user (select dropdown) that we should be filtering our list by
-        return badge["tags"].toLowerCase().indexOf(this.props.searchValue.toLowerCase()) !== -1;
+        const tagArray = badge["tags"].split(',');
+        // console.log(tagArray);
+        return badge['tags'].toLowerCase().indexOf(this.props.searchValue.toLowerCase()) !== -1;
       }
     );
+
     let filteredByNameBadges = this.props.badgeArray.filter(
       (badge) => {
-        let searchBy = "name";
-        //use computed property to grab the property from the user (select dropdown) that we should be filtering our list by
         return badge["name"].toLowerCase().indexOf(this.props.searchValue.toLowerCase()) !== -1;
       }
     );
@@ -30,10 +29,7 @@ class BadgeList extends Component {
               <div key={idx}>
                 <ul>
                   <li className='hover-hand' onClick={() => this.props.goToBadge(badge, this.props.searchValue)}>
-                    <img className='list-image' src={badge.imageUrl} alt={badge.name}></img>
                     <a>
-                    Activity: {badge.name} <br />
-                    Creator: {badge.creator} <br />
                     Tags: {badge.tags}
                     </a>
                   </li>
@@ -50,7 +46,7 @@ class BadgeList extends Component {
             return(
               <div key={idx}>
                 <ul>
-                  <li className='hover-hand' onClick={() => this.props.goToBadge(badge)}>
+                  <li className='hover-hand' onClick={() => this.props.goToBadge(badge, this.props.searchValue)}>
                     <img className='list-image' src={badge.imageUrl} alt={badge.name}></img>
                     <a>
                     Activity: {badge.name} <br />
