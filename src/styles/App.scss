@@ -47,8 +47,19 @@ html {
   margin: 0;
 }
 
-.category-name {
-  // transform: rotate(-90deg);
-	// transform-origin: right top 0;
-  // float: left;
+.category-div {
+  display: inline-block;
+  vertical-align: top;
+  width: 20%;
+  .category-name {
+    transform: rotate(-90deg);
+  	transform-origin: right top 0;
+  
+  }
+}
+
+.detail-body {
+  display: inline-block;
+  vertical-align: top;
+  width: 80%;
 }
