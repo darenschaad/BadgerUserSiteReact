@@ -4,17 +4,34 @@ import React, { Component } from 'react';
 class BadgeList extends Component {
 
   render(){
+    const array = [];
     let filteredByTagsBadges = this.props.badgeArray.filter(
       (badge) => {
         const tagArray = badge["tags"].split(',');
-        // console.log(tagArray);
-        return badge['tags'].toLowerCase().indexOf(this.props.searchValue.toLowerCase()) !== -1;
+
+        for (var i = 0; i < tagArray.length; i++) {
+          if (tagArray[i].includes(this.props.searchValue.toLowerCase()) && !array.includes(tagArray[i])) {
+            array.push(tagArray[i]);
+            array.sort();
+
+
+
+          }
+
+        }
+
+        // console.log(this.props.searchValue.toLowerCase());
+        // console.log(searchTagsArray);
+        // return searchTagsArray;
+        // return badge['tags'].toLowerCase().indexOf(this.props.searchValue.toLowerCase()) !== -1;
       }
     );
+    console.log(array);
 
     let filteredByNameBadges = this.props.badgeArray.filter(
       (badge) => {
         return badge["name"].toLowerCase().indexOf(this.props.searchValue.toLowerCase()) !== -1;
+
       }
     );
 
@@ -23,21 +40,17 @@ class BadgeList extends Component {
         <h2>Tags:</h2>
         <hr></hr>
         {
-          //map over filteredByTagsBadges to display list of everything from the database, or whatever the user is filtering with their search term.
-          filteredByTagsBadges.map((badge, idx) => {
-            return(
-              <div key={idx}>
-                <ul>
-                  <li className='hover-hand' onClick={() => this.props.goToBadge(badge, this.props.searchValue)}>
-                    <a>
-                    Tags: {badge.tags}
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            );
-          })
+          array.map((tag, idx) =>{
+              return(
+                <div key={idx}>
+                  <h4>
+                    {tag}
+                  </h4>
+                </div>
+              );
+            })
         }
+
         <h2>Activity:</h2>
         <hr></hr>
         {

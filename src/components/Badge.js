@@ -27,14 +27,18 @@ class Badge extends Component{
     return(
       <div>
         {setBackgroundColor(backgroundColor)}
-        <h1 style={{color: textColor}} className="category-name">{ category }</h1>
-        <h1 style={{color: textColor}}>{ourBadge.name}</h1>
-        <img className='detail-image' src={ourBadge.imageUrl} alt={ourBadge.name}></img>
-        <h3 style={{color: textColor}}>To do: {ourBadge.description}</h3>
-        <h3 style={{color: textColor}}>{ourBadge.comments}</h3>
-        <h3 style={{color: textColor}}>Proof: {ourBadge.proof}</h3>
-        <h4 style={{color: textColor}}>Challenges: {ourBadge.challenges}</h4>
-        <h4 style={{color: textColor}}>Tags: {ourBadge.tags}</h4>
+        <div className="category-div">
+          <h1 style={{color: textColor}} className="category-name">{ category }</h1>
+        </div>
+        <div className="detail-body">
+          <h1 style={{color: textColor}}>{ourBadge.name}</h1>
+          <img className='detail-image' src={ourBadge.imageUrl} alt={ourBadge.name}></img>
+          <h3 style={{color: textColor}}>To do: {ourBadge.description}</h3>
+          <h3 style={{color: textColor}}>{ourBadge.comments}</h3>
+          <h3 style={{color: textColor}}>Proof: {ourBadge.proof}</h3>
+          <h4 style={{color: textColor}}>Challenges: {ourBadge.challenges}</h4>
+          <h4 style={{color: textColor}}>Tags: {ourBadge.tags}</h4>
+        </div>
       </div>
 
     );
