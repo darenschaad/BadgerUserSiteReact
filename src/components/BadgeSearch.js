@@ -10,10 +10,16 @@ class BadgeSearch extends Component {
       // optionValue: 'name',
       searching: false,
       standardSearch: true,
+      categoryCheckBox: false,
+      descriptionCheckBox: false,
+      keywordsCheckBox: false,
+      // isChecked: false,
     }
     this.handleInputChange = this.handleInputChange.bind(this);
     this.advancedSearch = this.advancedSearch.bind(this);
     this.standardSearch = this.standardSearch.bind(this);
+    // this.checkboxClick = this.checkboxClick.bind(this);
+    this.onChange = this.onChange.bind(this);
   }
 
   componentDidMount() {
@@ -34,6 +40,26 @@ class BadgeSearch extends Component {
     this.setState({
       standardSearch: true
     })
+  }
+
+  // checkboxClick(event) {
+  //   if (event.target.value == "category") {
+  //
+  //     this.setState({
+  //       categoryCheckBox: true
+  //     })
+  //   }
+  // }
+
+  onChange(event) {
+    if (event.target.value == "category") {
+      this.setState({categoryCheckBox: !this.state.categoryCheckBox});
+    } else if(event.target.value == "description") {
+      this.setState({descriptionCheckBox: !this.state.descriptionCheckBox});
+    } else if (event.target.value == "keywords") {
+      this.setState({keywordsCheckBox: !this.state.keywordsCheckBox});
+    }
+
   }
 
   handleInputChange(event) {
@@ -64,9 +90,29 @@ class BadgeSearch extends Component {
         />
       {
         this.state.standardSearch === true ?
+          <div>
           <button id="advanced-search-button" type="button" onClick={this.advancedSearch}>Advanced Search</button>
+          </div>
         :
-          <button id="advanced-search-button" type="button" onClick={this.standardSearch}>Standard Search</button>
+          <div>
+            <button id="advanced-search-button" type="button" onClick={this.standardSearch}>Standard Search</button>
+            <br/>
+            <h3>Search Badges By:</h3>
+            <label>
+              <input type="checkbox" value="category" checked={this.state.categoryCheckBox} onChange={this.onChange} />
+              Category
+            </label>
+            <br/>
+            <label>
+              <input type="checkbox" value="description" checked={this.state.descriptionCheckBox} onChange={this.onChange} />
+              Badge Description
+            </label>
+            <br/>
+            <label>
+              <input type="checkbox" value="keywords" checked={this.state.descriptionCheckBox} onChange={this.onChange} />
+              Badge Keywords
+            </label>
+          </div>
       }
 
 
