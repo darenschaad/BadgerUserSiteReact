@@ -9,8 +9,11 @@ class BadgeSearch extends Component {
       searchValue: '',
       // optionValue: 'name',
       searching: false,
+      standardSearch: true,
     }
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.advancedSearch = this.advancedSearch.bind(this);
+    this.standardSearch = this.standardSearch.bind(this);
   }
 
   componentDidMount() {
@@ -19,6 +22,18 @@ class BadgeSearch extends Component {
     if(localStorageRef.length !== 0){
       this.setState({searching: true})
     }
+  }
+
+  advancedSearch(event) {
+    this.setState({
+      standardSearch: false
+    })
+  }
+
+  standardSearch(event) {
+    this.setState({
+      standardSearch: true
+    })
   }
 
   handleInputChange(event) {
@@ -47,6 +62,12 @@ class BadgeSearch extends Component {
           name={'searchValue'}
           onChange={this.handleInputChange}
         />
+      {
+        this.state.standardSearch === true ?
+          <button id="advanced-search-button" type="button" onClick={this.advancedSearch}>Advanced Search</button>
+        :
+          <button id="advanced-search-button" type="button" onClick={this.standardSearch}>Standard Search</button>
+      }
 
 
         {
