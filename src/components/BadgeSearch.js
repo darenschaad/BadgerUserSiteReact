@@ -29,7 +29,7 @@ class BadgeSearch extends Component {
      [event.target.name]: event.target.value,
      searching: true,
    });
-   if(event.target.value.length === 0) {
+   if(event.target.value.length <= 1 ) {
      this.setState({ searching: false })
    }
 }
@@ -53,6 +53,7 @@ class BadgeSearch extends Component {
           this.state.searching === true ?
             <BadgeList
               badgeArray={this.props.badgeArray}
+              tagArray={this.props.tagArray}
               optionValue={this.state.optionValue}
               searchValue={this.state.searchValue}
               goToBadge={this.props.goToBadge}

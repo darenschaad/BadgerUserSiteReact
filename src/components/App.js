@@ -8,6 +8,7 @@ class App extends Component {
     super();
     this.state = {
       badges: { },
+      tags: [],
       loading: true,
     };
     this.goToBadge = this.goToBadge.bind(this);
@@ -15,10 +16,17 @@ class App extends Component {
 
   componentDidMount(){
     //after component mounts, sync with Firebase database and set the badges list equal to this.state.badges empty object
+      this.ref = base.syncState(`/tags`, {
+        context: this,
+        state: "tags",
+        assArray: true
+      })
+
     this.ref = base.syncState(`/badges`, {
       context: this,
       state: "badges",
       asArray: true,
+
       //setState loading to false so that everything renders once Firebase has been synced — thus loading is no longer true
       then() {
         this.setState({ loading: false })
@@ -60,6 +68,7 @@ class App extends Component {
           <div>
             <BadgeSearch
               badgeArray={this.state.badges}
+              tagArray={this.state.tags}
               goToBadge={this.goToBadge}
             />
           </div>
