@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import RandomBadge from './RandomBadge';
 import BadgeList from './BadgeList';
+import AdvancedBadgeList from './AdvancedBadgeList';
 
 class BadgeSearch extends Component {
   constructor() {
@@ -10,9 +11,9 @@ class BadgeSearch extends Component {
       // optionValue: 'name',
       searching: false,
       standardSearch: true,
-      categoryCheckBox: false,
-      descriptionCheckBox: false,
-      keywordsCheckBox: false,
+      nameCheckBox: true,
+      creatorCheckBox: true,
+      keywordsCheckBox: true,
       // isChecked: false,
     }
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -46,16 +47,16 @@ class BadgeSearch extends Component {
   //   if (event.target.value == "category") {
   //
   //     this.setState({
-  //       categoryCheckBox: true
+  //       nameCheckBox: true
   //     })
   //   }
   // }
 
   onChange(event) {
     if (event.target.value == "category") {
-      this.setState({categoryCheckBox: !this.state.categoryCheckBox});
+      this.setState({nameCheckBox: !this.state.nameCheckBox});
     } else if(event.target.value == "description") {
-      this.setState({descriptionCheckBox: !this.state.descriptionCheckBox});
+      this.setState({creatorCheckBox: !this.state.creatorCheckBox});
     } else if (event.target.value == "keywords") {
       this.setState({keywordsCheckBox: !this.state.keywordsCheckBox});
     }
@@ -79,6 +80,47 @@ class BadgeSearch extends Component {
     function setBackgroundColor (color){
       document.body.style.background = color;
     }
+
+    //if statements for displaying either advance search or regular search
+    let displayList;
+    if(this.state.standardSearch === false) {
+      displayList = (
+        <div>
+          <AdvancedBadgeList
+            badgeArray={this.props.badgeArray}
+            tagArray={this.props.tagArray}
+            optionValue={this.state.optionValue}
+            searchValue={this.state.searchValue}
+            goToBadge={this.props.goToBadge}
+          />
+        </div>
+      )
+    } else {
+      if (this.state.searching) {
+        displayList = (
+          <div>
+            <BadgeList
+              badgeArray={this.props.badgeArray}
+              tagArray={this.props.tagArray}
+              optionValue={this.state.optionValue}
+              searchValue={this.state.searchValue}
+              goToBadge={this.props.goToBadge}
+            />
+          </div>
+        )
+      } else {
+        displayList = (
+          <div>
+            <RandomBadge
+              badgeArray={this.props.badgeArray}
+              goToBadge={this.props.goToBadge}
+              searchValue={this.state.searchValue}
+            />
+          </div>
+        )
+      }
+    }
+
     return (
       <div>
         {setBackgroundColor('#e6ffff')}
@@ -88,10 +130,12 @@ class BadgeSearch extends Component {
           name={'searchValue'}
           onChange={this.handleInputChange}
         />
+
       {
+        //display either standard search or advanced search
         this.state.standardSearch === true ?
           <div>
-          <button id="advanced-search-button" type="button" onClick={this.advancedSearch}>Advanced Search</button>
+            <button id="advanced-search-button" type="button" onClick={this.advancedSearch}>Advanced Search</button>
           </div>
         :
           <div>
@@ -99,39 +143,24 @@ class BadgeSearch extends Component {
             <br/>
             <h3>Search Badges By:</h3>
             <label>
-              <input type="checkbox" value="category" checked={this.state.categoryCheckBox} onChange={this.onChange} />
-              Category
+              <input type="checkbox" value="category" checked={this.state.nameCheckBox} onChange={this.onChange} />
+              Badge Name
             </label>
             <br/>
             <label>
-              <input type="checkbox" value="description" checked={this.state.descriptionCheckBox} onChange={this.onChange} />
-              Badge Description
+              <input type="checkbox" value="description" checked={this.state.creatorCheckBox} onChange={this.onChange} />
+              Badge Creator
             </label>
             <br/>
             <label>
-              <input type="checkbox" value="keywords" checked={this.state.descriptionCheckBox} onChange={this.onChange} />
+              <input type="checkbox" value="keywords" checked={this.state.keywordsCheckBox} onChange={this.onChange} />
               Badge Keywords
             </label>
           </div>
       }
 
 
-        {
-          this.state.searching === true ?
-            <BadgeList
-              badgeArray={this.props.badgeArray}
-              tagArray={this.props.tagArray}
-              optionValue={this.state.optionValue}
-              searchValue={this.state.searchValue}
-              goToBadge={this.props.goToBadge}
-            />
-            :
-          <RandomBadge
-            badgeArray={this.props.badgeArray}
-            goToBadge={this.props.goToBadge}
-            searchValue={this.state.searchValue}
-          />
-        }
+      { displayList }
 
       </div>
     );

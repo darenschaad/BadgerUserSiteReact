@@ -4,34 +4,17 @@ import React, { Component } from 'react';
 class BadgeList extends Component {
 
   render(){
-    let filteredBadges = this.props.badgeArray.filter(
-      (badge) => {
-        let searchBy = this.props.optionValue;
-        //use computed property to grab the property from the user (select dropdown) that we should be filtering our list by
-        return badge[searchBy].toLowerCase().indexOf(this.props.searchValue.toLowerCase()) !== -1;
-      }
-    );
+    // let filteredBadges = this.props.badgeArray.filter(
+    //   (badge) => {
+    //     let searchBy = this.props.optionValue;
+    //     //use computed property to grab the property from the user (select dropdown) that we should be filtering our list by
+    //     return badge[searchBy].toLowerCase().indexOf(this.props.searchValue.toLowerCase()) !== -1;
+    //   }
+    // );
 
     return(
       <div>
-        {
-          //map over filteredBadges to display list of everything from the database, or whatever the user is filtering with their search term.
-          filteredBadges.map((badge, idx) => {
-            return(
-              <div key={idx}>
-                <ul>
-                  <li className='hover-hand' onClick={() => this.props.goToBadge(badge)}>
-                    <img className='list-image' src={badge.imageUrl} alt={badge.name}></img>
-                    <a>
-                    Activity: {badge.name} <br />
-                    Creator: {badge.creator}
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            );
-          })
-        }
+        <h1>Hello</h1>
       </div>
     );
   }
@@ -43,3 +26,23 @@ BadgeList.PropTypes = {
 };
 
 export default BadgeList;
+
+
+// {
+//   //map over filteredBadges to display list of everything from the database, or whatever the user is filtering with their search term.
+//   filteredBadges.map((badge, idx) => {
+//     return(
+//       <div key={idx}>
+//         <ul>
+//           <li className='hover-hand' onClick={() => this.props.goToBadge(badge)}>
+//             <img className='list-image' src={badge.imageUrl} alt={badge.name}></img>
+//             <a>
+//             Activity: {badge.name} <br />
+//             Creator: {badge.creator}
+//             </a>
+//           </li>
+//         </ul>
+//       </div>
+//     );
+//   })
+// }
