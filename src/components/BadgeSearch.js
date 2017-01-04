@@ -92,6 +92,9 @@ class BadgeSearch extends Component {
             optionValue={this.state.optionValue}
             searchValue={this.state.searchValue}
             goToBadge={this.props.goToBadge}
+            nameCheckBox={this.state.nameCheckBox}
+            creatorCheckBox={this.state.creatorCheckBox}
+            keywordsCheckBox={this.state.keywordsCheckBox}
           />
         </div>
       )
@@ -148,14 +151,16 @@ class BadgeSearch extends Component {
             </label>
             <br/>
             <label>
-              <input type="checkbox" value="description" checked={this.state.creatorCheckBox} onChange={this.onChange} />
-              Badge Creator
-            </label>
-            <br/>
-            <label>
               <input type="checkbox" value="keywords" checked={this.state.keywordsCheckBox} onChange={this.onChange} />
               Badge Keywords
             </label>
+            <br/>
+            <label>
+              <input type="checkbox" value="description" checked={this.state.creatorCheckBox} onChange={this.onChange} />
+              Badge Creator
+            </label>
+
+
           </div>
       }
 

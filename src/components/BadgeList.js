@@ -5,17 +5,13 @@ class BadgeList extends Component {
 
   render(){
     const searchTagsArray = [];
-    
 
     let filteredByTagsBadges = this.props.tagArray.filter(
       (tag) => {
-        // console.log(tag);
-        // for (var i = 0; i < tagArray.length; i++) {
           if (tag.includes(this.props.searchValue.toLowerCase())) {
             searchTagsArray.push(tag);
             searchTagsArray.sort();
           }
-        // }
       }
     );
 
@@ -39,13 +35,13 @@ class BadgeList extends Component {
 
     return(
       <div>
-        <h2>Tags:</h2>
+        <h2>Search By Keywords</h2>
         <hr></hr>
         {
           searchTagsArray.map((tag, idx) =>{
               return(
                 <div key={idx}>
-                  <h4>{tag}</h4>
+                  <h4>Keyword: {tag}</h4>
                     <hr></hr>
                     {
                       //map over filteredByTagsBadges to display list of everything from the database, or whatever the user is filtering with their search term.
@@ -63,6 +59,7 @@ class BadgeList extends Component {
                                     {badge.name} <br/>
                                   {badge.tags}
                                 </a>
+                                <hr/>
                               </li>
                             </ul>
                           </div>
@@ -92,6 +89,7 @@ class BadgeList extends Component {
                     Creator: {badge.creator} <br />
                     Tags: {badge.tags}
                     </a>
+                    <br/>
                   </li>
                 </ul>
               </div>
