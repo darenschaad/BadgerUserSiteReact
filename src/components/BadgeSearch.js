@@ -25,9 +25,14 @@ class BadgeSearch extends Component {
 
   componentDidMount() {
     const localStorageRef = localStorage.getItem('searchBy');
+    const localSearchStateRef = localStorage.getItem('searchState');
     this.setState({searchValue : localStorageRef});
-    if(localStorageRef.length !== 0){
-      this.setState({searching: true})
+    if (localSearchStateRef == "advanced") {
+        this.setState({standardSearch: false})
+    } else {
+      if(localStorageRef.length !== 0){
+        this.setState({searching: true})
+    }
     }
   }
 
@@ -43,15 +48,6 @@ class BadgeSearch extends Component {
     })
   }
 
-  // checkboxClick(event) {
-  //   if (event.target.value == "category") {
-  //
-  //     this.setState({
-  //       nameCheckBox: true
-  //     })
-  //   }
-  // }
-
   onChange(event) {
     if (event.target.value == "category") {
       this.setState({nameCheckBox: !this.state.nameCheckBox});
@@ -64,8 +60,6 @@ class BadgeSearch extends Component {
   }
 
   handleInputChange(event) {
-  //  console.log(event.target.name);
-  //  console.log(event.target.value);
    //using the event object and a computed property, grab state object property name from input/select's name property (i.e. 'searchValue' or 'optionValue') and set the state property equal to the value grabbed from the event object.
    this.setState({
      [event.target.name]: event.target.value,

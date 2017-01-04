@@ -5,6 +5,7 @@ class BadgeList extends Component {
 
   render(){
     const searchTagsArray = [];
+    const searchState = "standard"
 
     let filteredByTagsBadges = this.props.tagArray.filter(
       (tag) => {
@@ -53,7 +54,7 @@ class BadgeList extends Component {
                           return(
                             <div key={idx}>
                               <ul>
-                                <li className='hover-hand' onClick={() => this.props.goToBadge(badge, this.props.searchValue)}>
+                                <li className='hover-hand' onClick={() => this.props.goToBadge(badge, this.props.searchValue, searchState)}>
                                   <img className='list-image' src={badge.imageUrl} alt={badge.name}></img>
                                   <a>
                                     {badge.name} <br/>
@@ -82,7 +83,7 @@ class BadgeList extends Component {
             return(
               <div key={idx}>
                 <ul>
-                  <li className='hover-hand' onClick={() => this.props.goToBadge(badge, this.props.searchValue)}>
+                  <li className='hover-hand' onClick={() => this.props.goToBadge(badge, this.props.searchValue, searchState)}>
                     <img className='list-image' src={badge.imageUrl} alt={badge.name}></img>
                     <a>
                     Activity: {badge.name} <br />

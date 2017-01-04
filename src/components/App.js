@@ -48,11 +48,12 @@ class App extends Component {
  // }
 
   //pass goToBadge the currentBadge parameter, which contains the object with all of the badge information
-  goToBadge(currentBadge, currentSearchTerm){
+  goToBadge(currentBadge, currentSearchTerm, currentSearchState){
     //pass JSON string containing information from the badge object to local storage so that the browser can help carry that information to each badge's specific route
     localStorage.setItem(`badge`, JSON.stringify(currentBadge));
     //surface router with App.contextTypes below and then transition to a specific badge's route using the currentBadge object's pushId property
     localStorage.setItem(`searchBy`, currentSearchTerm);
+    localStorage.setItem(`searchState`, currentSearchState);
     this.context.router.transitionTo(`/badge/${currentBadge.pushId}`);
   }
 

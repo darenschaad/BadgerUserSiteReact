@@ -6,6 +6,7 @@ class BadgeList extends Component {
   render(){
     const searchTagsArray = [];
     const creatorArray = [];
+    const searchState = "advanced";
 
     if (this.props.searchValue.length >= 3) {
 
@@ -70,7 +71,7 @@ class BadgeList extends Component {
                   return(
                     <div key={idx}>
                       <ul>
-                        <li className='hover-hand' onClick={() => this.props.goToBadge(badge)}>
+                        <li className='hover-hand' onClick={() => this.props.goToBadge(badge, this.props.searchValue, searchState)}>
                           <img className='list-image' src={badge.imageUrl} alt={badge.name}></img>
                           <a>
                           Activity: {badge.name} <br />
@@ -108,7 +109,7 @@ class BadgeList extends Component {
                             return(
                               <div key={idx}>
                                 <ul>
-                                  <li className='hover-hand' onClick={() => this.props.goToBadge(badge, this.props.searchValue)}>
+                                  <li className='hover-hand' onClick={() => this.props.goToBadge(badge, this.props.searchValue, searchState)}>
                                     <img className='list-image' src={badge.imageUrl} alt={badge.name}></img>
                                     <a>
                                       {badge.name} <br/>
@@ -152,7 +153,7 @@ class BadgeList extends Component {
                             return(
                               <div key={idx}>
                                 <ul>
-                                  <li className='hover-hand' onClick={() => this.props.goToBadge(badge, this.props.searchValue)}>
+                                  <li className='hover-hand' onClick={() => this.props.goToBadge(badge, this.props.searchValue, searchState)}>
                                     <img className='list-image' src={badge.imageUrl} alt={badge.name}></img>
                                     <a>
                                       {badge.name} <br/>
