@@ -19,7 +19,6 @@ class Badge extends Component{
     const category = categoryNames[index];
     const textColor = textColors[index];
     const backgroundColor = backgroundColors[index];
-    console.log(textColor);
     function setBackgroundColor (color){
       document.body.style.background = color;
     }
