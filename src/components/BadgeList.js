@@ -7,7 +7,7 @@ class BadgeList extends Component {
     const searchTagsArray = [];
     const searchState = "standard"
 
-    let filteredByTagsBadges = this.props.tagArray.filter(
+    this.props.tagArray.filter(
       (tag) => {
           if (tag.includes(this.props.searchValue.toLowerCase())) {
             searchTagsArray.push(tag);

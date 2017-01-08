@@ -8,7 +8,6 @@ class BadgeList extends Component {
     const creatorArray = [];
     const creatorBadgeArray= [];
     const searchState = "advanced";
-    const creatorBadgeCount = 0;
 
     if (this.props.searchValue.length >= 3) {
 
@@ -48,7 +47,7 @@ class BadgeList extends Component {
         var counter = 0;
           for (var i = 0; i < badges.length; i++) {
             // console.log(badges[i]);
-            if (badges[i]['creator'].toLowerCase() == creator.toLowerCase()) {
+            if (badges[i]['creator'].toLowerCase() === creator.toLowerCase()) {
               counter++
           }
         }
@@ -162,7 +161,7 @@ class BadgeList extends Component {
                         filteredByCreatorBadges.map((badge, idx) => {
                           let badgeCreator = badge.creator;
 
-                          if (badgeCreator == creator) {
+                          if (badgeCreator === creator) {
 
                             return(
                               <div key={idx}>

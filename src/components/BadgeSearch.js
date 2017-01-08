@@ -27,7 +27,7 @@ class BadgeSearch extends Component {
     const localStorageRef = localStorage.getItem('searchBy');
     const localSearchStateRef = localStorage.getItem('searchState');
     this.setState({searchValue : localStorageRef});
-    if (localSearchStateRef == "advanced") {
+    if (localSearchStateRef === "advanced") {
         this.setState({standardSearch: false})
     } else {
       if(localStorageRef.length !== 0){
@@ -49,11 +49,11 @@ class BadgeSearch extends Component {
   }
 
   onChange(event) {
-    if (event.target.value == "category") {
+    if (event.target.value === "category") {
       this.setState({nameCheckBox: !this.state.nameCheckBox});
-    } else if(event.target.value == "description") {
+    } else if(event.target.value === "description") {
       this.setState({creatorCheckBox: !this.state.creatorCheckBox});
-    } else if (event.target.value == "keywords") {
+    } else if (event.target.value === "keywords") {
       this.setState({keywordsCheckBox: !this.state.keywordsCheckBox});
     }
 

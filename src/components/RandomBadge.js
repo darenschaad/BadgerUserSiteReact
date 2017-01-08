@@ -38,6 +38,7 @@ class RandomBadge extends Component {
         <hr></hr>
         <div style={{backgroundColor : backgroundColor1}}>
           <div className='hover-hand' onClick={() => this.props.goToBadge(badge1, this.props.searchValue)}>
+            <h1 style={{color: textColor1}}>{category1}</h1>
             <h1 style={{color: textColor1}}>Activity: {badge1.name}</h1>
             <img className='detail-image' src={badge1.imageUrl} alt={badge1.names}></img>
             <h3 style={{color: textColor1}}>To do: {badge1.description} <br></br> {badge1.comments}</h3>
@@ -49,6 +50,7 @@ class RandomBadge extends Component {
         <hr></hr>
         <div style={{backgroundColor : backgroundColor2}}>
           <div className='hover-hand' onClick={() => this.props.goToBadge(badge2, this.props.searchValue)}>
+            <h1 style={{color: textColor2}}>{category2}</h1>
             <h1 style={{color: textColor2}}>Activity: {badge2.name}</h1>
             <img className='detail-image' src={badge2.imageUrl} alt={badge2.names}></img>
             <h3 style={{color: textColor2}}>To do: {badge2.description} <br></br> {badge2.comments}</h3>
