@@ -53,9 +53,17 @@ html {
   // width: 20%;
   position: absolute;
   .category-name {
-    transform: rotate(-90deg);
-  	transform-origin: right top 0;
-
+    // transform: rotate(-90deg);
+  	// transform-origin: right top 0;
+    -webkit-transform:rotate(90deg);
+    -moz-transform:rotate(90deg);
+    -ms-transform:rotate(90deg);
+    transform: rotate(90deg);
+    white-space:nowrap;
+    display:block;
+    top:0;
+    width:20px;
+    height:20px;
   }
 }
 
