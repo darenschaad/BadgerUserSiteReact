@@ -19,18 +19,30 @@ class BadgeSearch extends Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.advancedSearch = this.advancedSearch.bind(this);
     this.standardSearch = this.standardSearch.bind(this);
-    // this.checkboxClick = this.checkboxClick.bind(this);
     this.onChange = this.onChange.bind(this);
   }
 
   componentDidMount() {
-    const localStorageRef = localStorage.getItem('searchBy');
+    const localStorageSearchRef = localStorage.getItem('searchBy');
     const localSearchStateRef = localStorage.getItem('searchState');
-    this.setState({searchValue : localStorageRef});
+    const localStorageAdvancedNameCheckRef = localStorage.getItem('advancedName');
+    const localStorageAdvancedKeywordsCheckRef = localStorage.getItem('advancedKeywords');
+    const localStorageAdvancedCreatorCheckRef = localStorage.getItem('advancedCreator');
+    console.log(localStorageAdvancedNameCheckRef);
+    this.setState({searchValue : localStorageSearchRef});
+    if (localStorageAdvancedNameCheckRef === "false") {
+      this.setState({nameCheckBox : false});
+    }
+    if (localStorageAdvancedKeywordsCheckRef === "false") {
+      this.setState({keywordsCheckBox : false})
+    }
+    if (localStorageAdvancedCreatorCheckRef === "false") {
+      this.setState({creatorCheckBox : false})
+    }
     if (localSearchStateRef === "advanced") {
         this.setState({standardSearch: false})
     } else {
-      if(localStorageRef.length !== 0){
+      if(localStorageSearchRef.length !== 0){
         this.setState({searching: true})
     }
     }
@@ -49,12 +61,15 @@ class BadgeSearch extends Component {
   }
 
   onChange(event) {
-    if (event.target.value === "category") {
+    if (event.target.value === "name") {
       this.setState({nameCheckBox: !this.state.nameCheckBox});
+      localStorage.setItem(`advancedName`,  !this.state.nameCheckBox);
     } else if(event.target.value === "description") {
       this.setState({creatorCheckBox: !this.state.creatorCheckBox});
+      localStorage.setItem(`advancedCreator`, !this.state.creatorCheckBox);
     } else if (event.target.value === "keywords") {
       this.setState({keywordsCheckBox: !this.state.keywordsCheckBox});
+      localStorage.setItem(`advancedKeywords`, !this.state.keywordsCheckBox);
     }
 
   }
@@ -140,7 +155,7 @@ class BadgeSearch extends Component {
             <br/>
             <h3>Search Badges By:</h3>
             <label>
-              <input type="checkbox" value="category" checked={this.state.nameCheckBox} onChange={this.onChange} />
+              <input type="checkbox" value="name" checked={this.state.nameCheckBox} onChange={this.onChange} />
               Badge Name
             </label>
             <br/>
