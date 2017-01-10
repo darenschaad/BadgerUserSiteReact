@@ -8,13 +8,11 @@ class BadgeSearch extends Component {
     super();
     this.state = {
       searchValue: '',
-      // optionValue: 'name',
       searching: false,
       standardSearch: true,
       nameCheckBox: true,
       creatorCheckBox: true,
       keywordsCheckBox: true,
-      // isChecked: false,
     }
     this.handleInputChange = this.handleInputChange.bind(this);
     this.advancedSearch = this.advancedSearch.bind(this);
@@ -75,23 +73,28 @@ class BadgeSearch extends Component {
   }
 
   handleInputChange(event) {
-   //using the event object and a computed property, grab state object property name from input/select's name property (i.e. 'searchValue' or 'optionValue') and set the state property equal to the value grabbed from the event object.
    this.setState({
+     //Using computed property, sets the state object property by grabbing name prop from the event handler. Then sets that property equal to the event handler's value (what the user enters in)
      [event.target.name]: event.target.value,
+     //As user types, sets searching to true so that a list of badges is generated based on user input
      searching: true,
    });
+   //Searching will remain false until the user enters more than one character to optimize speed of rendered badges — one character renders too many options
    if(event.target.value.length <= 1 ) {
      this.setState({ searching: false })
    }
 }
 
   render() {
+    //sets background color based on the badge being rendered
     function setBackgroundColor (color){
       document.body.style.background = color;
     }
 
-    //if statements for displaying either advance search or regular search
+    //displayList will be rendered below in the return. Initializing it here, and then setting its value based on the if statements.
     let displayList;
+    //if statements for displaying either advance search or standard search
+    //if stadardSearch is set to false by clicking the Advanced Search Button, then the AdvancedBadgeList component will be rendered — this contains the list of badges broken out by name, keywords and creator
     if(this.state.standardSearch === false) {
       displayList = (
         <div>
@@ -108,6 +111,7 @@ class BadgeSearch extends Component {
         </div>
       )
     } else {
+      //if standardSearch is set (i.e. they haven't clicked the Advanced Search Button), the user will either see the RandomBadge component (user hasn't started searching) or the BadgeList component (user has started to search)
       if (this.state.searching) {
         displayList = (
           <div>
@@ -136,6 +140,8 @@ class BadgeSearch extends Component {
     return (
       <div>
         {setBackgroundColor('#e6ffff')}
+
+        {/*user input section*/}
         <input
           value={this.state.searchValue}
           placeholder={'Enter search term'}
@@ -144,7 +150,7 @@ class BadgeSearch extends Component {
         />
 
       {
-        //display either standard search or advanced search
+        //display either standard search (button that triggers advance search) or advanced search (radio button filters)
         this.state.standardSearch === true ?
           <div>
             <button id="advanced-search-button" type="button" onClick={this.advancedSearch}>Advanced Search</button>
@@ -173,7 +179,7 @@ class BadgeSearch extends Component {
           </div>
       }
 
-
+      {/*Display the displayList variable set before the return. It will display the RandomBadge, BadgeList or AdvancedBadgeList components based on user input*/}
       { displayList }
 
       </div>
