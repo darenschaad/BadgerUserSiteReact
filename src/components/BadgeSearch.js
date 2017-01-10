@@ -106,29 +106,6 @@ class BadgeSearch extends Component {
     function setBackgroundColor (color){
       document.body.style.background = color;
     }
-    //
-    // let rand1 = 0;
-    // let rand2 = 1;
-    // let length = this.props.badgeArray.length;
-    // function getRandomNumber(length) {
-    //   return Math.floor(Math.random() * (length));
-    // }
-    //
-    // if (this.state.searchValue.length === 1 || this.state.searchValue.length === 2) {
-    //   this.setState({randomBadge : false})
-    // }
-    // if (this.state.searchValue.length >= 3 ) {
-    //   this.setState({randomBadge : true})
-    // }
-    // if (this.state.randomBadge) {
-    //   rand1 = getRandomNumber(length);
-    //   rand2 = getRandomNumber(length);
-    //   while (rand1 === rand2) {
-    //     rand2 = getRandomNumber(length);
-    //   }
-      // console.log(this.state.searchValue.length);
-    //   console.log(rand1);
-    // }
 
     //if statements for displaying either advance search or regular search
     let displayList;
@@ -147,8 +124,7 @@ class BadgeSearch extends Component {
           />
         </div>
       )
-    } else {
-      if (this.state.searching) {
+    } else if (this.state.searching) {
         displayList = (
           <div>
             <BadgeList
@@ -160,18 +136,17 @@ class BadgeSearch extends Component {
             />
           </div>
         )
-      } else {
-        displayList = (
-          <div>
-            <RandomBadge
-              badgeArray={this.props.badgeArray}
-              goToBadge={this.props.goToBadge}
-              searchValue={this.state.searchValue}
-              randomBadge={this.state.randomBadge}
-            />
-          </div>
-        )
-      }
+    } else {
+      displayList = (
+        <div>
+          <RandomBadge
+            badgeArray={this.props.badgeArray}
+            goToBadge={this.props.goToBadge}
+            searchValue={this.state.searchValue}
+            randomBadge={this.state.randomBadge}
+          />
+        </div>
+      )
     }
 
     return (
