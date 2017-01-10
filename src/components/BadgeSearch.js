@@ -15,6 +15,7 @@ class BadgeSearch extends Component {
       creatorCheckBox: true,
       keywordsCheckBox: true,
       randomBadge: true,
+
       // isChecked: false,
     }
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -29,14 +30,20 @@ class BadgeSearch extends Component {
     const localStorageAdvancedNameCheckRef = localStorage.getItem('advancedName');
     const localStorageAdvancedKeywordsCheckRef = localStorage.getItem('advancedKeywords');
     const localStorageAdvancedCreatorCheckRef = localStorage.getItem('advancedCreator');
+
+
     // console.log(localStorageSearchRef);
     // console.log(localSearchStateRef);
     // console.log(localStorageAdvancedNameCheckRef);
     // console.log(localStorageAdvancedKeywordsCheckRef);
     // console.log(localStorageAdvancedCreatorCheckRef);
+
+
+
     if (localStorageSearchRef !== null) {
       this.setState({searchValue : localStorageSearchRef});
-      if(localStorageSearchRef.length !== 0){
+
+      if(localStorageSearchRef.length >= 3){
         this.setState({searching: true})
       }
     }
@@ -52,7 +59,6 @@ class BadgeSearch extends Component {
     if (localSearchStateRef === "advanced") {
         this.setState({standardSearch: false})
     }
-
   }
 
   advancedSearch(event) {
@@ -86,17 +92,43 @@ class BadgeSearch extends Component {
    //using the event object and a computed property, grab state object property name from input/select's name property (i.e. 'searchValue' or 'optionValue') and set the state property equal to the value grabbed from the event object.
    this.setState({
      [event.target.name]: event.target.value,
-     searching: true,
    });
    if(event.target.value.length <= 2 ) {
-     this.setState({ searching: false })
+     this.setState({ searching: false, randomBadge : true })
    }
+   else {
+     this.setState({ searching : true, randomBadge : false })
+   }
+
 }
 
   render() {
     function setBackgroundColor (color){
       document.body.style.background = color;
     }
+    //
+    // let rand1 = 0;
+    // let rand2 = 1;
+    // let length = this.props.badgeArray.length;
+    // function getRandomNumber(length) {
+    //   return Math.floor(Math.random() * (length));
+    // }
+    //
+    // if (this.state.searchValue.length === 1 || this.state.searchValue.length === 2) {
+    //   this.setState({randomBadge : false})
+    // }
+    // if (this.state.searchValue.length >= 3 ) {
+    //   this.setState({randomBadge : true})
+    // }
+    // if (this.state.randomBadge) {
+    //   rand1 = getRandomNumber(length);
+    //   rand2 = getRandomNumber(length);
+    //   while (rand1 === rand2) {
+    //     rand2 = getRandomNumber(length);
+    //   }
+      // console.log(this.state.searchValue.length);
+    //   console.log(rand1);
+    // }
 
     //if statements for displaying either advance search or regular search
     let displayList;
