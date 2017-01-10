@@ -6,11 +6,12 @@ class BadgeList extends Component {
   render(){
     const searchTagsArray = [];
     const creatorArray = [];
+    const creatorBadgeArray= [];
     const searchState = "advanced";
 
     if (this.props.searchValue.length >= 3) {
 
-      let filterTags = this.props.tagArray.filter(
+      this.props.tagArray.filter(
         (tag) => {
           if (tag.includes(this.props.searchValue.toLowerCase())) {
             searchTagsArray.push(tag);
@@ -19,7 +20,7 @@ class BadgeList extends Component {
         }
       );
 
-      let filterCreators = this.props.badgeArray.filter(
+      this.props.badgeArray.filter(
         (badge) => {
           // console.log(badge.creator);
           if(badge.creator.toLowerCase().includes(this.props.searchValue.toLowerCase()) && !creatorArray.includes(badge.creator)) {
@@ -42,11 +43,23 @@ class BadgeList extends Component {
         }
       );
 
+      function creatorBadges(creator, badges) {
+        var counter = 0;
+          for (var i = 0; i < badges.length; i++) {
+            // console.log(badges[i]);
+            if (badges[i]['creator'].toLowerCase() === creator.toLowerCase()) {
+              counter++
+          }
+        }
+        return counter;
+      }
+
       let filteredByCreatorBadges = this.props.badgeArray.filter(
         (badge) => {
           for (var i = 0; i < creatorArray.length; i++) {
             if (badge['creator'].toLowerCase().includes(creatorArray[i].toLowerCase())) {
-              return badge['creator'].toLowerCase().includes(creatorArray[i].toLowerCase());
+              creatorBadgeArray.push(badge);
+              return badge;
             }
           }
         }
@@ -141,14 +154,14 @@ class BadgeList extends Component {
                 creatorArray.map((creator, idx) =>{
                   return(
                     <div key={idx}>
-                      <h4>creator: {creator}</h4>
+                      <h2>{creator} ( {creatorBadges(creator, creatorBadgeArray)} )</h2>
                       <hr></hr>
                       {
                         //map over filterTags to display list of everything from the database, or whatever the user is filtering with their search term.
                         filteredByCreatorBadges.map((badge, idx) => {
                           let badgeCreator = badge.creator;
 
-                          if (badgeCreator.includes(creator)) {
+                          if (badgeCreator === creator) {
 
                             return(
                               <div key={idx}>
