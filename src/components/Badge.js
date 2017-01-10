@@ -33,7 +33,7 @@ class Badge extends Component{
         <div className="detail-body">
           <h1 style={{color: textColor}}>{ourBadge.name}</h1>
           <img className='detail-image' src={ourBadge.imageUrl} alt={ourBadge.name}></img>
-          <Linkify>
+          <Linkify properties={{target: 'blank'}}>
             <h3 style={{color: textColor}}>To do: {ourBadge.description}</h3>
             <h3 style={{color: textColor}}>{ourBadge.comments}</h3>
             <h3 style={{color: textColor}}>Proof: {ourBadge.proof}</h3>
