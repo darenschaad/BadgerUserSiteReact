@@ -74,21 +74,28 @@ class BadgeList extends Component {
 
         let displayName;
         if (this.props.nameCheckBox && this.props.searchValue.length >= 3) {
-          displayName = (
-            <div>
-              <h2>Search Results by Badge Name</h2>
-              <hr/>
-              {
-                //map over filteredBadges to display list of everything from the database, or whatever the user is filtering with their search term.
-                filteredByNameBadges.map((badge, idx) => {
-                  return(
-                    <div key={idx}>
-                      <ul>
-                        <li className='hover-hand' onClick={() => this.props.goToBadge(badge, this.props.searchValue, searchState)}>
-                          <img className='list-image' src={badge.imageUrl} alt={badge.name}></img>
-                          <a>
-                          Activity: {badge.name} <br />
-                          Creator: {badge.creator}
+          if (filteredByNameBadges.length === 0) {
+            displayName = (
+              <div>
+                <h2>Sorry, there are no Badges with names that match this search</h2>
+              </div>
+            )
+          } else {
+            displayName = (
+              <div>
+                <h2>Search Results by Badge Name</h2>
+                <hr/>
+                {
+                  //map over filteredBadges to display list of everything from the database, or whatever the user is filtering with their search term.
+                  filteredByNameBadges.map((badge, idx) => {
+                    return(
+                      <div key={idx}>
+                        <ul>
+                          <li className='hover-hand' onClick={() => this.props.goToBadge(badge, this.props.searchValue, searchState)}>
+                            <img className='list-image' src={badge.imageUrl} alt={badge.name}></img>
+                            <a>
+                              Activity: {badge.name} <br />
+                            Creator: {badge.creator}
                           </a>
                         </li>
                       </ul>
@@ -98,6 +105,7 @@ class BadgeList extends Component {
               }
             </div>
           )
+          }
         }
 
         let displayKeywords;
