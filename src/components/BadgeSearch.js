@@ -41,10 +41,9 @@ class BadgeSearch extends Component {
     }
     if (localSearchStateRef === "advanced") {
         this.setState({standardSearch: false})
-    } else {
-      if(localStorageSearchRef.length !== 0){
-        this.setState({searching: true})
     }
+    if(localStorageSearchRef.length !== 0){
+      this.setState({searching: true})
     }
   }
 
@@ -168,14 +167,9 @@ class BadgeSearch extends Component {
               <input type="checkbox" value="description" checked={this.state.creatorCheckBox} onChange={this.onChange} />
               Badge Creator
             </label>
-
-
           </div>
       }
-
-
       { displayList }
-
       </div>
     );
   }
