@@ -13,6 +13,7 @@ class BadgeSearch extends Component {
       nameCheckBox: true,
       creatorCheckBox: true,
       keywordsCheckBox: true,
+      randomBadge: true,
     }
     this.handleInputChange = this.handleInputChange.bind(this);
     this.advancedSearch = this.advancedSearch.bind(this);
@@ -26,8 +27,17 @@ class BadgeSearch extends Component {
     const localStorageAdvancedNameCheckRef = localStorage.getItem('advancedName');
     const localStorageAdvancedKeywordsCheckRef = localStorage.getItem('advancedKeywords');
     const localStorageAdvancedCreatorCheckRef = localStorage.getItem('advancedCreator');
-    console.log(localStorageAdvancedNameCheckRef);
-    this.setState({searchValue : localStorageSearchRef});
+    // console.log(localStorageSearchRef);
+    // console.log(localSearchStateRef);
+    // console.log(localStorageAdvancedNameCheckRef);
+    // console.log(localStorageAdvancedKeywordsCheckRef);
+    // console.log(localStorageAdvancedCreatorCheckRef);
+    if (localStorageSearchRef !== null) {
+      this.setState({searchValue : localStorageSearchRef});
+      if(localStorageSearchRef.length !== 0){
+        this.setState({searching: true})
+      }
+    }
     if (localStorageAdvancedNameCheckRef === "false") {
       this.setState({nameCheckBox : false});
     }
@@ -39,22 +49,20 @@ class BadgeSearch extends Component {
     }
     if (localSearchStateRef === "advanced") {
         this.setState({standardSearch: false})
-    } else {
-      if(localStorageSearchRef.length !== 0){
-        this.setState({searching: true})
     }
-    }
+
   }
 
   advancedSearch(event) {
     this.setState({
-      standardSearch: false
+      standardSearch : false,
+      randomBadge : false
     })
   }
 
   standardSearch(event) {
     this.setState({
-      standardSearch: true
+      standardSearch: true,
     })
   }
 
@@ -80,7 +88,7 @@ class BadgeSearch extends Component {
      searching: true,
    });
    //Searching will remain false until the user enters more than one character to optimize speed of rendered badges — one character renders too many options
-   if(event.target.value.length <= 1 ) {
+   if(event.target.value.length <= 2 ) {
      this.setState({ searching: false })
    }
 }
@@ -131,6 +139,7 @@ class BadgeSearch extends Component {
               badgeArray={this.props.badgeArray}
               goToBadge={this.props.goToBadge}
               searchValue={this.state.searchValue}
+              randomBadge={this.state.randomBadge}
             />
           </div>
         )
@@ -174,14 +183,12 @@ class BadgeSearch extends Component {
               <input type="checkbox" value="description" checked={this.state.creatorCheckBox} onChange={this.onChange} />
               Badge Creator
             </label>
-
-
           </div>
       }
 
       {/*Display the displayList variable set before the return. It will display the RandomBadge, BadgeList or AdvancedBadgeList components based on user input*/}
-      { displayList }
 
+      { displayList }
       </div>
     );
   }
