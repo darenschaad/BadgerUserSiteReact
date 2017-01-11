@@ -71,149 +71,159 @@ class BadgeList extends Component {
         }
       );
 
+      let displayPickSomething;
+      if (!this.props.nameCheckBox && !this.props.keywordsCheckBox && !this.props.creatorCheckBox) {
+        displayPickSomething = (
+          <div>
+            <h2>Please check one of the options to search by.</h2>
+            <hr/>
+          </div>
+        )
+      }
 
-        let displayName;
-        if (this.props.nameCheckBox && this.props.searchValue.length >= 3) {
-          if (filteredByNameBadges.length === 0) {
-            displayName = (
-              <div>
-                <h2>Sorry, there are no Badges with names that match this search</h2>
-                <hr></hr>
-              </div>
-            )
-          } else {
-            displayName = (
-              <div>
-                <h2>Search Results by Badge Name</h2>
-                <hr/>
-                {
-                  //map over filteredBadges to display list of everything from the database, or whatever the user is filtering with their search term.
-                  filteredByNameBadges.map((badge, idx) => {
-                    return(
-                      <div key={idx}>
-                        <ul>
-                          <li className='hover-hand' onClick={() => this.props.goToBadge(badge, this.props.searchValue, searchState)}>
-                            <img className='list-image' src={badge.imageUrl} alt={badge.name}></img>
-                            <a>
-                              Activity: {badge.name} <br />
-                              Creator: {badge.creator}
-                            </a>
-                          </li>
-                        </ul>
-                      </div>
-                    );
-                  })
-                }
-              </div>
-            )
-          }
+      let displayName;
+      if (this.props.nameCheckBox && this.props.searchValue.length >= 3) {
+        if (filteredByNameBadges.length === 0) {
+          displayName = (
+            <div>
+              <h2>Sorry, there are no Badges with names that match this search</h2>
+              <hr></hr>
+            </div>
+          )
+        } else {
+          displayName = (
+            <div>
+              <h2>Search Results by Badge Name</h2>
+              <hr/>
+              {
+                //map over filteredBadges to display list of everything from the database, or whatever the user is filtering with their search term.
+                filteredByNameBadges.map((badge, idx) => {
+                  return(
+                    <div key={idx}>
+                      <ul>
+                        <li className='hover-hand' onClick={() => this.props.goToBadge(badge, this.props.searchValue, searchState)}>
+                          <img className='list-image' src={badge.imageUrl} alt={badge.name}></img>
+                          <a>
+                            Activity: {badge.name} <br />
+                            Creator: {badge.creator}
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  );
+                })
+              }
+            </div>
+          )
         }
+      }
 
-        let displayKeywords;
-        if (this.props.keywordsCheckBox && this.props.searchValue.length >= 3) {
-          if (searchTagsArray.length === 0) {
-            displayKeywords = (
-              <div>
-                <h2>Sorry, there are no Badges with keywords that match this search</h2>
-                <hr></hr>
-              </div>
-            )
-          }else {
-            displayKeywords = (
-              <div>
-                <h2>Search By Keywords</h2>
-                <hr></hr>
-                {
-                  searchTagsArray.map((tag, idx) =>{
-                    return(
-                      <div key={idx}>
-                        <h4>Keyword: {tag}</h4>
-                        <hr></hr>
-                        {
-                          //map over filterTags to display list of everything from the database, or whatever the user is filtering with their search term.
-                          filteredByTagsArrayBadges.map((badge, idx) => {
-                            let badgeTagsArray = badge.tags.split(',');
-                            if (badgeTagsArray.includes(tag)) {
-                              return(
-                                <div key={idx}>
-                                  <ul>
-                                    <li className='hover-hand' onClick={() => this.props.goToBadge(badge, this.props.searchValue, searchState)}>
-                                      <img className='list-image' src={badge.imageUrl} alt={badge.name}></img>
-                                      <a>
-                                        {badge.name}
-                                        <br/>
-                                        {badge.tags}
-                                      </a>
-                                      <hr/>
-                                    </li>
-                                  </ul>
-                                </div>
-                              );
-                            }
-                          })
-                        }
-                      </div>
-                    );
-                  })
-                }
-              </div>
-            ) //close variable
-          }
-        } //close if statement
+      let displayKeywords;
+      if (this.props.keywordsCheckBox && this.props.searchValue.length >= 3) {
+        if (searchTagsArray.length === 0) {
+          displayKeywords = (
+            <div>
+              <h2>Sorry, there are no Badges with keywords that match this search</h2>
+              <hr></hr>
+            </div>
+          )
+        }else {
+          displayKeywords = (
+            <div>
+              <h2>Search By Keywords</h2>
+              <hr></hr>
+              {
+                searchTagsArray.map((tag, idx) =>{
+                  return(
+                    <div key={idx}>
+                      <h4>Keyword: {tag}</h4>
+                      <hr></hr>
+                      {
+                        //map over filterTags to display list of everything from the database, or whatever the user is filtering with their search term.
+                        filteredByTagsArrayBadges.map((badge, idx) => {
+                          let badgeTagsArray = badge.tags.split(',');
+                          if (badgeTagsArray.includes(tag)) {
+                            return(
+                              <div key={idx}>
+                                <ul>
+                                  <li className='hover-hand' onClick={() => this.props.goToBadge(badge, this.props.searchValue, searchState)}>
+                                    <img className='list-image' src={badge.imageUrl} alt={badge.name}></img>
+                                    <a>
+                                      {badge.name}
+                                      <br/>
+                                      {badge.tags}
+                                    </a>
+                                    <hr/>
+                                  </li>
+                                </ul>
+                              </div>
+                            );
+                          }
+                        })
+                      }
+                    </div>
+                  );
+                })
+              }
+            </div>
+          ) //close variable
+        }
+      } //close if statement
 
-        let displayCreator;
-        if (this.props.creatorCheckBox && this.props.searchValue.length >= 3) {
-          if (creatorArray.length === 0) {
-            displayCreator = (
-              <div>
-                <h2>Sorry, there are no Badge creators that match this search</h2>
-                <hr></hr>
-              </div>
-            )
-          } else {
-            displayCreator = (
-              <div>
-                <h2>Search By Creator</h2>
-                <hr></hr>
-                {
-                  creatorArray.map((creator, idx) =>{
-                    return(
-                      <div key={idx}>
-                        <h2>{creator} ( {creatorBadges(creator, creatorBadgeArray)} )</h2>
-                        <hr></hr>
-                        {
-                          //map over filterTags to display list of everything from the database, or whatever the user is filtering with their search term.
-                          filteredByCreatorBadges.map((badge, idx) => {
-                            let badgeCreator = badge.creator;
-                            if (badgeCreator === creator) {
-                              return(
-                                <div key={idx}>
-                                  <ul>
-                                    <li className='hover-hand' onClick={() => this.props.goToBadge(badge, this.props.searchValue, searchState)}>
-                                      <img className='list-image' src={badge.imageUrl} alt={badge.name}></img>
-                                      <a>
-                                        {badge.name} <br/>
-                                        {badge.tags}
-                                      </a>
-                                      <hr/>
-                                    </li>
-                                  </ul>
-                                </div>
-                              );
-                            }
-                          })
-                        }
-                      </div>
-                    );
-                  })
-                }
-              </div>
-            ) //close variable
-          }
-        } //close if statement
+      let displayCreator;
+      if (this.props.creatorCheckBox && this.props.searchValue.length >= 3) {
+        if (creatorArray.length === 0) {
+          displayCreator = (
+            <div>
+              <h2>Sorry, there are no Badge creators that match this search</h2>
+              <hr></hr>
+            </div>
+          )
+        } else {
+          displayCreator = (
+            <div>
+              <h2>Search By Creator</h2>
+              <hr></hr>
+              {
+                creatorArray.map((creator, idx) =>{
+                  return(
+                    <div key={idx}>
+                      <h2>{creator} ( {creatorBadges(creator, creatorBadgeArray)} )</h2>
+                      <hr></hr>
+                      {
+                        //map over filterTags to display list of everything from the database, or whatever the user is filtering with their search term.
+                        filteredByCreatorBadges.map((badge, idx) => {
+                          let badgeCreator = badge.creator;
+                          if (badgeCreator === creator) {
+                            return(
+                              <div key={idx}>
+                                <ul>
+                                  <li className='hover-hand' onClick={() => this.props.goToBadge(badge, this.props.searchValue, searchState)}>
+                                    <img className='list-image' src={badge.imageUrl} alt={badge.name}></img>
+                                    <a>
+                                      {badge.name} <br/>
+                                      {badge.tags}
+                                    </a>
+                                    <hr/>
+                                  </li>
+                                </ul>
+                              </div>
+                            );
+                          }
+                        })
+                      }
+                    </div>
+                  );
+                })
+              }
+            </div>
+          ) //close variable
+        }
+      } //close if statement
 
     return(
       <div>
+          {displayPickSomething}
           {displayName}
           {displayKeywords}
           {displayCreator}
