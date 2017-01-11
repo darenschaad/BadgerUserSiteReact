@@ -1,8 +1,15 @@
 import React, {Component} from 'react';
 
 class RandomBadge extends Component {
+  constructor() {
+    super();
+    this.state = {
+      rand1 : 0,
+      rand2 : 1
+    }
+  }
 
-  render() {
+  componentDidMount() {
     let badgeArray = this.props.badgeArray;
     let length = badgeArray.length;
     function getRandomNumber(length) {
@@ -13,6 +20,17 @@ class RandomBadge extends Component {
     while (rand1 === rand2) {
       rand2 = getRandomNumber(length);
     }
+    this.setState({ rand1 : rand1, rand2 : rand2 })
+  }
+
+  render() {
+    let badgeArray = this.props.badgeArray;
+
+    console.log(this.props.searchValue.length);
+    console.log(this.props.randomBadge);
+    let rand1 = this.state.rand1;
+    let rand2 = this.state.rand2;
+
 
     let badge1 = badgeArray[rand1];
     let badge2 = badgeArray[rand2];
