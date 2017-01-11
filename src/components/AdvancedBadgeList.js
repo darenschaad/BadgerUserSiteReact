@@ -71,11 +71,21 @@ class BadgeList extends Component {
         }
       );
 
+      let displayTypeSomething;
+      if (this.props.searchValue.length <= 2) {
+        displayTypeSomething = (
+          <div>
+            <h2>Type at least three characters to begin search</h2>
+            <hr/>
+          </div>
+        )
+      }
+
       let displayPickSomething;
       if (!this.props.nameCheckBox && !this.props.keywordsCheckBox && !this.props.creatorCheckBox) {
         displayPickSomething = (
           <div>
-            <h2>Please check one of the options to search by.</h2>
+            <h2>Please check one of the options to search by</h2>
             <hr/>
           </div>
         )
@@ -223,11 +233,11 @@ class BadgeList extends Component {
 
     return(
       <div>
-          {displayPickSomething}
-          {displayName}
-          {displayKeywords}
-          {displayCreator}
-
+        {displayTypeSomething}
+        {displayPickSomething}
+        {displayName}
+        {displayKeywords}
+        {displayCreator}
       </div>
     );
   }
