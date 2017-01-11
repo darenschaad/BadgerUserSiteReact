@@ -85,33 +85,47 @@ class BadgeList extends Component {
       )
     }
 
+    let displayName;
+    if (filteredByNameBadges.length === 0) {
+      displayName = (
+        <div>
+          <h2>Sorry, there are no Badges with names that match this search</h2>
+          <hr></hr>
+        </div>
+      )
+    } else {
+      displayName = (
+        <div>
+          <h2>Matching Activity Names:</h2>
+          <hr></hr>
+          {
+            //map over filteredByTagsBadges to display list of everything from the database, or whatever the user is filtering with their search term.
+            filteredByNameBadges.map((badge, idx) => {
+              return(
+                <div key={idx}>
+                  <ul>
+                    <li className='hover-hand' onClick={() => this.props.goToBadge(badge, this.props.searchValue, searchState)}>
+                      <img className='list-image' src={badge.imageUrl} alt={badge.name}></img>
+                      <a>
+                      Activity: {badge.name} <br />
+                      Creator: {badge.creator} <br />
+                      Tags: {badge.tags}
+                      </a>
+                      <br/>
+                    </li>
+                  </ul>
+                </div>
+              );
+            })
+          }
+        </div>
+      )
+    }
+
     return(
       <div>
         {displayKeywords}
-
-
-        <h2>Matching Activity Names:</h2>
-        <hr></hr>
-        {
-          //map over filteredByTagsBadges to display list of everything from the database, or whatever the user is filtering with their search term.
-          filteredByNameBadges.map((badge, idx) => {
-            return(
-              <div key={idx}>
-                <ul>
-                  <li className='hover-hand' onClick={() => this.props.goToBadge(badge, this.props.searchValue, searchState)}>
-                    <img className='list-image' src={badge.imageUrl} alt={badge.name}></img>
-                    <a>
-                    Activity: {badge.name} <br />
-                    Creator: {badge.creator} <br />
-                    Tags: {badge.tags}
-                    </a>
-                    <br/>
-                  </li>
-                </ul>
-              </div>
-            );
-          })
-        }
+        {displayName}
       </div>
     );
   }
