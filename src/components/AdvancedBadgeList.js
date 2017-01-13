@@ -232,12 +232,8 @@ class BadgeList extends Component {
       } //close if statement
 
     return(
-<<<<<<< HEAD
-      <div>
-        {displayTypeSomething}
-=======
       <div className="advanceBadgeByList">
->>>>>>> master
+        {displayTypeSomething}
         {displayPickSomething}
         {displayName}
         {displayKeywords}
