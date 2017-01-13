@@ -75,7 +75,7 @@ class BadgeList extends Component {
         let displayName;
         if (this.props.nameCheckBox && this.props.searchValue.length >= 3) {
           displayName = (
-            <div>
+            <div className="advancedBadgeBySection">
               <h2>Search Results by Badge Name</h2>
               <hr/>
               {
@@ -103,7 +103,7 @@ class BadgeList extends Component {
         let displayKeywords;
         if (this.props.keywordsCheckBox && this.props.searchValue.length >= 3) {
           displayKeywords = (
-            <div>
+            <div className="advancedBadgeBySection">
               <h2>Search By Keywords</h2>
               <hr></hr>
               {
@@ -147,7 +147,7 @@ class BadgeList extends Component {
         let displayCreator;
         if (this.props.creatorCheckBox && this.props.searchValue.length >= 3) {
           displayCreator = (
-            <div>
+            <div className="advancedBadgeBySection">
               <h2>Search By Creator</h2>
               <hr></hr>
               {
@@ -189,11 +189,10 @@ class BadgeList extends Component {
         } //close if statement
 
     return(
-      <div>
+      <div className="">
           {displayName}
           {displayKeywords}
           {displayCreator}
-
       </div>
     );
   }

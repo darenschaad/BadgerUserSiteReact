@@ -148,7 +148,7 @@ class BadgeSearch extends Component {
 
     return (
       <div>
-        {setBackgroundColor('#e6ffff')}
+        {setBackgroundColor('#989DA7')}
 
         {/*user input section*/}
         <input
