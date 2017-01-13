@@ -14,6 +14,7 @@ class BadgeSearch extends Component {
       creatorCheckBox: true,
       keywordsCheckBox: true,
       randomBadge: true,
+
     }
     this.handleInputChange = this.handleInputChange.bind(this);
     this.advancedSearch = this.advancedSearch.bind(this);
@@ -27,14 +28,11 @@ class BadgeSearch extends Component {
     const localStorageAdvancedNameCheckRef = localStorage.getItem('advancedName');
     const localStorageAdvancedKeywordsCheckRef = localStorage.getItem('advancedKeywords');
     const localStorageAdvancedCreatorCheckRef = localStorage.getItem('advancedCreator');
-    // console.log(localStorageSearchRef);
-    // console.log(localSearchStateRef);
-    // console.log(localStorageAdvancedNameCheckRef);
-    // console.log(localStorageAdvancedKeywordsCheckRef);
-    // console.log(localStorageAdvancedCreatorCheckRef);
+
     if (localStorageSearchRef !== null) {
       this.setState({searchValue : localStorageSearchRef});
-      if(localStorageSearchRef.length !== 0){
+
+      if(localStorageSearchRef.length >= 3){
         this.setState({searching: true})
       }
     }
@@ -50,7 +48,6 @@ class BadgeSearch extends Component {
     if (localSearchStateRef === "advanced") {
         this.setState({standardSearch: false})
     }
-
   }
 
   advancedSearch(event) {
@@ -89,8 +86,12 @@ class BadgeSearch extends Component {
    });
    //Searching will remain false until the user enters more than one character to optimize speed of rendered badges — one character renders too many options
    if(event.target.value.length <= 2 ) {
-     this.setState({ searching: false })
+     this.setState({ searching: false, randomBadge : true })
    }
+   else {
+     this.setState({ searching : true, randomBadge : false })
+   }
+
 }
 
   render() {
@@ -118,9 +119,9 @@ class BadgeSearch extends Component {
           />
         </div>
       )
-    } else {
+    }
       //if standardSearch is set (i.e. they haven't clicked the Advanced Search Button), the user will either see the RandomBadge component (user hasn't started searching) or the BadgeList component (user has started to search)
-      if (this.state.searching) {
+      else if (this.state.searching) {
         displayList = (
           <div>
             <BadgeList
@@ -132,18 +133,17 @@ class BadgeSearch extends Component {
             />
           </div>
         )
-      } else {
-        displayList = (
-          <div>
-            <RandomBadge
-              badgeArray={this.props.badgeArray}
-              goToBadge={this.props.goToBadge}
-              searchValue={this.state.searchValue}
-              randomBadge={this.state.randomBadge}
-            />
-          </div>
-        )
-      }
+    } else {
+      displayList = (
+        <div>
+          <RandomBadge
+            badgeArray={this.props.badgeArray}
+            goToBadge={this.props.goToBadge}
+            searchValue={this.state.searchValue}
+            randomBadge={this.state.randomBadge}
+          />
+        </div>
+      )
     }
 
     return (
