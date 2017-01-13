@@ -102,7 +102,7 @@ class BadgeList extends Component {
           )
         } else {
           displayName = (
-            <div>
+            <div className="advancedBadgeBySection">
               <h2>Search Results by Badge Name</h2>
               <hr/>
               {
@@ -139,7 +139,7 @@ class BadgeList extends Component {
           )
         }else {
           displayKeywords = (
-            <div>
+            <div className="advancedBadgeBySection">
               <h2>Search By Keywords</h2>
               <hr></hr>
               {
@@ -191,7 +191,7 @@ class BadgeList extends Component {
           )
         } else {
           displayCreator = (
-            <div>
+            <div className="advancedBadgeBySection">
               <h2>Search By Creator</h2>
               <hr></hr>
               {
@@ -232,8 +232,12 @@ class BadgeList extends Component {
       } //close if statement
 
     return(
+<<<<<<< HEAD
       <div>
         {displayTypeSomething}
+=======
+      <div className="advanceBadgeByList">
+>>>>>>> master
         {displayPickSomething}
         {displayName}
         {displayKeywords}
