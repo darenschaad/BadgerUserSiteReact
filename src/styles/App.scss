@@ -1,3 +1,4 @@
+//Font Section
 @font-face {
   font-family: 'bebas';
   src: url('../fonts/BebasNeue.otf');
@@ -7,11 +8,21 @@
   src: url('../fonts/futura-condensed-normal.ttf');
 }
 
-$background-color: #989DA7;
 
+//Variable Section
+$background-color: #989DA7;
+$badger-black: #000000;
+$badger-white: #FFFFFF;
+$primary-font: 'bebas';
+$secondary-font: 'futura';
+
+
+
+//Overall Section
 body {
   // background-color: #e6ffff;
   // background-color: red;
+  padding: 10vw;
 
   @media only screen and (min-width: 600px) {
       /* For tablets: */
@@ -23,6 +34,57 @@ body {
   }
 
 }
+
+
+//Search section
+.searchInput {
+  border: none;
+  margin: 5px;
+  height: 35px;
+  width: 100%;
+  padding-left: 10px;
+  font-family: $secondary-font;
+  &::-webkit-input-placeholder {
+    color: $badger-black !important;
+  }
+
+  &:-moz-placeholder { /* Firefox 18- */
+    color: $badger-black !important;
+  }
+
+  &::-moz-placeholder {  /* Firefox 19+ */
+    color: $badger-black !important;
+  }
+
+  &:-ms-input-placeholder {
+    color: $badger-black !important;
+  }
+}
+
+.searchButton {
+  font-family: $primary-font;
+  background-color: $badger-black;
+  color: $badger-white;
+  border: none;
+  margin: 5px;
+  height: 35px;
+  width: 100%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .detail-image {
     height: auto;

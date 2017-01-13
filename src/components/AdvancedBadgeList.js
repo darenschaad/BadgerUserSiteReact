@@ -222,7 +222,7 @@ class BadgeList extends Component {
       } //close if statement
 
     return(
-      <div className="advanceBadgeByList">
+      <div className="advancedBadgeByList">
         {displayPickSomething}
         {displayName}
         {displayKeywords}
