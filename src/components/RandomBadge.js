@@ -48,29 +48,31 @@ class RandomBadge extends Component {
     const backgroundColor2 = backgroundColors[index2];
 
     return (
-      <div>
+      <div className="random-badge-div">
         <h2>RANDOM BADGES</h2>
         <hr></hr>
-        <div style={{backgroundColor : backgroundColor1}}>
-          <div className='hover-hand' onClick={() => this.props.goToBadge(badge1, this.props.searchValue)}>
-            <h1 style={{color: textColor1}}>{category1}</h1>
-            <h1 style={{color: textColor1}}>Activity: {badge1.name}</h1>
-            <img className='detail-image' src={badge1.imageUrl} alt={badge1.names}></img>
-            <h3 style={{color: textColor1}}>To do: {badge1.description} <br></br> {badge1.comments}</h3>
-            <hr></hr>
-            <h3 style={{color: textColor1}}>Proof: {badge1.proof}</h3>
+        <div>
+          <div style={{backgroundColor : backgroundColor1}}>
+            <div className='hover-hand random-badge-content' onClick={() => this.props.goToBadge(badge1, this.props.searchValue)}>
+              <h1 style={{color: textColor1}}>{category1}</h1>
+              <h1 style={{color: textColor1}}>Activity: {badge1.name}</h1>
+              <img className='detail-image' src={badge1.imageUrl} alt={badge1.names}></img>
+              <h3 style={{color: textColor1}}>To do: {badge1.description} <br></br> {badge1.comments}</h3>
+              <hr></hr>
+              <h3 style={{color: textColor1}}>Proof: {badge1.proof}</h3>
+            </div>
           </div>
-        </div>
 
-        <hr></hr>
-        <div style={{backgroundColor : backgroundColor2}}>
-          <div className='hover-hand' onClick={() => this.props.goToBadge(badge2, this.props.searchValue)}>
-            <h1 style={{color: textColor2}}>{category2}</h1>
-            <h1 style={{color: textColor2}}>Activity: {badge2.name}</h1>
-            <img className='detail-image' src={badge2.imageUrl} alt={badge2.names}></img>
-            <h3 style={{color: textColor2}}>To do: {badge2.description} <br></br> {badge2.comments}</h3>
-            <hr></hr>
-            <h3 style={{color: textColor2}}>Proof: {badge2.proof}</h3>
+          <hr></hr>
+          <div style={{backgroundColor : backgroundColor2}}>
+            <div className='hover-hand random-badge-content' onClick={() => this.props.goToBadge(badge2, this.props.searchValue)}>
+              <h1 style={{color: textColor2}}>{category2}</h1>
+              <h1 style={{color: textColor2}}>Activity: {badge2.name}</h1>
+              <img className='detail-image' src={badge2.imageUrl} alt={badge2.names}></img>
+              <h3 style={{color: textColor2}}>To do: {badge2.description} <br></br> {badge2.comments}</h3>
+              <hr></hr>
+              <h3 style={{color: textColor2}}>Proof: {badge2.proof}</h3>
+            </div>
           </div>
         </div>
       </div>
