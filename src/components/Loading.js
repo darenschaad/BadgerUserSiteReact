@@ -3,8 +3,11 @@ import React from 'react';
 
 const Loading = (props) => {
   return(
-    <div>
-      <img src="https://spcilk.github.io/badger-badge-images/images/000.png" alt="badger logo"></img>
+    <div id="loading-div" className="animated bounce infinite">
+      <h3>
+        <img id="loading-image"  src={require('../img/badgey.png')} />
+          Loading...
+      </h3>
     </div>
 
   )
