@@ -37,14 +37,14 @@ class BadgeList extends Component {
     let displayKeywords;
     if (searchTagsArray.length === 0) {
       displayKeywords = (
-        <div>
+        <div className="standard-search-content">
           <h2>Sorry, there are no Badges with keywords that match this search</h2>
           <hr></hr>
         </div>
       )
     } else {
       displayKeywords = (
-        <div>
+        <div className="standard-search-content">
           <h2>Search By Keywords</h2>
           <hr></hr>
           {
@@ -88,14 +88,14 @@ class BadgeList extends Component {
     let displayName;
     if (filteredByNameBadges.length === 0) {
       displayName = (
-        <div>
+        <div className="standard-search-content">
           <h2>Sorry, there are no Badges with names that match this search</h2>
           <hr></hr>
         </div>
       )
     } else {
       displayName = (
-        <div>
+        <div className="standard-search-content">
           <h2>Matching Activity Names:</h2>
           <hr></hr>
           {

@@ -207,8 +207,6 @@ body {
   max-width: 50px;
   max-height: 50px;
 }
-
-
 // end navbar syling
 
 // random badge styling
@@ -216,13 +214,29 @@ body {
 .random-badge-content {
   padding-left: 20px;
 }
-// 
-// .random-badge-div {
-//   font-family: $primary-font;
-// }
 
+.random-badge-div {
+  font-family: $primary-font;
+}
 
 // end random badge styling
+
+// standard search styling
+
+ .standard-search-content {
+   font-family: $primary-font;
+ }
+
+// end standard search styling
+
+// advanced search styling
+.advanced-search-content {
+  font-family: $primary-font;
+}
+
+
+// end advanced search styling
+
 
 
 
