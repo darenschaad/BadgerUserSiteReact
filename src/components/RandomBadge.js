@@ -51,7 +51,7 @@ class RandomBadge extends Component {
       <div className="random-badge-div">
         <h2>RANDOM BADGES</h2>
         <hr></hr>
-        <div>
+        <div className="random-badge-div">
           <div style={{backgroundColor : backgroundColor1}}>
             <div className='hover-hand random-badge-content' onClick={() => this.props.goToBadge(badge1, this.props.searchValue)}>
               <h1 style={{color: textColor1}}>{category1}</h1>

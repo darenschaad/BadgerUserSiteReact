@@ -5,6 +5,7 @@ import App from './components/App';
 import { BrowserRouter, Match, Miss } from '../node_modules/react-router/index';
 import Badge from './components/Badge';
 import Categories from './components/Categories';
+import Challenges from './components/Challenges'
 import NotFound from './components/NotFound';
 
 import './styles/normalize.css';
@@ -17,8 +18,9 @@ const Root = () => {
       <BrowserRouter>
         <div>
           <Match exactly pattern="/" component={App} />
-          <Match pattern="/categories" component={Categories} />
-          <Match pattern="/about" component={About} />
+          <Match exactly pattern="/categories" component={Categories} />
+          <Match exactly pattern="/about" component={About} />
+          <Match exactly pattern="/challenges" component={Challenges} />
           <Match pattern="/badge/:pushId" component={Badge} />
           <Miss component={NotFound} />
         </div>
