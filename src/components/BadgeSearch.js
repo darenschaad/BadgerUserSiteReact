@@ -71,7 +71,6 @@ class BadgeSearch extends Component {
       this.setState({keywordsCheckBox: !this.state.keywordsCheckBox});
       localStorage.setItem(`advancedKeywords`, !this.state.keywordsCheckBox);
     }
-
   }
 
   handleInputChange(event) {
@@ -132,7 +131,7 @@ class BadgeSearch extends Component {
         )
     } else {
       displayList = (
-        <div>
+        <div className="randomBadge">
           <RandomBadge
             badgeArray={this.props.badgeArray}
             goToBadge={this.props.goToBadge}
@@ -148,8 +147,9 @@ class BadgeSearch extends Component {
 
         {/*user input section*/}
         <input
+          className="searchInput"
           value={this.state.searchValue}
-          placeholder={'Enter search term'}
+          placeholder={'Type here to search everything'}
           name={'searchValue'}
           onChange={this.handleInputChange}
         />
@@ -158,33 +158,73 @@ class BadgeSearch extends Component {
         //display either standard search (button that triggers advance search) or advanced search (radio button filters)
         this.state.standardSearch === true ?
           <div>
-            <button id="advanced-search-button" type="button" onClick={this.advancedSearch}>Advanced Search</button>
+            <button
+              className="searchButton"
+              id="advanced-search-button"
+              type="button"
+              onClick={this.advancedSearch}>
+                Advanced Search
+            </button>
           </div>
         :
-          <div>
-            <button id="advanced-search-button" type="button" onClick={this.standardSearch}>Standard Search</button>
+          <div className="advanceSearch">
+            <h4>Filter Your Search By:</h4>
+            <div className="searchFilters control-group">
+              <label className="control control--radio">
+                <input
+                  type="radio"
+                  value="name"
+                  checked={this.state.nameCheckBox}
+                  onChange={this.onChange}
+                  />
+                <div
+                  className="control__indicator"
+                />
+                Badge Name
+              </label>
+              <br/>
+
+              <label className="control control--radio">
+                <input
+                  type="radio"
+                  value="keywords"
+                  checked={this.state.keywordsCheckBox}
+                  onChange={this.onChange}
+                  />
+                <div
+                  className="control__indicator"
+                />
+                Badge Keywords
+              </label>
+              <br/>
+
+              <label className="control control--radio">
+                <input
+                  type="radio"
+                  value="description"
+                  checked={this.state.creatorCheckBox}
+                  onChange={this.onChange}
+                  />
+                <div
+                  className="control__indicator"
+                />
+                Badge Creator
+              </label>
+            </div>
+
+            <button
+              className="searchButton"
+              id="advanced-search-button"
+              type="button"
+              onClick={this.standardSearch}>
+                BACK TO STANDARD SEARCH
+            </button>
             <br/>
-            <h3>Search Badges By:</h3>
-            <label>
-              <input type="checkbox" value="name" checked={this.state.nameCheckBox} onChange={this.onChange} />
-              Badge Name
-            </label>
-            <br/>
-            <label>
-              <input type="checkbox" value="keywords" checked={this.state.keywordsCheckBox} onChange={this.onChange} />
-              Badge Keywords
-            </label>
-            <br/>
-            <label>
-              <input type="checkbox" value="description" checked={this.state.creatorCheckBox} onChange={this.onChange} />
-              Badge Creator
-            </label>
           </div>
       }
 
-      {/*Display the displayList variable set before the return. It will display the RandomBadge, BadgeList or AdvancedBadgeList components based on user input*/}
-
-      { displayList }
+        {/*Display the displayList variable set before the return. It will display the RandomBadge, BadgeList or AdvancedBadgeList components based on user input*/}
+        { displayList }
       </div>
     );
   }

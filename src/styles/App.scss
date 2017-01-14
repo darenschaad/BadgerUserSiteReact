@@ -1,3 +1,4 @@
+//Font Section
 @font-face {
   font-family: 'bebas';
   src: url('../fonts/BebasNeue.otf');
@@ -7,11 +8,21 @@
   src: url('../fonts/futura-condensed-normal.ttf');
 }
 
-$background-color: #989DA7;
 
+//Variable Section
+$background-color: #989DA7;
+$badger-black: #000000;
+$badger-white: #FFFFFF;
+$primary-font: 'bebas';
+$secondary-font: 'futura';
+
+
+
+//Overall Section
 body {
   // background-color: #e6ffff;
   // background-color: red;
+  padding: 10vw;
 
   @media only screen and (min-width: 600px) {
       /* For tablets: */
@@ -23,6 +34,159 @@ body {
   }
 
 }
+
+
+//Search section
+.searchInput {
+  border: none;
+  height: 35px;
+  width: 100%;
+  padding-left: 10px;
+  font-family: $secondary-font;
+  border-radius: 2px;
+  &::-webkit-input-placeholder {
+    color: lighten($badger-black, 30%) !important;
+  }
+
+  &:-moz-placeholder { /* Firefox 18- */
+    color: lighten($badger-black, 30%) !important;
+  }
+
+  &::-moz-placeholder {  /* Firefox 19+ */
+    color: lighten($badger-black, 30%) !important;
+  }
+
+  &:-ms-input-placeholder {
+    color: lighten($badger-black, 30%) !important;
+  }
+}
+
+.searchButton {
+  font-family: $primary-font;
+  background-color: $badger-black;
+  color: $badger-white;
+  border: none;
+  height: 35px;
+  width: 100%;
+  border-radius: 2px;
+  margin-top: 10px;
+}
+
+.advanceSearch{
+  width: 100%;
+  h4 {
+    text-align: center;
+    font-family: $primary-font;
+  }
+  .searchFilters {
+    background-color: lighten($background-color, 10%);
+    padding: 10px;
+    width: 100%;
+    border-radius: 2px;
+  }
+}
+
+.control {
+	font-family: $primary-font;
+	position: relative;
+	display: block;
+	padding-left: 30px;
+	cursor: pointer;
+}
+
+.control input {
+	position: absolute;
+	z-index: -1;
+	opacity: 0;
+}
+
+.control__indicator {
+	position: absolute;
+	left: 0;
+	width: 12px;
+	height: 12px;
+}
+
+.control--radio .control__indicator {
+	border-radius: 50%;
+}
+
+/* Hover and focus states */
+.control:hover input ~ .control__indicator,
+.control input:focus ~ .control__indicator {
+	background: $badger-white;
+}
+
+/* Checked state */
+.control input:checked ~ .control__indicator {
+	background: $badger-white;
+}
+
+/* Hover state whilst checked */
+.control:hover input:not([disabled]):checked ~ .control__indicator,
+.control ~ .control__indicator {
+	background: $background-color;
+}
+
+
+/* Check mark */
+.control__indicator:after {
+	position: absolute;
+	display: none;
+	content: '';
+}
+
+/* Show check mark */
+.control input:checked ~ .control__indicator:after {
+	display: block;
+}
+
+// /* Checkbox tick */
+.control--checkbox .control__indicator:after {
+	top: 4px;
+	left: 8px;
+	width: 3px;
+	height: 8px;
+	transform: rotate(45deg);
+	border: solid $badger-black;
+	border-width: 0 2px 2px 0;
+}
+
+// /* Disabled tick colour */
+.control--checkbox input:disabled ~ .control__indicator:after {
+	border-color: $badger-white;
+}
+
+/* Radio button inner circle */
+.control--radio .control__indicator:after {
+	top: 25%;
+	left: 25%;
+	width: 5.5px;
+	height: 5.5px;
+	border-radius: 50%;
+	background: $badger-black;
+}
+
+/* Disabled circle colour */
+.control--radio input:disabled ~ .control__indicator:after {
+	background: #7b7b7b;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .detail-image {
     height: auto;
