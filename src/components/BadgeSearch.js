@@ -153,7 +153,7 @@ class BadgeSearch extends Component {
         <input
           className="searchInput"
           value={this.state.searchValue}
-          placeholder={'Enter search term'}
+          placeholder={'Type here to search everything'}
           name={'searchValue'}
           onChange={this.handleInputChange}
         />
@@ -167,11 +167,55 @@ class BadgeSearch extends Component {
               id="advanced-search-button"
               type="button"
               onClick={this.advancedSearch}>
-                ADVANCED SEARCH
+                Advanced Search
             </button>
           </div>
         :
-          <div>
+          <div className="advanceSearch">
+            <h4>Filter Your Search By:</h4>
+            <div className="searchFilters control-group">
+              <label className="control control--radio">
+                <input
+                  type="radio"
+                  value="name"
+                  checked={this.state.nameCheckBox}
+                  onChange={this.onChange}
+                  />
+                <div
+                  className="control__indicator"
+                />
+                Badge Name
+              </label>
+              <br/>
+
+              <label className="control control--radio">
+                <input
+                  type="radio"
+                  value="keywords"
+                  checked={this.state.keywordsCheckBox}
+                  onChange={this.onChange}
+                  />
+                <div
+                  className="control__indicator"
+                />
+                Badge Keywords
+              </label>
+              <br/>
+
+              <label className="control control--radio">
+                <input
+                  type="radio"
+                  value="description"
+                  checked={this.state.creatorCheckBox}
+                  onChange={this.onChange}
+                  />
+                <div
+                  className="control__indicator"
+                />
+                Badge Creator
+              </label>
+            </div>
+
             <button
               className="searchButton"
               id="advanced-search-button"
@@ -180,39 +224,6 @@ class BadgeSearch extends Component {
                 BACK TO STANDARD SEARCH
             </button>
             <br/>
-
-            <h3>FILTER YOUR SEARCH BY:</h3>
-            <label>
-              <input
-                type="radio"
-                value="name"
-                checked={this.state.nameCheckBox}
-                onChange={this.onChange}
-              />
-              Badge Name
-            </label>
-            <br/>
-
-            <label>
-              <input
-                type="radio"
-                value="keywords"
-                checked={this.state.keywordsCheckBox}
-                onChange={this.onChange}
-              />
-              Badge Keywords
-            </label>
-            <br/>
-
-            <label>
-              <input
-                type="radio"
-                value="description"
-                checked={this.state.creatorCheckBox}
-                onChange={this.onChange}
-              />
-              Badge Creator
-            </label>
           </div>
       }
 
