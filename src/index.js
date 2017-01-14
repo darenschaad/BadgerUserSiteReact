@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import About from './components/About';
 import App from './components/App';
-import NavBar from './components/NavBar';
 import { BrowserRouter, Match, Miss } from '../node_modules/react-router/index';
 import Badge from './components/Badge';
 import Categories from './components/Categories';
