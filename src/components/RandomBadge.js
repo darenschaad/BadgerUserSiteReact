@@ -25,9 +25,6 @@ class RandomBadge extends Component {
 
   render() {
     let badgeArray = this.props.badgeArray;
-
-    console.log(this.props.searchValue.length);
-    console.log(this.props.randomBadge);
     let rand1 = this.state.rand1;
     let rand2 = this.state.rand2;
 

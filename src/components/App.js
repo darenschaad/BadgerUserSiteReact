@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import base from '../base';
 import BadgeSearch from './BadgeSearch';
 import NavBar from './NavBar';
+import Loading from './Loading';
 
 class App extends Component {
   constructor() {
@@ -61,11 +62,12 @@ class App extends Component {
     //once this.state.loading is true after Firebase is synced, the page will render
     if(this.state.loading) {
       return(
-        <h3 className="Loading">LOADING...</h3>
+        <Loading />
       );
     } else {
       return (
         <div className="App">
+          <NavBar />
           <BadgeSearch
             badgeArray={this.state.badges}
             tagArray={this.state.tags}

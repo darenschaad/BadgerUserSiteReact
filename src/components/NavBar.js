@@ -6,18 +6,21 @@ class NavBar extends Component {
     this.goToPage = this.goToPage.bind(this);
   }
 
-  goToPage(event) {
+  goToPage(destination) {
+    event.preventDefault();
+    // const destination = this.destination.value;
+    console.log(destination);
     console.log(event);
-    this.context.router.transitionTo(`/${event.target.value}`);
+    this.context.router.transitionTo(`/${destination}`);
   }
 
   render(){
     return(
       <div>
-        <ul>
-          <li value={'about'} onClick={this.goToPage}>About</li>
-          <li value={'categories'} onClick={this.goToPage}>Categories</li>
-        </ul>
+          <ul>
+            <li onClick={this.goToPage.bind(this, "about")}>About</li>
+            <li onClick={this.goToPage.bind(this, "categories")}>Categories</li>
+          </ul>
       </div>
     );
   }

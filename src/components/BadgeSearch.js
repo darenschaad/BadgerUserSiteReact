@@ -13,8 +13,6 @@ class BadgeSearch extends Component {
       nameCheckBox: true,
       creatorCheckBox: true,
       keywordsCheckBox: true,
-      randomBadge: true,
-
     }
     this.handleInputChange = this.handleInputChange.bind(this);
     this.advancedSearch = this.advancedSearch.bind(this);
@@ -53,7 +51,6 @@ class BadgeSearch extends Component {
   advancedSearch(event) {
     this.setState({
       standardSearch : false,
-      randomBadge : false
     })
   }
 
@@ -85,10 +82,10 @@ class BadgeSearch extends Component {
    });
    //Searching will remain false until the user enters more than one character to optimize speed of rendered badges — one character renders too many options
    if(event.target.value.length <= 2 ) {
-     this.setState({ searching: false, randomBadge : true })
+     this.setState({ searching: false })
    }
    else {
-     this.setState({ searching : true, randomBadge : false })
+     this.setState({ searching : true })
    }
 
 }
@@ -139,7 +136,6 @@ class BadgeSearch extends Component {
             badgeArray={this.props.badgeArray}
             goToBadge={this.props.goToBadge}
             searchValue={this.state.searchValue}
-            randomBadge={this.state.randomBadge}
           />
         </div>
       )
