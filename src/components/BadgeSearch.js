@@ -167,7 +167,7 @@ class BadgeSearch extends Component {
             </button>
           </div>
         :
-          <div className="advanceSearch">
+          <div className="advancedSearch">
             <h4>Filter Your Search By:</h4>
             <div className="searchFilters control-group">
               <label className="control control--radio">
@@ -177,9 +177,7 @@ class BadgeSearch extends Component {
                   checked={this.state.nameCheckBox}
                   onChange={this.onChange}
                   />
-                <div
-                  className="control__indicator"
-                />
+                <div className="control__indicator"></div>
                 Badge Name
               </label>
               <br/>
@@ -191,9 +189,7 @@ class BadgeSearch extends Component {
                   checked={this.state.keywordsCheckBox}
                   onChange={this.onChange}
                   />
-                <div
-                  className="control__indicator"
-                />
+                <div className="control__indicator"></div>
                 Badge Keywords
               </label>
               <br/>
@@ -205,9 +201,7 @@ class BadgeSearch extends Component {
                   checked={this.state.creatorCheckBox}
                   onChange={this.onChange}
                   />
-                <div
-                  className="control__indicator"
-                />
+                <div className="control__indicator"></div>
                 Badge Creator
               </label>
             </div>
