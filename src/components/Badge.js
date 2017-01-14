@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Linkify from 'react-linkify';
+import NavBar from './NavBar';
 
 class Badge extends Component{
   // constructor() {
@@ -26,6 +27,7 @@ class Badge extends Component{
 
     return(
       <div>
+        <NavBar />
         {setBackgroundColor(backgroundColor)}
         <div className="category-div">
           <h1 style={{color: textColor}} className="category-name">{ category }</h1>
