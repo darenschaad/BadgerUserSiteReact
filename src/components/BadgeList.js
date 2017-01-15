@@ -20,7 +20,7 @@ class BadgeList extends Component {
       (badge) => {
         for (var i = 0; i < searchTagsArray.length; i++) {
           if (badge['tags'].toLowerCase().includes(searchTagsArray[i].toLowerCase())) {
-            return badge['tags'].toLowerCase().includes(searchTagsArray[i].toLowerCase());
+            return badge;
           }
         }
 

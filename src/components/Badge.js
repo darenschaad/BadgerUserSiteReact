@@ -41,7 +41,8 @@ class Badge extends Component{
             <h3 style={{color: textColor}}>Proof: {ourBadge.proof}</h3>
           </Linkify>
           <h4 style={{color: textColor}}>Challenges: {ourBadge.challenges}</h4>
-          <h4 style={{color: textColor}}>Tags: {ourBadge.tags}</h4>
+          <h4 style={{color: textColor}}>Creator: {ourBadge.creator}</h4>
+          <h4 style={{color: textColor}}>Keywords: {ourBadge.tags}</h4>
         </div>
       </div>
 
