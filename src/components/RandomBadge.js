@@ -48,7 +48,7 @@ class RandomBadge extends Component {
     const backgroundColor2 = backgroundColors[index2];
 
     return (
-      <div className="random-badge-div">
+      <div className="random-badge-div animated slideInUp">
         <h2>RANDOM BADGES</h2>
         <hr></hr>
         <div className="random-badge-div">
