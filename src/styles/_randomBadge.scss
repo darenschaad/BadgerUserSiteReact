@@ -1,11 +1,45 @@
 // random badge styling
-
 .random-badge-content {
-  padding-left: 20px;
+  padding: 0;
+  height: 100%;
+  width: 100%;
 }
 
 .random-badge-div {
   font-family: $primary-font;
 }
 
+.badge-tile-category {
+  background-color: $badger-white;
+  padding: 15px;
+  margin: 0;
+  text-align: center;
+}
+
+.badge-tile {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.detail-image {
+  height: 100%;
+  width: auto;
+  max-width: 350px;
+  max-height: 350px;
+}
+
+.badge-tile-details {
+  padding: 10px;
+}
+
+.badge-tile-image-details {
+  display: flex;
+
+}
+
+.read-more {
+  text-decoration: underline;
+  color: red;
+}
 // end random badge styling
