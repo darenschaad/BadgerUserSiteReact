@@ -62,8 +62,8 @@ class BadgeList extends Component {
 
                         return(
                           <div key={idx}>
-                            <ul>
-                              <li className='hover-hand' onClick={() => this.props.goToBadge(badge, this.props.searchValue, searchState)}>
+                            <ul className="badge-list">
+                              <li className='badge-list-item hover-hand' onClick={() => this.props.goToBadge(badge, this.props.searchValue, searchState)}>
                                 <img className='list-image' src={badge.imageUrl} alt={badge.name}></img>
                                 <a>
                                   {badge.name} <br/>
@@ -103,8 +103,8 @@ class BadgeList extends Component {
             filteredByNameBadges.map((badge, idx) => {
               return(
                 <div key={idx}>
-                  <ul>
-                    <li className='hover-hand' onClick={() => this.props.goToBadge(badge, this.props.searchValue, searchState)}>
+                  <ul className="badge-list">
+                    <li className='badge-list-item hover-hand' onClick={() => this.props.goToBadge(badge, this.props.searchValue, searchState)}>
                       <img className='list-image' src={badge.imageUrl} alt={badge.name}></img>
                       <a>
                       Activity: {badge.name} <br />
@@ -123,7 +123,7 @@ class BadgeList extends Component {
     }
 
     return(
-      <div>
+      <div className="animated slideInUp">
         {displayKeywords}
         {displayName}
       </div>
