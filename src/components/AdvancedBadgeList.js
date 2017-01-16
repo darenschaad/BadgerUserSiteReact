@@ -74,7 +74,7 @@ class BadgeList extends Component {
       let displayTypeSomething;
       if (this.props.searchValue.length <= 2) {
         displayTypeSomething = (
-          <div>
+          <div  className="advanced-search-content">
             <h2>Type at least three characters to begin search</h2>
             <hr/>
           </div>
@@ -84,7 +84,7 @@ class BadgeList extends Component {
       let displayPickSomething;
       if (!this.props.nameCheckBox && !this.props.keywordsCheckBox && !this.props.creatorCheckBox) {
         displayPickSomething = (
-          <div>
+          <div  className="advanced-search-content">
             <h2>Please check one of the options to search by</h2>
             <hr/>
           </div>
@@ -95,14 +95,14 @@ class BadgeList extends Component {
       if (this.props.nameCheckBox && this.props.searchValue.length >= 3) {
         if (filteredByNameBadges.length === 0) {
           displayName = (
-            <div>
+            <div  className="advanced-search-content">
               <h2>Sorry, there are no Badges with names that match this search</h2>
               <hr></hr>
             </div>
           )
         } else {
           displayName = (
-            <div className="advancedBadgeBySection">
+            <div className="advanced-search-content">
               <h2>Search Results by Badge Name</h2>
               <hr/>
               {
@@ -132,14 +132,14 @@ class BadgeList extends Component {
       if (this.props.keywordsCheckBox && this.props.searchValue.length >= 3) {
         if (searchTagsArray.length === 0) {
           displayKeywords = (
-            <div>
+            <div className="advanced-search-content">
               <h2>Sorry, there are no Badges with keywords that match this search</h2>
               <hr></hr>
             </div>
           )
         }else {
           displayKeywords = (
-            <div className="advancedBadgeBySection">
+            <div className="advanced-search-content">
               <h2>Search By Keywords</h2>
               <hr></hr>
               {
@@ -184,14 +184,14 @@ class BadgeList extends Component {
       if (this.props.creatorCheckBox && this.props.searchValue.length >= 3) {
         if (creatorArray.length === 0) {
           displayCreator = (
-            <div>
+            <div className="advanced-search-content">
               <h2>Sorry, there are no Badge creators that match this search</h2>
               <hr></hr>
             </div>
           )
         } else {
           displayCreator = (
-            <div className="advancedBadgeBySection">
+            <div className="advanced-search-content">
               <h2>Search By Creator</h2>
               <hr></hr>
               {

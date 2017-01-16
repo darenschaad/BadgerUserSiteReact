@@ -196,7 +196,7 @@ body {
     text-decoration: none;
     color: $badger-black;
     &:hover {
-      background-color: #111;
+      background-color: #DCF0FF;
     }
   }
 }
@@ -207,18 +207,39 @@ body {
   max-width: 50px;
   max-height: 50px;
 }
-
-
 // end navbar syling
 
+// random badge styling
 
-
-.detail-image {
-    height: auto;
-    width: auto;
-    max-width: 200px;
-    max-height: 200px;
+.random-badge-content {
+  padding-left: 20px;
 }
+
+.random-badge-div {
+  font-family: $primary-font;
+}
+
+// end random badge styling
+
+// standard search styling
+
+ .standard-search-content {
+   font-family: $primary-font;
+ }
+
+// end standard search styling
+
+// advanced search styling
+.advanced-search-content {
+  font-family: $primary-font;
+}
+
+
+// end advanced search styling
+
+
+
+
 
 .list-image {
     height: auto;
@@ -238,6 +259,8 @@ html {
   margin: 0;
 }
 
+
+// badge detail style
 .category-div {
   display: inline-block;
   vertical-align: top;
@@ -245,7 +268,7 @@ html {
   position: absolute;
   .category-name {
     // transform: rotate(-90deg);
-  	// transform-origin: right top 0;
+    // transform-origin: right top 0;
     -webkit-transform:rotate(90deg);
     -moz-transform:rotate(90deg);
     -ms-transform:rotate(90deg);
@@ -258,11 +281,22 @@ html {
   }
 }
 
+.detail-image {
+  height: auto;
+  width: auto;
+  max-width: 200px;
+  max-height: 200px;
+}
+
 .detail-body {
   display: inline-block;
   vertical-align: top;
   width: 80%;
+  padding-left: 30px;
 }
+
+// badge detail style end
+
 
 #loading-image {
   height: auto;
