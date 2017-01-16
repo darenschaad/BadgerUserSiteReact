@@ -17,11 +17,11 @@ class NavBar extends Component {
   render(){
     return(
       <div className="navbar-div">
-        <img onClick={this.goToPage.bind(this, "")} id="navbar-image"  src={require('../img/badgey.png')} alt="badger logo"/>
+        <img className="navbar-clickable" onClick={this.goToPage.bind(this, "")} id="navbar-image"  src={require('../img/badgey.png')} alt="badger logo"/>
         <ul>
-          <li onClick={this.goToPage.bind(this, "challenges")}>Challenges</li>
-          <li onClick={this.goToPage.bind(this, "about")}>About</li>
-          <li onClick={this.goToPage.bind(this, "categories")}>Categories</li>
+          <li className="navbar-clickable" onClick={this.goToPage.bind(this, "challenges")}>Challenges</li>
+          <li className="navbar-clickable" onClick={this.goToPage.bind(this, "about")}>About</li>
+          <li className="navbar-clickable" onClick={this.goToPage.bind(this, "categories")}>Categories</li>
         </ul>
       </div>
     );
