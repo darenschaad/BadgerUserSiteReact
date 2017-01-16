@@ -178,7 +178,7 @@ class BadgeSearch extends Component {
                   onChange={this.onChange}
                   />
                 <div className="control__indicator"></div>
-                Badge Name
+                <div className="search-filters">Badge Name</div>
               </label>
               <br/>
 
@@ -190,7 +190,7 @@ class BadgeSearch extends Component {
                   onChange={this.onChange}
                   />
                 <div className="control__indicator"></div>
-                Badge Keywords
+                <div className="search-filters">Badge Keywords</div>
               </label>
               <br/>
 
@@ -202,7 +202,7 @@ class BadgeSearch extends Component {
                   onChange={this.onChange}
                   />
                 <div className="control__indicator"></div>
-                Badge Creator
+                <div className="search-filters">Badge Creator</div>
               </label>
             </div>
 
