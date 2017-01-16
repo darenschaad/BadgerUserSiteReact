@@ -45,12 +45,12 @@ class BadgeList extends Component {
     } else {
       displayKeywords = (
         <div className="standard-search-content">
-          <h2>Search By Keywords</h2>
+          <h2 className="standard-search-describer">Search By Keywords</h2>
           <hr></hr>
           {
             searchTagsArray.map((tag, idx) =>{
               return(
-                <div key={idx}>
+                <div key={idx} className="standard-search-individual-keywords">
                   <h4>Keyword: {tag}</h4>
                   <hr></hr>
                   {
@@ -65,10 +65,10 @@ class BadgeList extends Component {
                             <ul className="badge-list">
                               <li className='badge-list-item hover-hand' onClick={() => this.props.goToBadge(badge, this.props.searchValue, searchState)}>
                                 <img className='list-image' src={badge.imageUrl} alt={badge.name}></img>
-                                <a>
-                                  {badge.name} <br/>
-                                {badge.tags}
-                              </a>
+                                <a className="badge-list-details">
+                                 Activity: {badge.name}
+                                 <br/>
+                                </a>
                               <hr/>
                             </li>
                           </ul>
@@ -96,20 +96,19 @@ class BadgeList extends Component {
     } else {
       displayName = (
         <div className="standard-search-content">
-          <h2>Matching Activity Names:</h2>
+          <h2 className="standard-search-describer">Matching Activity Names:</h2>
           <hr></hr>
           {
             //map over filteredByTagsBadges to display list of everything from the database, or whatever the user is filtering with their search term.
             filteredByNameBadges.map((badge, idx) => {
               return(
-                <div key={idx}>
+                <div key={idx} className="standard-search-individual-names">
                   <ul className="badge-list">
                     <li className='badge-list-item hover-hand' onClick={() => this.props.goToBadge(badge, this.props.searchValue, searchState)}>
                       <img className='list-image' src={badge.imageUrl} alt={badge.name}></img>
-                      <a>
-                      Activity: {badge.name} <br />
-                      Creator: {badge.creator} <br />
-                      Tags: {badge.tags}
+                      <a className="badge-list-details">
+                        Activity: {badge.name}
+                        <br/>
                       </a>
                       <br/>
                     </li>
