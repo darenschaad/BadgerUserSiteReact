@@ -1,0 +1,35 @@
+// navbar styling
+.navbar-div {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  font-family: $primary-font;
+  font-size: 1.5em;
+}
+
+.navbar-div ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  li {
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 10px 10px 10px 10px;
+    text-decoration: none;
+    color: $badger-black;
+    &:hover {
+      background-color: #DCF0FF;
+    }
+  }
+}
+
+#navbar-image {
+  height: auto;
+  width: auto;
+  max-width: 50px;
+  max-height: 50px;
+}
+// end navbar syling
