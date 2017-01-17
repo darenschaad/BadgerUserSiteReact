@@ -1,0 +1,38 @@
+.about-page {
+  font-family: $secondary-font;
+}
+
+.about-title {
+  font-family: $primary-font;
+  font-size: 3.2em;
+}
+
+.about-page p {
+  font-size: 1.2em;
+}
+
+.about-page-left-col {
+  display: flex;
+  flex-direction: column;
+  width: 75vw;
+}
+
+.about-page-right-col {
+  display: flex;
+  flex-direction: column;
+  width: 25vw;
+}
+
+.about-page-content {
+  display: flex;
+}
+
+.about-graph-image {
+  max-width: 200px;
+}
+
+.about-badge-image {
+  max-width: 450px;
+  display: block;
+  margin: auto;
+}

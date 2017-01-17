@@ -21,18 +21,24 @@
 
 .standard-search-content {
   border-style: double;
-  margin-top: 5px;
+  margin-bottom: 8px;
+  // margin-top: 5px;
 }
 
 .standard-search-individual-keywords {
   border-style: groove;
   padding-left: 8px;
+  padding-bottom: 8px;
   margin: 5px;
+}
+
+.standard-search-block-keywords {
+  margin-bottom: 15px;
 }
 
 .standard-search-individual-names {
   padding-left: 8px;
-  margin: 5px
+  // margin: 5px;
 }
 
 .standard-search-describer {
