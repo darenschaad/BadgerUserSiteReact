@@ -1,28 +1,27 @@
+@import "bourbon";
+
 // badge detail style
-.category-div {
+.badge-detail-page-tile {
+  position: relative;
   display: inline-block;
-  vertical-align: top;
-  // width: 20%;
+  margin: 0 auto;
+  padding: 15px;
+}
+
+.category-div {
   position: absolute;
-  .category-name {
-    // transform: rotate(-90deg);
-    // transform-origin: right top 0;
-    -webkit-transform:rotate(90deg);
-    -moz-transform:rotate(90deg);
-    -ms-transform:rotate(90deg);
-    transform: rotate(90deg);
-    white-space:nowrap;
-    display:block;
-    top:0;
-    width:20px;
-    height:20px;
-  }
+  bottom: -68px;
+  left: 0;
+  background-color: $badger-white;
+  text-align: center;
+
+  @include transform(rotate(270deg));
+  @include transform-origin(0 0);
 }
 
 .detail-body {
-  display: inline-block;
-  vertical-align: top;
-  width: 80%;
-  padding-left: 30px;
+  padding: 0;
+  margin: 0;
+  // word-wrap: break-word;
 }
 // badge detail style end
