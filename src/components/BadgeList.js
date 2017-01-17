@@ -38,42 +38,38 @@ class BadgeList extends Component {
     if (searchTagsArray.length === 0) {
       displayKeywords = (
         <div className="standard-search-content">
-          <h2>Sorry, there are no Badges with keywords that match this search</h2>
-          <hr></hr>
+          <h2 className="standard-search-describer">Sorry, there are no Badges with keywords that match this search</h2>
         </div>
       )
     } else {
       displayKeywords = (
         <div className="standard-search-content">
-          <h2>Search By Keywords</h2>
-          <hr></hr>
+          <h2 className="standard-search-describer">Search By Keywords</h2>
           {
             searchTagsArray.map((tag, idx) =>{
               return(
-                <div key={idx}>
+                <div key={idx} className="standard-search-individual-keywords">
                   <h4>Keyword: {tag}</h4>
-                  <hr></hr>
                   {
                     //map over filteredByTagsBadges to display list of everything from the database, or whatever the user is filtering with their search term.
                     filteredByTagsArrayBadges.map((badge, idx) => {
-                      let badgeTagsArray = badge.tags.split(',');
+                      let badgeTagsArray = badge.tags.toLowerCase().split(',');
 
                       if (badgeTagsArray.includes(tag)) {
 
                         return(
-                          <div key={idx}>
+                          <div key={idx} className="standard-search-block-keywords">
                             <ul className="badge-list">
                               <li className='badge-list-item hover-hand' onClick={() => this.props.goToBadge(badge, this.props.searchValue, searchState)}>
                                 <img className='list-image' src={badge.imageUrl} alt={badge.name}></img>
-                                <a>
-                                  {badge.name} <br/>
-                                {badge.tags}
-                              </a>
-                              <hr/>
-                            </li>
-                          </ul>
-                        </div>
-                      );
+                                <a className="badge-list-details">
+                                 Activity: {badge.name}
+                                 <br/>
+                                </a>
+                              </li>
+                            </ul>
+                          </div>
+                        );
                       }
                     })
                   }
@@ -89,27 +85,24 @@ class BadgeList extends Component {
     if (filteredByNameBadges.length === 0) {
       displayName = (
         <div className="standard-search-content">
-          <h2>Sorry, there are no Badges with names that match this search</h2>
-          <hr></hr>
+          <h2 className="standard-search-describer">Sorry, there are no Badges with names that match this search</h2>
         </div>
       )
     } else {
       displayName = (
         <div className="standard-search-content">
-          <h2>Matching Activity Names:</h2>
-          <hr></hr>
+          <h2 className="standard-search-describer">Matching Activity Names:</h2>
           {
             //map over filteredByTagsBadges to display list of everything from the database, or whatever the user is filtering with their search term.
             filteredByNameBadges.map((badge, idx) => {
               return(
-                <div key={idx}>
+                <div key={idx} className="standard-search-individual-names">
                   <ul className="badge-list">
                     <li className='badge-list-item hover-hand' onClick={() => this.props.goToBadge(badge, this.props.searchValue, searchState)}>
                       <img className='list-image' src={badge.imageUrl} alt={badge.name}></img>
-                      <a>
-                      Activity: {badge.name} <br />
-                      Creator: {badge.creator} <br />
-                      Tags: {badge.tags}
+                      <a className="badge-list-details">
+                        Activity: {badge.name}
+                        <br/>
                       </a>
                       <br/>
                     </li>

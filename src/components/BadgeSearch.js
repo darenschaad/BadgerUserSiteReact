@@ -91,11 +91,6 @@ class BadgeSearch extends Component {
 }
 
   render() {
-    //sets background color based on the badge being rendered
-    function setBackgroundColor (color){
-      document.body.style.background = color;
-    }
-
     //displayList will be rendered below in the return. Initializing it here, and then setting its value based on the if statements.
     let displayList;
     //if statements for displaying either advance search or standard search
@@ -143,8 +138,6 @@ class BadgeSearch extends Component {
 
     return (
       <div>
-        {setBackgroundColor('#E1E5ED')}
-
         {/*user input section*/}
         <input
           className="searchInput"
