@@ -85,18 +85,18 @@ class About extends Component {
             </div>
           </div>
           <div className="about-page-right-col">
-            <p>
-              Voting is open!
-              Voting is open!
-              Posted: Wed 29th of April, 2015
-              Badgers Backyard Cinema! Twelve Badgers and buddies gathered...
+            <h3><a target="_blank" href="http://badgerrific.tumblr.com/post/117645057594">Voting is open!</a></h3>
+              <p><a target="_blank" href="https://www.surveymonkey.com/s/ZCS3MV3">Voting is open!</a></p>
+              <h5>Posted: Wed 29th of April, 2015</h5>
+              <h3><a target="_blank" href="http://badgerrific.tumblr.com/post/86908778244">Badgers Backyard Cinema! Twelve Badgers and buddies gathered...</a></h3>
+              <p>
               Badgers Backyard Cinema!
               Twelve Badgers and buddies gathered together last night for the first installment of Badgers Backyard Cinema!
-              We wanted to go with a scouting theme, so we chose Moonrise Kingdom and cozied up at the “drive-in” with pizza and popcorn and pillows and blankets.
+              We wanted to go with a scouting theme, so we chose <a target="_blank" href="http://www.moonrisekingdom.com/">Moonrise Kingdom</a> and cozied up at the “drive-in” with pizza and popcorn and pillows and blankets.
               We’re cooking up a tarpaulin badge, too, because rigging that up to channel the rain is way harder than it looks!
               Thanks a million to Badger Mary (with assistance from buddy Seth and Badger Sarah C) for the tarp magic, and to buddy Felim for the sound system!
-              Posted: Mon 26th of May, 2014
             </p>
+              <h5>Posted: Mon 26th of May, 2014</h5>
           </div>
         </div>
       </div>

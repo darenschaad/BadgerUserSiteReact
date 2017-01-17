@@ -14,7 +14,8 @@
 .about-page-left-col {
   display: flex;
   flex-direction: column;
-  width: 75vw;
+  width: 73vw;
+  margin-right: 15px;
 }
 
 .about-page-right-col {
@@ -32,7 +33,7 @@
 }
 
 .about-badge-image {
-  max-width: 450px;
+  max-width: 500px;
   display: block;
   margin: auto;
 }
