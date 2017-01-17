@@ -3,12 +3,18 @@ import Linkify from 'react-linkify';
 import NavBar from './NavBar';
 
 class Badge extends Component{
-  // constructor() {
-  //   super();
-  //   this.state = {
-  //     currentBadge: this.props.currentBadge,
-  //   }
-  // }
+  constructor() {
+    super();
+    this.state = {
+      height: 0,
+    }
+  }
+
+  componentDidMount() {
+    const height = document.getElementsByClassName('badge-detail-page-tile')[0].clientHeight;
+    this.setState({ height });
+  }
+
   render() {
     const localStorageRef = localStorage.getItem('badge');
     const ourBadge = JSON.parse(localStorageRef);
@@ -21,28 +27,28 @@ class Badge extends Component{
     const category = categoryNames[index];
     const textColor = textColors[index];
     const backgroundColor = backgroundColors[index];
-    function setBackgroundColor (color){
-      document.body.style.background = color;
-    }
+
+    const categoryHeight = `${this.state.height}px`
 
     return(
       <div>
         <NavBar />
-        {setBackgroundColor(backgroundColor)}
-        <div className="category-div">
-          <h1 style={{color: textColor}} className="category-name">{ category }</h1>
-        </div>
-        <div className="detail-body">
-          <h1 style={{color: textColor}}>{ourBadge.name}</h1>
-          <img className='detail-image' src={ourBadge.imageUrl} alt={ourBadge.name}></img>
-          <Linkify properties={{target: '_blank'}}>
-            <h3 style={{color: textColor}}>To do: {ourBadge.description}</h3>
-            <h3 style={{color: textColor}}>{ourBadge.comments}</h3>
-            <h3 style={{color: textColor}}>Proof: {ourBadge.proof}</h3>
-          </Linkify>
-          <h4 style={{color: textColor}}>Challenges: {ourBadge.challenges}</h4>
-          <h4 style={{color: textColor}}>Creator: {ourBadge.creator}</h4>
-          <h4 style={{color: textColor}}>Keywords: {ourBadge.tags}</h4>
+        <div className="badge-detail-page-tile" style={{backgroundColor: backgroundColor}}>
+          <div className="category-div" style={{width: categoryHeight}}>
+            <h1 style={{color: textColor}} className="category-name">{ category }</h1>
+          </div>
+          <div className="detail-body">
+            <h1 style={{color: textColor}}>{ourBadge.name}</h1>
+            <img className='detail-image' src={ourBadge.imageUrl} alt={ourBadge.name}></img>
+            <Linkify properties={{target: '_blank'}}>
+              <h3 style={{color: textColor}}>To do: {ourBadge.description}</h3>
+              <h3 style={{color: textColor}}>{ourBadge.comments}</h3>
+              <h3 style={{color: textColor}}>Proof: {ourBadge.proof}</h3>
+            </Linkify>
+            <h4 style={{color: textColor}}>Challenges: {ourBadge.challenges}</h4>
+            <h4 style={{color: textColor}}>Creator: {ourBadge.creator}</h4>
+            <h4 style={{color: textColor}}>Keywords: {ourBadge.tags}</h4>
+          </div>
         </div>
       </div>
 

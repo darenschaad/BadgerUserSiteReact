@@ -6,7 +6,7 @@
 }
 
 body {
-  padding: 10vw;
+  padding: 5vh 10vw;
   background-color: #e1e5ed;
   @media only screen and (min-width: 600px) {
       /* For tablets: */
@@ -16,4 +16,10 @@ body {
       /* For desktop: */
       ;
   }
+}
+
+#intro-image {
+  max-width: 300px;
+  margin-left: 25vw;
+  margin-right: 25vw;
 }

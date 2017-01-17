@@ -51,7 +51,7 @@ class RandomBadge extends Component {
     let detailLength1 = badge1.description + "\n" + badge1.comments;
     if(detailLength1.length > 250) {
       readMore1 = (
-        <span className="read-more">...Continue for More</span>
+        <span className="read-more">...</span>
       );
     }
 
@@ -59,7 +59,7 @@ class RandomBadge extends Component {
     let detailLength2 = badge2.description + "\n" + badge2.comments;
     if(detailLength2.length > 250) {
       readMore2 = (
-        <span className="read-more">...Continue for More</span>
+        <span className="read-more">...</span>
       );
     }
 

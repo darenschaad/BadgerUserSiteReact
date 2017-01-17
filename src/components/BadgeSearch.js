@@ -138,8 +138,6 @@ class BadgeSearch extends Component {
 
     return (
       <div>
-
-
         {/*user input section*/}
         <input
           className="searchInput"
