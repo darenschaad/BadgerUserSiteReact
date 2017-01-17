@@ -6,6 +6,8 @@
   display: inline-block;
   margin: 0 auto;
   padding: 15px;
+  // padding-right: 20px;
+  word-wrap: break-word;
 }
 
 .category-div {
@@ -21,7 +23,7 @@
 
 .detail-body {
   padding: 0;
-  margin: 0;
-  // word-wrap: break-word;
+  margin-left: 7.5%;
+  word-wrap: break-word;
 }
 // badge detail style end
