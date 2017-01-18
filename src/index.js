@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import About from './components/About';
 import App from './components/App';
@@ -11,23 +11,30 @@ import NotFound from './components/NotFound';
 import './styles/normalize.css';
 import './styles/App.scss';
 import './styles/animate.css';
-import './../modernizr';
 
-const Root = () => {
-  return(
-    <div>
-      <BrowserRouter>
-        <div>
-          <Match exactly pattern="/" component={App} />
-          <Match exactly pattern="/categories" component={Categories} />
-          <Match exactly pattern="/about" component={About} />
-          <Match exactly pattern="/challenges" component={Challenges} />
-          <Match pattern="/badge/:pushId" component={Badge} />
-          <Miss component={NotFound} />
-        </div>
-      </BrowserRouter>
-    </div>
-  )
+class Root extends Component {
+  componentDidMount(){
+    //after component mounts, sync with Firebase database and set the badges list equal to this.state.badges empty object
+    localStorage.setItem(`searchBy`, "");
+  }
+
+  render() {
+
+    return(
+      <div>
+        <BrowserRouter>
+          <div>
+            <Match exactly pattern="/" component={App} />
+            <Match exactly pattern="/categories" component={Categories} />
+            <Match exactly pattern="/about" component={About} />
+            <Match exactly pattern="/challenges" component={Challenges} />
+            <Match pattern="/badge/:pushId" component={Badge} />
+            <Miss component={NotFound} />
+          </div>
+        </BrowserRouter>
+      </div>
+    )
+  }
 }
 
 ReactDOM.render(
