@@ -2,28 +2,49 @@
 
 // badge detail style
 .badge-detail-page-tile {
-  position: relative;
+  // position: relative;
   display: inline-block;
-  margin: 0 auto;
-  padding: 15px;
+  margin: 0;
   // padding-right: 20px;
   word-wrap: break-word;
 }
 
 .category-div {
-  position: absolute;
-  bottom: -68px;
-  left: 0;
   background-color: $badger-white;
   text-align: center;
+  vertical-align: middle;
+  width: 100%;
+  height: 75px;
+  position: relative;
+  h1 {
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+  }
+  // position: absolute;
+  // bottom: -68px;
+  // left: 0;
 
-  @include transform(rotate(270deg));
-  @include transform-origin(0 0);
+  // @include transform(rotate(270deg));
+  // @include transform-origin(0 0);
 }
 
 .detail-body {
   padding: 0;
-  margin-left: 7.5%;
   word-wrap: break-word;
+  margin: 5% 5%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  h1{
+    text-align: center;
+  }
+}
+
+.detail-image {
+  // min-height: 300px;
+  // width: auto;
 }
 // badge detail style end

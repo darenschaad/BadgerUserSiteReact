@@ -33,20 +33,23 @@ class Badge extends Component{
     const category = categoryNames[index];
 
     const textColor = textColors[index];
-    
+
     const backgroundColor = backgroundColors[index];
 
     //split tags with space separation so you don't have one long string with no space
     const splitTags = ourBadge.tags.split(',').join(', ');
 
     //grab the height set to state and place it inside string before pixels so that it can be used below in styles
-    const categoryHeight = `${this.state.height}px`
+    const categoryHeight = `${this.state.height}px`;
 
     return(
       <div>
         <NavBar />
-        <div className="badge-detail-page-tile" style={{backgroundColor: backgroundColor}}>
-          <div className="category-div" style={{width: categoryHeight}}>
+        <div
+          className="badge-detail-page-tile"
+          style={{backgroundColor: backgroundColor}}
+        >
+          <div className="category-div">
             <h1 style={{color: textColor}} className="category-name">{ category }</h1>
           </div>
           <div className="detail-body">
