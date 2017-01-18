@@ -11,6 +11,9 @@ class NavBar extends Component {
     // const destination = this.destination.value;
     console.log(destination);
     console.log(event);
+    if (destination === "") {
+      localStorage.setItem(`searchBy`, "");
+    }
     this.context.router.transitionTo(`/${destination}`);
   }
 
