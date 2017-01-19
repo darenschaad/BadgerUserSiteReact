@@ -6,20 +6,33 @@
 }
 
 body {
-  padding: 5vh 10vw;
+  width: 100vw;
+  // height: 100%;
+  padding: 5vh 7.5vw;
+  margin: 0;
   background-color: #e1e5ed;
-  @media only screen and (min-width: 600px) {
-      /* For tablets: */
-      ;
-  }
-  @media only screen and (min-width: 768px) {
-      /* For desktop: */
-      ;
-  }
 }
 
 #intro-image {
-  max-width: 300px;
-  margin-left: 25vw;
-  margin-right: 25vw;
+  max-width: 200px;
+  // margin-left: 15vw;
+  // margin-right: 15vw;
+  @media screen and (min-width: $break-medium) {
+    max-width: 300px;
+    margin-left: 25vw;
+    margin-right: 25vw;
+  }
+}
+
+#root {
+  width: 100%;
+}
+
+.App {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
 }

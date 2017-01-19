@@ -49,7 +49,7 @@ class RandomBadge extends Component {
 
     let readMore1;
     let detailLength1 = badge1.description + "\n" + badge1.comments;
-    if(detailLength1.length > 250) {
+    if(detailLength1.length > 50) {
       readMore1 = (
         <span className="read-more">...</span>
       );
@@ -57,7 +57,7 @@ class RandomBadge extends Component {
 
     let readMore2;
     let detailLength2 = badge2.description + "\n" + badge2.comments;
-    if(detailLength2.length > 250) {
+    if(detailLength2.length > 50) {
       readMore2 = (
         <span className="read-more">...</span>
       );
@@ -73,8 +73,8 @@ class RandomBadge extends Component {
               <img className='detail-image' src={badge1.imageUrl} alt={badge1.names}></img>
               <div className="badge-tile-details">
                 <h1 style={{color: textColor1}}>{badge1.name}</h1>
-                <h4 style={{color: textColor1}}>To do: {detailLength1.substring(0, 250)} {readMore1}</h4>
-                <h4 style={{color: textColor1}}>Proof: {badge1.proof}</h4>
+                <h4 style={{color: textColor1}}>To do: <span>{detailLength1.substring(0, 50)} {readMore1}</span></h4>
+                <h4 style={{color: textColor1}}>Proof: <span>{badge1.proof}</span></h4>
               </div>
             </div>
             <h1 className="badge-tile-category" style={{color: textColor1}}>{category1}</h1>
@@ -87,8 +87,8 @@ class RandomBadge extends Component {
               <img className='detail-image' src={badge2.imageUrl} alt={badge2.names}></img>
               <div className="badge-tile-details">
                 <h1 style={{color: textColor2}}>{badge2.name}</h1>
-                <h4 style={{color: textColor2}}>To do: {detailLength2.substring(0, 250)} {readMore2}</h4>
-                <h4 style={{color: textColor2}}>Proof: {badge2.proof}</h4>
+                <h4 style={{color: textColor2}}>To do: <span>{detailLength2.substring(0, 50)} {readMore2}</span></h4>
+                <h4 style={{color: textColor2}}>Proof: <span>{badge2.proof}</span></h4>
               </div>
             </div>
             <h1 className="badge-tile-category" style={{color: textColor2}}>{category2}</h1>
