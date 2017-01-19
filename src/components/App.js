@@ -68,7 +68,7 @@ class App extends Component {
       return (
         <div className="App">
           <NavBar />
-          <img id="intro-image" src={require('../img/badgers-name.png')} />
+          <img id="intro-image" src={require('../img/badgers-name.png')} alt="badgers name logo"/>
           <BadgeSearch
             badgeArray={this.state.badges}
             tagArray={this.state.tags}

@@ -1,0 +1,18 @@
+//Base styles
+.category-image {
+  height: auto;
+  width: auto;
+  max-width: 50px;
+  max-height: 50px;
+}
+
+.category-individual {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  // justify-content: center;
+}
+
+.category-text {
+  margin-left: 10px;
+}

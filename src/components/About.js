@@ -58,7 +58,7 @@ class About extends Component {
             ... see the latest Badger Stats?
             You are in luck! <a target="_blank" href="https://docs.google.com/spreadsheet/ccc?key=0ApgD9Dta5lkZdEwtb0g0S0pSS0o3X2JPbmh2bzJ5aEE&usp=sharing">Click here</a> to see the latest results!
             </p>
-            <img className="about-graph-image" src={require('../img/graph.jpg')} alt="image of a graph"/>
+            <img className="about-graph-image" src={require('../img/graph.jpg')} alt="graph"/>
 
             <h2>We meet every 3rd Friday.</h2>
             <p>
@@ -81,7 +81,7 @@ class About extends Component {
             You can see all group activities on the <a target="_blank" href="http://thebadgers.wikispaces.com/Badger+Calendar">Badgers Calendar.</a>
             </p>
             <div className="about-image-div">
-              <img className="about-badge-image" src={require('../img/about.jpg')} alt="image of a badge"/>
+              <img className="about-badge-image" src={require('../img/about.jpg')} alt="badge"/>
             </div>
           </div>
           <div className="about-page-right-col">
