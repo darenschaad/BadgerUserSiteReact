@@ -9,7 +9,7 @@ import Categories from './components/Categories';
 import Challenges from './components/Challenges'
 import NotFound from './components/NotFound';
 
-import './styles/normalize.css';
+// import './styles/normalize.css';
 import './styles/App.scss';
 import './styles/animate.css';
 
