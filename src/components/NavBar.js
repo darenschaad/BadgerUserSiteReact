@@ -4,7 +4,11 @@ import FontAwesome from 'react-fontawesome';
 class NavBar extends Component {
   constructor() {
     super();
+    this.state = {
+      className: 'closed',
+    }
     this.goToPage = this.goToPage.bind(this);
+    this.openMenu = this.openMenu.bind(this);
   }
 
   goToPage(destination) {
@@ -18,12 +22,22 @@ class NavBar extends Component {
     this.context.router.transitionTo(`/${destination}`);
   }
 
+  openMenu() {
+    if(this.state.className === 'closed') {
+      this.setState({ className: 'open' });
+    } else {
+      this.setState({ className: 'closed' })
+    }
+  }
+
   render(){
     return(
       <div className="navbar-div">
-        <img className="navbar-clickable" onClick={this.goToPage.bind(this, "")} id="navbar-image"  src={require('../img/badgey.png')} alt="badger logo"/>
-        <FontAwesome className="hamburger-icon" name="bars" />
-        <ul>
+        <div className="navbar-icons">
+          <img className="navbar-clickable" onClick={this.goToPage.bind(this, "")} id="navbar-image"  src={require('../img/badgey.png')} alt="badger logo"/>
+          <FontAwesome onClick={this.openMenu} className="hamburger-icon" name="bars" />
+        </div>
+        <ul className={this.state.className}>
           <li className="navbar-clickable" onClick={this.goToPage.bind(this, "challenges")}>Challenges</li>
           <li className="navbar-clickable" onClick={this.goToPage.bind(this, "about")}>About</li>
           <li className="navbar-clickable" onClick={this.goToPage.bind(this, "categories")}>Categories</li>
