@@ -8,15 +8,43 @@ import Badge from './components/Badge';
 import Categories from './components/Categories';
 import Challenges from './components/Challenges'
 import NotFound from './components/NotFound';
+import base from './base';
 
 // import './styles/normalize.css';
 import './styles/App.scss';
 import './styles/animate.css';
 
 class Root extends Component {
+  constructor() {
+    super();
+    this.state = {
+      badges: { },
+      tags: [ ],
+      loading: true,
+    }
+  }
+
   componentDidMount(){
     //after component mounts, sync with Firebase database and set the badges list equal to this.state.badges empty object
     localStorage.setItem(`searchBy`, "");
+
+    //after component mounts, sync with Firebase database and set the badges list equal to this.state.badges empty object
+    this.ref = base.syncState(`/tags`, {
+      context: this,
+      state: "tags",
+      assArray: true
+    })
+
+    this.ref = base.syncState(`/badges`, {
+      context: this,
+      state: "badges",
+      asArray: true,
+
+      //setState loading to false so that everything renders once Firebase has been synced — thus loading is no longer true
+      then() {
+        this.setState({ loading: false })
+      }
+    });
   }
 
   render() {
@@ -25,8 +53,8 @@ class Root extends Component {
       <div>
         <BrowserRouter history={browserHistory}>
           <div>
-            <Match exactly pattern="/" component={App} />
-            <Match exactly pattern="/categories" component={() => (<Categories myProp="hello"/>)}/>
+            <Match exactly pattern="/" component={() => (<App badges={this.state.badges} tags={this.state.tags} loading={this.state.loading}/>)} />
+            <Match exactly pattern="/categories" component={() => (<Categories badges={this.state.badges} tags={this.state.tags} />)}/>
             <Match exactly pattern="/about" component={About} />
             <Match exactly pattern="/challenges" component={Challenges} />
             <Match pattern="/badge/:pushId" component={Badge} />

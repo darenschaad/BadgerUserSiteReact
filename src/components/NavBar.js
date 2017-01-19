@@ -13,9 +13,6 @@ class NavBar extends Component {
 
   goToPage(destination) {
     event.preventDefault();
-    // const destination = this.destination.value;
-    console.log(destination);
-    console.log(event);
     if (destination === "") {
       localStorage.setItem(`searchBy`, "");
     }

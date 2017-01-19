@@ -5,35 +5,19 @@ import NavBar from './NavBar';
 import Loading from './Loading';
 
 class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      badges: { },
-      tags: [],
-      loading: true,
-    };
-    this.goToBadge = this.goToBadge.bind(this);
-  }
+  // constructor() {
+  //   super();
+  //   this.state = {
+  //     badges: this.props.badges,
+  //     tags: this.props.tags,
+  //     loading: this.props.loading,
+  //   };
+  //   this.goToBadge = this.goToBadge.bind(this);
+  // }
 
-  componentDidMount(){
-    //after component mounts, sync with Firebase database and set the badges list equal to this.state.badges empty object
-      this.ref = base.syncState(`/tags`, {
-        context: this,
-        state: "tags",
-        assArray: true
-      })
-
-    this.ref = base.syncState(`/badges`, {
-      context: this,
-      state: "badges",
-      asArray: true,
-
-      //setState loading to false so that everything renders once Firebase has been synced — thus loading is no longer true
-      then() {
-        this.setState({ loading: false })
-      }
-    });
-  }
+  // componentDidMount(){
+  //
+  // }
 
  //  handleInputChange(event) {
  //   console.log(event.target.name);
@@ -60,7 +44,7 @@ class App extends Component {
 
   render() {
     //once this.state.loading is true after Firebase is synced, the page will render
-    if(this.state.loading) {
+    if(this.props.loading) {
       return(
         <Loading />
       );
@@ -70,8 +54,8 @@ class App extends Component {
           <NavBar />
           <img id="intro-image" src={require('../img/badgers-name.png')} alt="badgers name logo"/>
           <BadgeSearch
-            badgeArray={this.state.badges}
-            tagArray={this.state.tags}
+            badgeArray={this.props.badges}
+            tagArray={this.props.tags}
             goToBadge={this.goToBadge}
           />
         </div>

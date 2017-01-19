@@ -2,6 +2,10 @@ import React, {Component} from 'react';
 import NavBar from './NavBar';
 
 class Categories extends Component {
+
+  componentDidMount() {
+    console.log(this.props.badges);
+  }
   render() {
     return(
       <div>
