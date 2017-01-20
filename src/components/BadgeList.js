@@ -44,35 +44,36 @@ class BadgeList extends Component {
     } else {
       displayKeywords = (
         <div className="standard-search-content">
-          <h2 className="standard-search-describer">Search By Keywords</h2>
+          <h2 className="standard-search-describer">Keywords</h2>
+          <div className="break"></div>
           {
             searchTagsArray.map((tag, idx) =>{
               return(
-                <div key={idx} className="standard-search-individual-keywords">
-                  <h4>Keyword: {tag}</h4>
-                  {
-                    //map over filteredByTagsBadges to display list of everything from the database, or whatever the user is filtering with their search term.
-                    filteredByTagsArrayBadges.map((badge, idx) => {
-                      let badgeTagsArray = badge.tags.toLowerCase().split(',');
+                <div>
+                  <span className="tag">"{tag}"</span>
+                  <div key={idx} className="standard-search-block-keywords">
+                    {
+                      //map over filteredByTagsBadges to display list of everything from the database, or whatever the user is filtering with their search term.
+                      filteredByTagsArrayBadges.map((badge, idx) => {
+                        let badgeTagsArray = badge.tags.toLowerCase().split(',');
 
-                      if (badgeTagsArray.includes(tag)) {
+                        if (badgeTagsArray.includes(tag)) {
 
-                        return(
-                          <div key={idx} className="standard-search-block-keywords">
-                            <ul className="badge-list">
-                              <li className='badge-list-item hover-hand' onClick={() => this.props.goToBadge(badge, this.props.searchValue, searchState)}>
-                                <img className='list-image' src={badge.imageUrl} alt={badge.name}></img>
-                                <a className="badge-list-details">
-                                 Activity: {badge.name}
-                                 <br/>
-                                </a>
-                              </li>
-                            </ul>
-                          </div>
-                        );
-                      }
-                    })
-                  }
+                          return(
+                            <div key={idx} className="standard-search-individual-keywords">
+                              <img
+                                className='list-image'
+                                src={badge.imageUrl}
+                                alt={badge.name}
+                                title={badge.name}
+                                onClick={() => this.props.goToBadge(badge, this.props.searchValue, searchState)}
+                              />
+                            </div>
+                          );
+                        }
+                      })
+                    }
+                  </div>
                 </div>
               );
             })
@@ -91,7 +92,8 @@ class BadgeList extends Component {
     } else {
       displayName = (
         <div className="standard-search-content">
-          <h2 className="standard-search-describer">Matching Activity Names:</h2>
+          <h2 className="standard-search-describer">Badges</h2>
+          <div className="break"></div>
           {
             //map over filteredByTagsBadges to display list of everything from the database, or whatever the user is filtering with their search term.
             filteredByNameBadges.map((badge, idx) => {
