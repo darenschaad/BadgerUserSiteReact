@@ -6,6 +6,7 @@ import { BrowserRouter, Match, Miss, browserHistory } from '../node_modules/reac
 import Badge from './components/Badge';
 // import NavBar from './components/NavBar';
 import Categories from './components/Categories';
+import CategoryList from './components/CategoryList';
 import Challenges from './components/Challenges'
 import NotFound from './components/NotFound';
 import base from './base';
@@ -53,11 +54,43 @@ class Root extends Component {
       <div>
         <BrowserRouter history={browserHistory}>
           <div>
-            <Match exactly pattern="/" component={() => (<App badges={this.state.badges} tags={this.state.tags} loading={this.state.loading}/>)} />
-            <Match exactly pattern="/categories" component={() => (<Categories badges={this.state.badges} tags={this.state.tags} />)}/>
+            <Match
+              exactly
+              pattern="/"
+              component={() => (
+                <App
+                  badges={this.state.badges}
+                  tags={this.state.tags}
+                  loading={this.state.loading} />
+              )}
+            />
+
+            <Match
+              exactly
+              pattern="/categories"
+              component={() => (
+                <Categories
+                  badges={this.state.badges}
+                  tags={this.state.tags} />
+              )}
+            />
+
+            <Match
+              pattern="/categories/:categoryId"
+              component={() => (
+                <CategoryList
+                  badges={this.state.badges}
+                  tags={this.state.tags}
+                  loading={this.state.loading} />
+              )}
+            />
+
             <Match exactly pattern="/about" component={About} />
+
             <Match exactly pattern="/challenges" component={Challenges} />
+
             <Match pattern="/badge/:pushId" component={Badge} />
+
             <Miss component={NotFound} />
           </div>
         </BrowserRouter>

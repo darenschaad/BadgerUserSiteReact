@@ -5,15 +5,15 @@ import NavBar from './NavBar';
 import Loading from './Loading';
 
 class App extends Component {
-  // constructor() {
-  //   super();
-  //   this.state = {
-  //     badges: this.props.badges,
-  //     tags: this.props.tags,
-  //     loading: this.props.loading,
-  //   };
-  //   this.goToBadge = this.goToBadge.bind(this);
-  // }
+  constructor() {
+    super();
+    // this.state = {
+    //   badges: this.props.badges,
+    //   tags: this.props.tags,
+    //   loading: this.props.loading,
+    // };
+    this.goToBadge = this.goToBadge.bind(this);
+  }
 
   // componentDidMount(){
   //
