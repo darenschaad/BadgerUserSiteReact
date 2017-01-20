@@ -1,19 +1,32 @@
 // navbar styling
 .navbar-div {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
   width: 100%;
   font-family: $primary-font;
   font-size: 1.5em;
   margin-bottom: 30px;
+  @media screen and (min-width: $break-medium) {
+    flex-direction: row;
+  }
+}
+
+.navbar-icons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  @media screen and (min-width: $break-medium) {
+    flex: 1;
+  }
 }
 
 .navbar-div ul {
-  display: none;
+  list-style-type: none;
   @media screen and (min-width: $break-medium) {
-    list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
@@ -29,6 +42,24 @@
         background-color: #DCF0FF;
       }
     }
+  }
+}
+
+.navbar-div ul.closed {
+  display: none;
+  @media screen and (min-width: $break-medium) {
+    display: block;
+  }
+}
+
+.navbar-div ul.open {
+  display: block;
+  text-align: center;
+  margin-top: 40px;
+  li {
+    padding: 10px;
+    font-size: 1.5em;
+    border-bottom: solid 1px $badger-black;
   }
 }
 
