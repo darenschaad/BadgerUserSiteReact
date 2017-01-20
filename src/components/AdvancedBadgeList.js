@@ -151,7 +151,7 @@ class BadgeList extends Component {
                       {
                         //map over filterTags to display list of everything from the database, or whatever the user is filtering with their search term.
                         filteredByTagsArrayBadges.map((badge, idx) => {
-                          let badgeTagsArray = badge.tags.split(',');
+                          let badgeTagsArray = badge.tags.toLowerCase().split(',');
                           if (badgeTagsArray.includes(tag)) {
                             return(
                               <div key={idx}>
@@ -211,8 +211,7 @@ class BadgeList extends Component {
                                   <li className='hover-hand' onClick={() => this.props.goToBadge(badge, this.props.searchValue, searchState)}>
                                     <img className='list-image' src={badge.imageUrl} alt={badge.name}></img>
                                     <a>
-                                      {badge.name} <br/>
-                                      {badge.tags}
+                                      {badge.name}
                                     </a>
                                     <hr/>
                                   </li>
