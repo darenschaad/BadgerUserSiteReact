@@ -31,18 +31,30 @@ class CategoryList extends Component {
 
       const index = categories.indexOf(currentCategory);
 
+      const divIndex = "category-list-index-" + index;
+
       const categoryNames = ["000 - GENERAL KNOWLEDGE", "100 - PHILOSOPHY & PSYCHOLOGY", "200 - RELIGION", "300 - SOCIAL SCIENCE", "400 - LANGUAGES", "500 - SCIENCE", "600 - TECHNOLOGY", "700 - ARTS & RECREATION", "800 - LITERATURE", "900 - HISTORY & GEOGRAPHY"];
 
+      const textColors = ["#4C4C4C", "#0079A5", "#66008D", "#4D782D", "#C97100", "#25895A", "#000073", "#988967", "#76193C", "#985721"];
+
+      const backgroundColors = ["#989DA7", "#DCF0FF", "#D0C0D6", "#CEDFB0", "#EEC99A", "#9EBAAC", "#B5B5CA", "#FDE192", "#DBC2CC", "#D8C2A9"];
+
       const category = categoryNames[index];
+
+      const textColor = textColors[index];
+
+      const backgroundColor = backgroundColors[index];
 
 
       let filteredByCategory = this.props.badges.map(
         (badge, idx) => {
           if(badge.category === currentCategory) {
             return (
-              <div className="category-list-div" key={idx} onClick={() => this.goToBadge(badge)}>
-                <img className='category-list-image' src={badge.imageUrl} alt={badge.name}></img>
-                <h4 className="category-list-text">{badge.name}</h4>
+              <div className={divIndex}>
+                <div className="category-list-div" style={{}} key={idx} onClick={() => this.goToBadge(badge)}>
+                  <img className='category-list-image' src={badge.imageUrl} alt={badge.name}></img>
+                  <h4 className="category-list-text" style={{color: textColor}}>{badge.name}</h4>
+                </div>
               </div>
             );
           }
