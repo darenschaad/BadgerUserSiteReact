@@ -37,11 +37,19 @@
   h4{
     font-size: 1em;
     display: none;
+    @media screen and (min-width: $break-medium) {
+      display: flex;
+      align-items: center;
+    }
   }
   span{
     font-size: 0.75em;
     font-family: 'futura';
     display: none;
+    @media screen and (min-width: $break-medium) {
+      display: flex;
+      align-items: center;
+    }
   }
 }
 
