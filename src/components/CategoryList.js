@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import NavBar from './NavBar';
 import Loading from './Loading';
-import base from './../base';
+// import base from './../base';
 
 class CategoryList extends Component {
 

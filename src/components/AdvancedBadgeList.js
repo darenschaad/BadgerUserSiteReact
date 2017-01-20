@@ -151,7 +151,7 @@ class BadgeList extends Component {
                       {
                         //map over filterTags to display list of everything from the database, or whatever the user is filtering with their search term.
                         filteredByTagsArrayBadges.map((badge, idx) => {
-                          let badgeTagsArray = badge.tags.split(',');
+                          let badgeTagsArray = badge.tags.toLowerCase().split(',');
                           if (badgeTagsArray.includes(tag)) {
                             return(
                               <div key={idx}>
