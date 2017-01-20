@@ -4,6 +4,16 @@ import Loading from './Loading';
 // import base from './../base';
 
 class CategoryList extends Component {
+  constructor() {
+    super();
+    this.goToBadge = this.goToBadge.bind(this);
+  }
+
+  goToBadge(currentBadge){
+    //pass JSON string containing information from the badge object to local storage so that the browser can help carry that information to each badge's specific route
+    localStorage.setItem(`badge`, JSON.stringify(currentBadge));
+    this.context.router.transitionTo(`/badge/${currentBadge.pushId}`);
+  }
 
   render() {
 
@@ -23,7 +33,7 @@ class CategoryList extends Component {
         (badge, idx) => {
           if(badge.category === currentCategory) {
             return (
-              <div key={idx}>
+              <div key={idx} onClick={() => this.goToBadge(badge)}>
                 {badge.name}
               </div>
             );
