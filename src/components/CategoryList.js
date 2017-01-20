@@ -2,22 +2,11 @@ import React, {Component} from 'react';
 import NavBar from './NavBar';
 
 class CategoryList extends Component {
-  // constructor() {
-  //   super();
-  //   this.state = {
-  //     badges: { }
-  //   }
-  // }
-
-  componentDidMount() {
-    console.log(this.props.badges);
-  }
 
   render() {
     const localStorageRef = localStorage.getItem('category');
 
     const currentCategory = JSON.parse(localStorageRef);
-    console.log(currentCategory);
 
     let filteredByCategory = this.props.badges.map(
       (badge, idx) => {
