@@ -1,0 +1,29 @@
+.category-list-div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 5px 0 ;
+  height: 60px;
+  &:hover {
+    background-color: $hover-color;
+    cursor: pointer;
+  }
+}
+
+.category-list-text {
+  margin-left: 10px;
+  font-family: $secondary-font;
+}
+
+.category-list-image {
+    height: auto;
+    width: auto;
+    max-width: 50px;
+    max-height: 50px;
+    margin: 0 0 0 5px;
+}
+
+.category-list-category-title {
+  font-family: $primary-font;
+  text-align: center;
+}

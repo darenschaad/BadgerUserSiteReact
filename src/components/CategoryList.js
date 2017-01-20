@@ -25,16 +25,24 @@ class CategoryList extends Component {
         </div>
       );
     } else {
-      const localStorageRef = localStorage.getItem('category');
+      const currentCategory = Number(localStorage.getItem('category'));
 
-      const currentCategory = JSON.parse(localStorageRef);
+      const categories = [0,100,200,300,400,500,600,700,800,900];
+
+      const index = categories.indexOf(currentCategory);
+
+      const categoryNames = ["000 - GENERAL KNOWLEDGE", "100 - PHILOSOPHY & PSYCHOLOGY", "200 - RELIGION", "300 - SOCIAL SCIENCE", "400 - LANGUAGES", "500 - SCIENCE", "600 - TECHNOLOGY", "700 - ARTS & RECREATION", "800 - LITERATURE", "900 - HISTORY & GEOGRAPHY"];
+
+      const category = categoryNames[index];
+
 
       let filteredByCategory = this.props.badges.map(
         (badge, idx) => {
           if(badge.category === currentCategory) {
             return (
-              <div key={idx} onClick={() => this.goToBadge(badge)}>
-                {badge.name}
+              <div className="category-list-div" key={idx} onClick={() => this.goToBadge(badge)}>
+                <img className='category-list-image' src={badge.imageUrl} alt={badge.name}></img>
+                <h4 className="category-list-text">{badge.name}</h4>
               </div>
             );
           }
@@ -43,6 +51,7 @@ class CategoryList extends Component {
       return (
         <div>
           <NavBar />
+          <h1 className="category-list-category-title">{category}</h1>
           {filteredByCategory}
         </div>
       );
