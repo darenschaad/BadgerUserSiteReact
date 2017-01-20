@@ -10,10 +10,10 @@ class Badge extends Component{
     }
   }
 
-  componentDidMount() {
-    let height = document.getElementsByClassName('badge-detail-page-tile')[0].clientHeight;
-    this.setState({ height });
-  }
+  // componentDidMount() {
+  //   let height = document.getElementsByClassName('badge-detail-page-tile')[0].clientHeight;
+  //   this.setState({ height });
+  // }
 
   render() {
     const localStorageRef = localStorage.getItem('badge');
@@ -40,7 +40,7 @@ class Badge extends Component{
     const splitTags = ourBadge.tags.split(',').join(', ');
 
     //grab the height set to state and place it inside string before pixels so that it can be used below in styles
-    const categoryHeight = `${this.state.height}px`;
+    // const categoryHeight = `${this.state.height}px`;
 
     return(
       <div>

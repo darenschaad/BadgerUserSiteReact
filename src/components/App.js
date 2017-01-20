@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import base from '../base';
+// import base from '../base';
 import BadgeSearch from './BadgeSearch';
 import NavBar from './NavBar';
 import Loading from './Loading';

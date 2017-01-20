@@ -137,12 +137,12 @@ class BadgeSearch extends Component {
     }
 
     return (
-      <div>
+      <div className="search-section">
         {/*user input section*/}
         <input
           className="searchInput"
           value={this.state.searchValue}
-          placeholder={'Type here to search everything'}
+          placeholder={'Type to search badges'}
           name={'searchValue'}
           onChange={this.handleInputChange}
         />
