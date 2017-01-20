@@ -71,7 +71,9 @@ class Root extends Component {
               component={() => (
                 <Categories
                   badges={this.state.badges}
-                  tags={this.state.tags} />
+                  tags={this.state.tags}
+                  loading={this.state.loading}
+                 />
               )}
             />
 
