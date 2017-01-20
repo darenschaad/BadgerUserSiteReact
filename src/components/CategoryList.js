@@ -45,13 +45,16 @@ class CategoryList extends Component {
 
       const backgroundColor = backgroundColors[index];
 
+      let categoryBadgeCount = 0;
+
 
       let filteredByCategory = this.props.badges.map(
         (badge, idx) => {
           if(badge.category === currentCategory) {
+            categoryBadgeCount++;
             return (
-              <div className={divIndex}>
-                <div className="category-list-div" style={{}} key={idx} onClick={() => this.goToBadge(badge)}>
+              <div className={divIndex}  key={idx} >
+                <div className="category-list-div" onClick={() => this.goToBadge(badge)}>
                   <img className='category-list-image' src={badge.imageUrl} alt={badge.name}></img>
                   <h4 className="category-list-text" style={{color: textColor}}>{badge.name}</h4>
                 </div>
@@ -63,7 +66,7 @@ class CategoryList extends Component {
       return (
         <div>
           <NavBar />
-          <h1 className="category-list-category-title">{category}</h1>
+          <h1 className="category-list-category-title">{category} ({categoryBadgeCount})</h1>
           {filteredByCategory}
         </div>
       );
