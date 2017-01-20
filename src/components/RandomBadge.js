@@ -5,7 +5,8 @@ class RandomBadge extends Component {
     super();
     this.state = {
       rand1 : 0,
-      rand2 : 1
+      rand2 : 1,
+      // windowWidth: window.innerWidth
     }
   }
 
@@ -22,6 +23,11 @@ class RandomBadge extends Component {
     }
     this.setState({ rand1 : rand1, rand2 : rand2 })
   }
+
+  // window.onresize = function(event) {
+  //   this.setState({ windowWidth: window.innerWidth })
+  //   // return window.innerWidth;
+  // };
 
   render() {
     let badgeArray = this.props.badgeArray;
@@ -49,7 +55,8 @@ class RandomBadge extends Component {
 
     let readMore1;
     let detailLength1 = badge1.description + "\n" + badge1.comments;
-    if(detailLength1.length > 50) {
+
+    if(detailLength1.length > 250) {
       readMore1 = (
         <span className="read-more">...</span>
       );
@@ -57,7 +64,7 @@ class RandomBadge extends Component {
 
     let readMore2;
     let detailLength2 = badge2.description + "\n" + badge2.comments;
-    if(detailLength2.length > 50) {
+    if(detailLength2.length > 250) {
       readMore2 = (
         <span className="read-more">...</span>
       );
@@ -66,29 +73,33 @@ class RandomBadge extends Component {
     return (
       <div className="random-badge-div animated slideInUp">
         <h2>RANDOM BADGES</h2>
-        <hr></hr>
+        <div className="break"></div>
         <div className="random-badge-div">
           <div className='badge-tile hover-hand random-badge-content' style={{backgroundColor : backgroundColor1}} onClick={() => this.props.goToBadge(badge1, this.props.searchValue)}>
             <div className="badge-tile-image-details">
               <img className='detail-image' src={badge1.imageUrl} alt={badge1.names}></img>
               <div className="badge-tile-details">
                 <h1 style={{color: textColor1}}>{badge1.name}</h1>
-                <h4 style={{color: textColor1}}>To do: <span>{detailLength1.substring(0, 50)} {readMore1}</span></h4>
-                <h4 style={{color: textColor1}}>Proof: <span>{badge1.proof}</span></h4>
+                <span className="badge-tile-subtitle" style={{color: textColor1}}>To do: </span>
+                <span className="badge-tile-description">{detailLength1.substring(0, 250)} {readMore1}</span>
+                <br />
+                <span className="badge-tile-subtitle" style={{color: textColor1}}>Proof: </span>
+                <span className="badge-tile-description">{badge1.proof}</span>
               </div>
             </div>
             <h1 className="badge-tile-category" style={{color: textColor1}}>{category1}</h1>
           </div>
-
-          <hr></hr>
 
           <div className='badge-tile hover-hand random-badge-content' style={{backgroundColor : backgroundColor2}} onClick={() => this.props.goToBadge(badge2, this.props.searchValue)}>
             <div className="badge-tile-image-details">
               <img className='detail-image' src={badge2.imageUrl} alt={badge2.names}></img>
               <div className="badge-tile-details">
                 <h1 style={{color: textColor2}}>{badge2.name}</h1>
-                <h4 style={{color: textColor2}}>To do: <span>{detailLength2.substring(0, 50)} {readMore2}</span></h4>
-                <h4 style={{color: textColor2}}>Proof: <span>{badge2.proof}</span></h4>
+                <span className="badge-tile-subtitle" style={{color: textColor2}}>To do: </span>
+                <span className="badge-tile-description">{detailLength2.substring(0, 250)} {readMore2}</span>
+                <br />
+                <span className="badge-tile-subtitle" style={{color: textColor2}}>Proof: </span>
+                <span className="badge-tile-description">{badge2.proof}</span>
               </div>
             </div>
             <h1 className="badge-tile-category" style={{color: textColor2}}>{category2}</h1>

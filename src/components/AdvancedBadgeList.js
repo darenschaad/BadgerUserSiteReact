@@ -211,8 +211,7 @@ class BadgeList extends Component {
                                   <li className='hover-hand' onClick={() => this.props.goToBadge(badge, this.props.searchValue, searchState)}>
                                     <img className='list-image' src={badge.imageUrl} alt={badge.name}></img>
                                     <a>
-                                      {badge.name} <br/>
-                                      {badge.tags}
+                                      {badge.name}
                                     </a>
                                     <hr/>
                                   </li>

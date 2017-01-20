@@ -9,17 +9,29 @@
   font-family: $primary-font;
 }
 
+.break {
+  // border-top: solid 2px $badger-black;
+  border-radius: 5px;
+  background: $badger-black;
+  height: 2px;
+  width: 100%;
+  margin-bottom: 10px;
+  margin-top: -10px;
+}
+
 .badge-tile-category {
   background-color: $badger-white;
   margin: 0;
   text-align: center;
   font-size: 1.5em;
+  padding: 5px 0px 3px;
 }
 
 .badge-tile {
   padding: 0;
   display: flex;
   flex-direction: column;
+  margin-top: 20px;
 }
 
 .detail-image {
@@ -34,21 +46,21 @@
   h1{
     font-size: 1.5em;
   }
-  h4{
-    font-size: 1em;
+  .badge-tile-subtitle{
+    // font-size: 1em;
     display: none;
     @media screen and (min-width: $break-medium) {
-      display: flex;
-      align-items: center;
+      display: inline;
+      font-size: 1.15em;
     }
   }
-  span{
-    font-size: 0.75em;
+  .badge-tile-description{
+    // font-size: 0.75em;
     font-family: 'futura';
     display: none;
     @media screen and (min-width: $break-medium) {
-      display: flex;
-      align-items: center;
+      display: inline;
+      font-size: 1em;
     }
   }
 }
