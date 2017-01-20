@@ -2,26 +2,39 @@ import React, {Component} from 'react';
 import NavBar from './NavBar';
 
 class CategoryList extends Component {
-
-  // componentDidMount() {
-  //
+  // constructor() {
+  //   super();
+  //   this.state = {
+  //     badges: { }
+  //   }
   // }
+
+  componentDidMount() {
+    console.log(this.props.badges);
+  }
 
   render() {
     const localStorageRef = localStorage.getItem('category');
 
     const currentCategory = JSON.parse(localStorageRef);
+    console.log(currentCategory);
 
-    // let filteredByCategory = this.props.badges.filter(
-    //   (badge) => {
-    //     return badge["category"].indexOf(currentCategory);
-    //   }
-    // );
+    let filteredByCategory = this.props.badges.map(
+      (badge, idx) => {
+        if(badge.category === currentCategory) {
+          return (
+            <div key={idx}>
+              {badge.name}
+            </div>
+          );
+        }
+      }
+    );
 
     return (
       <div>
         <NavBar />
-
+        {filteredByCategory}
       </div>
     );
   }
