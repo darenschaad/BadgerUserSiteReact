@@ -49,9 +49,9 @@ class BadgeList extends Component {
           {
             searchTagsArray.map((tag, idx) =>{
               return(
-                <div>
+                <div key={idx}>
                   <span className="tag">"{tag}"</span>
-                  <div key={idx} className="standard-search-block-keywords">
+                  <div className="standard-search-block-keywords">
                     {
                       //map over filteredByTagsBadges to display list of everything from the database, or whatever the user is filtering with their search term.
                       filteredByTagsArrayBadges.map((badge, idx) => {
@@ -99,16 +99,20 @@ class BadgeList extends Component {
             filteredByNameBadges.map((badge, idx) => {
               return(
                 <div key={idx} className="standard-search-individual-names">
-                  <ul className="badge-list">
-                    <li className='badge-list-item hover-hand' onClick={() => this.props.goToBadge(badge, this.props.searchValue, searchState)}>
-                      <img className='list-image' src={badge.imageUrl} alt={badge.name}></img>
-                      <a className="badge-list-details">
-                        Activity: {badge.name}
-                        <br/>
-                      </a>
-                      <br/>
-                    </li>
-                  </ul>
+                  <div className='badge-tile hover-hand random-badge-content' onClick={() => this.props.goToBadge(badge, this.props.searchValue, searchState)}>
+                    <div className="badge-tile-image-details">
+                      <img className='detail-image' src={badge.imageUrl} alt={badge.names}></img>
+                      <div className="badge-tile-details">
+                        <h1>{badge.name}</h1>
+                        <span className="badge-tile-subtitle">To do: </span>
+                        <span className="badge-tile-description">{badge.description}</span>
+                        <br />
+                        <span className="badge-tile-subtitle">Proof: </span>
+                        <span className="badge-tile-description">{badge.proof}</span>
+                      </div>
+                    </div>
+                    <h1 className="badge-tile-category">{badge.category}</h1>
+                  </div>
                 </div>
               );
             })
