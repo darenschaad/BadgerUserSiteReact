@@ -72,16 +72,19 @@ class Badge extends Component{
             <h1 style={{color: textColor}} className="category-name">{ category }</h1>
           </div>
           <div className="detail-body">
-            <h1 style={{color: textColor}}>{ourBadge.name}</h1>
-            <img className='detail-image' src={ourBadge.imageUrl} alt={ourBadge.name}></img>
+            <h1 className="badge-title" style={{color: textColor}}>{ourBadge.name}</h1>
+            <div className="img-wrapper">
+              <img className='badge-page-image' src={ourBadge.imageUrl} alt={ourBadge.name}></img>
+            </div>
             <Linkify properties={{target: '_blank'}}>
-              <h3 style={{color: textColor}}>To do: {ourBadge.description}</h3>
+              <h3 style={{color: textColor}}><span className="badge-page-subtitle">To do:</span> {ourBadge.description}</h3>
               <h3 style={{color: textColor}}>{ourBadge.comments}</h3>
-              <h3 style={{color: textColor}}>Proof: {ourBadge.proof}</h3>
+              <h3 style={{color: textColor}}><span className="badge-page-subtitle">Proof:</span> {ourBadge.proof}</h3>
             </Linkify>
-            <h4 style={{color: textColor}}>Challenges: {ourBadge.challenges}</h4>
-            <h4 style={{color: textColor}}>Creator: {ourBadge.creator}</h4>
-            <h4 style={{color: textColor}}>Keywords: {splitTags}</h4>
+            <h3 style={{color: textColor}}><span className="badge-page-subtitle">Challenges:</span> {ourBadge.challenges}</h3>
+            <h3 style={{color: textColor}}><span className="badge-page-subtitle">Keywords:</span> {splitTags}</h3>
+            <h3 style={{color: textColor}}><span className="badge-page-subtitle">Creator:</span> {ourBadge.creator}</h3>
+            <h3 style={{color: textColor}}><span className="badge-page-subtitle">Date Created:</span> {ourBadge.date}</h3>
           </div>
         </div>
       </div>
