@@ -10,12 +10,31 @@ class Badge extends Component{
     }
   }
 
+
+
+
+
   // componentDidMount() {
   //   let height = document.getElementsByClassName('badge-detail-page-tile')[0].clientHeight;
   //   this.setState({ height });
   // }
 
   render() {
+
+    function titleCase(str) {
+     var splitStr = str.split(' ');
+     for (var i = 0; i < splitStr.length; i++) {
+         // You do not need to check if i is larger than splitStr length, as your for does that for you
+         // Assign it back to the array
+         if (splitStr[i] !== "of" && splitStr[i] !== "for" && splitStr[i] !== "the" && splitStr[i] !== "in") {
+
+           splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
+         }
+     }
+
+     // Directly return the joined string
+     return splitStr.join(' ');
+    }
     const localStorageRef = localStorage.getItem('badge');
 
     const ourBadge = JSON.parse(localStorageRef);
@@ -37,7 +56,7 @@ class Badge extends Component{
     const backgroundColor = backgroundColors[index];
 
     //split tags with space separation so you don't have one long string with no space
-    const splitTags = ourBadge.tags.split(',').join(', ');
+    const splitTags = titleCase(ourBadge.tags.split(',').join(', '));
 
     //grab the height set to state and place it inside string before pixels so that it can be used below in styles
     // const categoryHeight = `${this.state.height}px`;
