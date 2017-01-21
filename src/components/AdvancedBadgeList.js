@@ -9,6 +9,13 @@ class BadgeList extends Component {
     const creatorBadgeArray= [];
     const searchState = "advanced";
 
+    const categories = [0,100,200,300,400,500,600,700,800,900];
+    const categoryNames = ["000 - GENERAL KNOWLEDGE", "100 - PHILOSOPHY & PSYCHOLOGY", "200 - RELIGION", "300 - SOCIAL SCIENCE", "400 - LANGUAGES", "500 - SCIENCE", "600 - TECHNOLOGY", "700 - ARTS & RECREATION", "800 - LITERATURE", "900 - HISTORY & GEOGRAPHY"];
+
+    const textColors = ["#4C4C4C", "#0079A5", "#66008D", "#4D782D", "#C97100", "#25895A", "#000073", "#988967", "#76193C", "#985721"];
+
+    const backgroundColors = ["#989DA7", "#DCF0FF", "#D0C0D6", "#CEDFB0", "#EEC99A", "#9EBAAC", "#B5B5CA", "#FDE192", "#DBC2CC", "#D8C2A9"];
+
     if (this.props.searchValue.length >= 3) {
 
       this.props.tagArray.filter(
@@ -103,22 +110,35 @@ class BadgeList extends Component {
         } else {
           displayName = (
             <div className="advanced-search-content">
-              <h2>Search Results by Badge Name</h2>
-              <hr/>
+              <h2>Name</h2>
+              <div className="break"></div>
               {
                 //map over filteredBadges to display list of everything from the database, or whatever the user is filtering with their search term.
                 filteredByNameBadges.map((badge, idx) => {
+                  let index = categories.indexOf(badge.category);
+
+                  let category = categoryNames[index];
+
+                  let textColor = textColors[index];
+
+                  let backgroundColor = backgroundColors[index];
+
                   return(
-                    <div key={idx}>
-                      <ul>
-                        <li className='hover-hand' onClick={() => this.props.goToBadge(badge, this.props.searchValue, searchState)}>
-                          <img className='list-image' src={badge.imageUrl} alt={badge.name}></img>
-                          <a>
-                            Activity: {badge.name} <br />
-                            Creator: {badge.creator}
-                          </a>
-                        </li>
-                      </ul>
+                    <div key={idx} className="standard-search-individual-names">
+                      <div style={{backgroundColor: backgroundColor}} className='badge-tile hover-hand random-badge-content' onClick={() => this.props.goToBadge(badge, this.props.searchValue, searchState)}>
+                        <div className="badge-tile-image-details">
+                          <img className='detail-image' src={badge.imageUrl} alt={badge.names}></img>
+                          <div className="badge-tile-details">
+                            <h1 style={{color: textColor }} >{badge.name}</h1>
+                            <span style={{color: textColor }} className="badge-tile-subtitle">To do: </span>
+                            <span className="badge-tile-description">{badge.description}</span>
+                            <br />
+                            <span style={{color: textColor }} className="badge-tile-subtitle">Proof: </span>
+                            <span className="badge-tile-description">{badge.proof}</span>
+                          </div>
+                        </div>
+                        <h1 style={{color: textColor }} className="badge-tile-category">{category}</h1>
+                      </div>
                     </div>
                   );
                 })
@@ -137,35 +157,46 @@ class BadgeList extends Component {
               <hr></hr>
             </div>
           )
-        }else {
+        } else {
           displayKeywords = (
             <div className="advanced-search-content">
-              <h2>Search By Keywords</h2>
-              <hr></hr>
+              <h2>Keywords</h2>
+              <div className="break"></div>
               {
                 searchTagsArray.map((tag, idx) =>{
                   return(
                     <div key={idx}>
-                      <h4>Keyword: {tag}</h4>
-                      <hr></hr>
+                      <h4>"{tag}"</h4>
                       {
                         //map over filterTags to display list of everything from the database, or whatever the user is filtering with their search term.
                         filteredByTagsArrayBadges.map((badge, idx) => {
                           let badgeTagsArray = badge.tags.toLowerCase().split(',');
+
+                          let index = categories.indexOf(badge.category);
+
+                          let category = categoryNames[index];
+
+                          let textColor = textColors[index];
+
+                          let backgroundColor = backgroundColors[index];
+
                           if (badgeTagsArray.includes(tag)) {
                             return(
-                              <div key={idx}>
-                                <ul>
-                                  <li className='hover-hand' onClick={() => this.props.goToBadge(badge, this.props.searchValue, searchState)}>
-                                    <img className='list-image' src={badge.imageUrl} alt={badge.name}></img>
-                                    <a>
-                                      {badge.name}
-                                      <br/>
-                                      {badge.tags}
-                                    </a>
-                                    <hr/>
-                                  </li>
-                                </ul>
+                              <div key={idx} className="standard-search-individual-names">
+                                <div style={{backgroundColor: backgroundColor}} className='badge-tile hover-hand random-badge-content' onClick={() => this.props.goToBadge(badge, this.props.searchValue, searchState)}>
+                                  <div className="badge-tile-image-details">
+                                    <img className='detail-image' src={badge.imageUrl} alt={badge.names}></img>
+                                    <div className="badge-tile-details">
+                                      <h1 style={{color: textColor }} >{badge.name}</h1>
+                                      <span style={{color: textColor }} className="badge-tile-subtitle">To do: </span>
+                                      <span className="badge-tile-description">{badge.description}</span>
+                                      <br />
+                                      <span style={{color: textColor }} className="badge-tile-subtitle">Proof: </span>
+                                      <span className="badge-tile-description">{badge.proof}</span>
+                                    </div>
+                                  </div>
+                                  <h1 style={{color: textColor }} className="badge-tile-category">{category}</h1>
+                                </div>
                               </div>
                             );
                           }
@@ -192,30 +223,45 @@ class BadgeList extends Component {
         } else {
           displayCreator = (
             <div className="advanced-search-content">
-              <h2>Search By Creator</h2>
-              <hr></hr>
+              <h2>Creator</h2>
+              <div className="break"></div>
               {
                 creatorArray.map((creator, idx) =>{
                   return(
                     <div key={idx}>
                       <h2>{creator} ( {creatorBadges(creator, creatorBadgeArray)} )</h2>
-                      <hr></hr>
                       {
                         //map over filterTags to display list of everything from the database, or whatever the user is filtering with their search term.
                         filteredByCreatorBadges.map((badge, idx) => {
                           let badgeCreator = badge.creator;
+
+                          let badgeTagsArray = badge.tags.toLowerCase().split(',');
+
+                          let index = categories.indexOf(badge.category);
+
+                          let category = categoryNames[index];
+
+                          let textColor = textColors[index];
+
+                          let backgroundColor = backgroundColors[index];
+                          
                           if (badgeCreator === creator) {
                             return(
-                              <div key={idx}>
-                                <ul>
-                                  <li className='hover-hand' onClick={() => this.props.goToBadge(badge, this.props.searchValue, searchState)}>
-                                    <img className='list-image' src={badge.imageUrl} alt={badge.name}></img>
-                                    <a>
-                                      {badge.name}
-                                    </a>
-                                    <hr/>
-                                  </li>
-                                </ul>
+                              <div key={idx} className="standard-search-individual-names">
+                                <div style={{backgroundColor: backgroundColor}} className='badge-tile hover-hand random-badge-content' onClick={() => this.props.goToBadge(badge, this.props.searchValue, searchState)}>
+                                  <div className="badge-tile-image-details">
+                                    <img className='detail-image' src={badge.imageUrl} alt={badge.names}></img>
+                                    <div className="badge-tile-details">
+                                      <h1 style={{color: textColor }} >{badge.name}</h1>
+                                      <span style={{color: textColor }} className="badge-tile-subtitle">To do: </span>
+                                      <span className="badge-tile-description">{badge.description}</span>
+                                      <br />
+                                      <span style={{color: textColor }} className="badge-tile-subtitle">Proof: </span>
+                                      <span className="badge-tile-description">{badge.proof}</span>
+                                    </div>
+                                  </div>
+                                  <h1 style={{color: textColor }} className="badge-tile-category">{category}</h1>
+                                </div>
                               </div>
                             );
                           }
