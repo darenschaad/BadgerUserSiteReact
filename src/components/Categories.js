@@ -26,7 +26,7 @@ class Categories extends Component {
       return(
         <div>
           <NavBar />
-          <h1>Categories</h1>
+          <h1 className="categories-categories-title">Categories</h1>
           <div className="category-000-div">
             <div className="category-individual animated slideInRight" value={0} onClick={() => this.goToCategory(0)} >
               <img className="category-image" id="category-000-image"  src="https://spcilk.github.io/badger-badge-images/images/000.png" alt="General knowledge category"/>

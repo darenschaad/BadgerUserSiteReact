@@ -19,6 +19,14 @@
 
 .category-text {
   margin-left: 10px;
+  font-family: $primary-font;
+  font-size: 2em;
+}
+
+.categories-categories-title {
+  text-align: center;
+  font-family: $primary-font;
+  font-size: 3em;
 }
 
 @keyframes wiggle {
