@@ -58,7 +58,7 @@ class BadgeList extends Component {
             searchTagsArray.map((tag, idx) =>{
               return(
                 <div key={idx}>
-                  <span className="tag">"{tag}"</span>
+                  <span className="tag">Badges that include the keyword "{tag}"</span>
                   <div className="standard-search-block-keywords">
                     {
                       //map over filteredByTagsBadges to display list of everything from the database, or whatever the user is filtering with their search term.
