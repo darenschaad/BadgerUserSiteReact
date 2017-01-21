@@ -8,6 +8,7 @@ var InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 var url = require('url');
 var paths = require('./paths');
 var getClientEnvironment = require('./env');
+var bourbon = require('node-bourbon').includePaths;
 
 function ensureSlash(path, needsSlash) {
   var hasSlash = path.endsWith('/');
@@ -161,6 +162,10 @@ module.exports = {
         }
       }
     ]
+  },
+
+  sassLoader: {
+    includePaths: bourbon,
   },
 
   // We use PostCSS for autoprefixing only.
