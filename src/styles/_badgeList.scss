@@ -4,15 +4,19 @@
   padding: 0;
 }
 
+.tag {
+  color: $badger-black;
+}
+
 .badge-list-item {
   margin: 0;
 }
 
 .list-image {
-    height: auto;
-    width: auto;
-    max-width: 50px;
-    max-height: 50px;
+  height: auto;
+  width: auto;
+  max-width: 75px;
+  max-height: 75px;
 }
 
 .badge-list-details {
@@ -20,27 +24,19 @@
 }
 
 .standard-search-content {
-  border-style: double;
   margin-bottom: 8px;
   // margin-top: 5px;
 }
 
-.standard-search-individual-keywords {
-  border-style: groove;
-  padding-left: 8px;
-  padding-bottom: 8px;
-  margin: 5px;
+.standard-search-individual-keywords:not(:first-child) {
+  margin-left: 10px;
 }
 
 .standard-search-block-keywords {
   margin-bottom: 15px;
+  display: flex;
 }
 
-.standard-search-individual-names {
-  padding-left: 8px;
-  // margin: 5px;
-}
-
-.standard-search-describer {
-  padding-left: 8px;
+.badge-tile-description {
+  color: lighten($badger-black, 10%);
 }
