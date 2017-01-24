@@ -12,7 +12,7 @@ var bourbon = require('node-bourbon').includePaths;
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // In development, we always serve from the root. This makes config easier.
-var publicPath = 'http://localhost:3000/';
+var publicPath = '/';
 // `publicUrl` is just like `publicPath`, but we will provide it to our app
 // as %PUBLIC_URL% in `index.html` and `process.env.PUBLIC_URL` in JavaScript.
 // Omit trailing slash as %PUBLIC_PATH%/xyz looks better than %PUBLIC_PATH%xyz.
@@ -64,6 +64,11 @@ module.exports = {
     // This is the URL that app is served from. We use "/" in development.
     publicPath: publicPath
   },
+  
+  historyApiFallback: {
+    index: publicPath
+  },
+
   resolve: {
     // This allows you to set a fallback for where Webpack should look for modules.
     // We read `NODE_PATH` environment variable in `paths.js` and pass paths here.
