@@ -66,6 +66,7 @@ class Root extends Component {
             />
 
             <Match
+              exactly
               pattern="/categories"
               component={() => (
                 <Categories
