@@ -56,8 +56,9 @@ class Badge extends Component{
 
     const backgroundColor = backgroundColors[index];
 
-    //split tags with space separation so you don't have one long string with no space
+    //split tags and challenges with space separation so you don't have one long string with no space
     const splitTags = titleCase(ourBadge.tags.split(',').join(', '));
+    const splitChallenges = ourBadge.challenges.split(',').join(', ');
 
     //grab the height set to state and place it inside string before pixels so that it can be used below in styles
     // const categoryHeight = `${this.state.height}px`;
@@ -82,7 +83,7 @@ class Badge extends Component{
               <h3 style={{color: textColor}}>{ourBadge.comments}</h3>
               <h3 style={{color: textColor}}><span className="badge-page-subtitle">Proof:</span> {ourBadge.proof}</h3>
             </Linkify>
-            <h3 style={{color: textColor}}><span className="badge-page-subtitle">Challenges:</span> {ourBadge.challenges}</h3>
+            <h3 style={{color: textColor}}><span className="badge-page-subtitle">Challenges:</span> {splitChallenges}</h3>
             <h3 style={{color: textColor}}><span className="badge-page-subtitle">Keywords:</span> {splitTags}</h3>
             <h3 style={{color: textColor}}><span className="badge-page-subtitle">Creator:</span> {ourBadge.creator}</h3>
             <h3 style={{color: textColor}}><span className="badge-page-subtitle">Date Created:</span> {ourBadge.date}</h3>
