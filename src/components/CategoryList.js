@@ -47,7 +47,6 @@ class CategoryList extends Component {
 
       let categoryBadgeCount = 0;
 
-
       let filteredByCategory = this.props.badges.map(
         (badge, idx) => {
           if(badge.category === currentCategory) {
