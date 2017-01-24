@@ -8,6 +8,7 @@ var InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 var url = require('url');
 var paths = require('./paths');
 var getClientEnvironment = require('./env');
+var bourbon = require('node-bourbon').includePaths;
 
 function ensureSlash(path, needsSlash) {
   var hasSlash = path.endsWith('/');
@@ -68,9 +69,9 @@ module.exports = {
     // We inferred the "public path" (such as / or /my-project) from homepage.
     publicPath: publicPath
   },
-  historyApiFallback: {
-    index: publicPath
-  },
+  // historyApiFallback: {
+  //   index: publicPath
+  // },
   resolve: {
     // This allows you to set a fallback for where Webpack should look for modules.
     // We read `NODE_PATH` environment variable in `paths.js` and pass paths here.
@@ -101,6 +102,11 @@ module.exports = {
       }
     ],
     loaders: [
+      {
+        test: /\.scss$/,
+        include: paths.appSrc,
+        loaders: ["style", "css", "sass"]
+      },
       // Process JS with Babel.
       {
         test: /\.(js|jsx)$/,
@@ -161,6 +167,13 @@ module.exports = {
     ]
   },
 
+<<<<<<< HEAD
+=======
+  sassLoader: {
+    includePaths: bourbon,
+  },
+
+>>>>>>> master
   // We use PostCSS for autoprefixing only.
   postcss: function() {
     return [
