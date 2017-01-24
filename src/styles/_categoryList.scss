@@ -47,72 +47,75 @@
   text-align: center;
 }
 
-.category-list-index-0 {
-  &:hover {
-    background-color: $category-000-color;
-    animation: wiggle 1.5s ease-in-out;
-  }
-}
+@media screen and (min-width: $break-medium) {
 
-.category-list-index-1 {
-  &:hover {
-    background-color: $category-100-color;
-    animation: wiggle 1.5s ease-in-out;
+  .category-list-index-0 {
+    &:hover {
+      background-color: $category-000-color;
+      animation: wiggle 1.5s ease-in-out;
+    }
   }
-}
 
-.category-list-index-2 {
-  &:hover {
-    background-color: $category-200-color;
-    animation: wiggle 1.5s ease-in-out;
+  .category-list-index-1 {
+    &:hover {
+      background-color: $category-100-color;
+      animation: wiggle 1.5s ease-in-out;
+    }
   }
-}
 
-.category-list-index-3 {
-  &:hover {
-    background-color: $category-300-color;
-    animation: wiggle 1.5s ease-in-out;
+  .category-list-index-2 {
+    &:hover {
+      background-color: $category-200-color;
+      animation: wiggle 1.5s ease-in-out;
+    }
   }
-}
 
-.category-list-index-4 {
-  &:hover {
-    background-color: $category-400-color;
-    animation: wiggle 1.5s ease-in-out;
+  .category-list-index-3 {
+    &:hover {
+      background-color: $category-300-color;
+      animation: wiggle 1.5s ease-in-out;
+    }
   }
-}
 
-.category-list-index-5 {
-  &:hover {
-    background-color: $category-500-color;
-    animation: wiggle 1.5s ease-in-out;
+  .category-list-index-4 {
+    &:hover {
+      background-color: $category-400-color;
+      animation: wiggle 1.5s ease-in-out;
+    }
   }
-}
 
-.category-list-index-6 {
-  &:hover {
-    background-color: $category-600-color;
-    animation: wiggle 1.5s ease-in-out;
+  .category-list-index-5 {
+    &:hover {
+      background-color: $category-500-color;
+      animation: wiggle 1.5s ease-in-out;
+    }
   }
-}
 
-.category-list-index-7 {
-  &:hover {
-    background-color: $category-700-color;
-    animation: wiggle 1.5s ease-in-out;
+  .category-list-index-6 {
+    &:hover {
+      background-color: $category-600-color;
+      animation: wiggle 1.5s ease-in-out;
+    }
   }
-}
 
-.category-list-index-8 {
-  &:hover {
-    background-color: $category-800-color;
-    animation: wiggle 1.5s ease-in-out;
+  .category-list-index-7 {
+    &:hover {
+      background-color: $category-700-color;
+      animation: wiggle 1.5s ease-in-out;
+    }
   }
-}
 
-.category-list-index-9 {
-  &:hover {
-    background-color: $category-900-color;
-    animation: wiggle 1.5s ease-in-out;
+  .category-list-index-8 {
+    &:hover {
+      background-color: $category-800-color;
+      animation: wiggle 1.5s ease-in-out;
+    }
+  }
+
+  .category-list-index-9 {
+    &:hover {
+      background-color: $category-900-color;
+      animation: wiggle 1.5s ease-in-out;
+    }
   }
 }
