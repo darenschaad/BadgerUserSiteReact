@@ -14,10 +14,11 @@ class Badge extends Component{
 
 
 
-  // componentDidMount() {
-  //   let height = document.getElementsByClassName('badge-detail-page-tile')[0].clientHeight;
-  //   this.setState({ height });
-  // }
+  componentDidMount() {
+    // let height = document.getElementsByClassName('badge-detail-page-tile')[0].clientHeight;
+    // this.setState({ height });
+    document.body.scrollTop = 0;
+  }
 
   render() {
 

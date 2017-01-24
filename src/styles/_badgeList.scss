@@ -6,6 +6,11 @@
 
 .tag {
   color: $badger-black;
+  font-size: 1.2em;
+}
+
+.tag-description {
+  opacity: 0.5;
 }
 
 .badge-list-item {
@@ -26,6 +31,13 @@
 .standard-search-content {
   margin-bottom: 8px;
   // margin-top: 5px;
+}
+
+.standard-search-individual-keywords {
+  &:hover {
+    cursor: pointer;
+    background-color: $hover-color;
+  }
 }
 
 .standard-search-individual-keywords:not(:first-child) {

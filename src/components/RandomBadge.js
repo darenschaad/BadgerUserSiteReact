@@ -6,6 +6,7 @@ class RandomBadge extends Component {
     this.state = {
       rand1 : 0,
       rand2 : 1,
+      rand3 : 2,
       // windowWidth: window.innerWidth
     }
   }
@@ -21,7 +22,11 @@ class RandomBadge extends Component {
     while (rand1 === rand2) {
       rand2 = getRandomNumber(length);
     }
-    this.setState({ rand1 : rand1, rand2 : rand2 })
+    let rand3 = getRandomNumber(length);
+    while (rand1 === rand3 || rand2 === rand3) {
+      rand3 = getRandomNumber(length);
+    }
+    this.setState({ rand1 : rand1, rand2 : rand2, rand3 : rand3})
   }
 
   // window.onresize = function(event) {
@@ -33,15 +38,18 @@ class RandomBadge extends Component {
     let badgeArray = this.props.badgeArray;
     let rand1 = this.state.rand1;
     let rand2 = this.state.rand2;
+    let rand3 = this.state.rand3;
 
 
     let badge1 = badgeArray[rand1];
     let badge2 = badgeArray[rand2];
+    let badge3 = badgeArray[rand3];
 
     const categories = [0,100,200,300,400,500,600,700,800,900];
 
     let index1 = categories.indexOf(badge1.category);
     let index2 = categories.indexOf(badge2.category);
+    let index3 = categories.indexOf(badge3.category);
     const categoryNames = ["000 - GENERAL KNOWLEDGE", "100 - PHILOSOPHY & PSYCHOLOGY", "200 - RELIGION", "300 - SOCIAL SCIENCE", "400 - LANGUAGES", "500 - SCIENCE", "600 - TECHNOLOGY", "700 - ARTS & RECREATION", "800 - LITERATURE", "900 - HISTORY & GEOGRAPHY"];
     const textColors = ["#4C4C4C", "#0079A5", "#66008D", "#4D782D", "#C97100", "#25895A", "#000073", "#988967", "#76193C", "#985721"];
     const backgroundColors = ["#989DA7", "#DCF0FF", "#D0C0D6", "#CEDFB0", "#EEC99A", "#9EBAAC", "#B5B5CA", "#FDE192", "#DBC2CC", "#D8C2A9"];
@@ -52,6 +60,10 @@ class RandomBadge extends Component {
     const category2 = categoryNames[index2];
     const textColor2 = textColors[index2];
     const backgroundColor2 = backgroundColors[index2];
+
+    const category3 = categoryNames[index3];
+    const textColor3 = textColors[index3];
+    const backgroundColor3 = backgroundColors[index3];
 
     let readMore1;
     let detailLength1 = badge1.description + "\n" + badge1.comments;
@@ -66,6 +78,14 @@ class RandomBadge extends Component {
     let detailLength2 = badge2.description + "\n" + badge2.comments;
     if(detailLength2.length > 250) {
       readMore2 = (
+        <span className="read-more">...</span>
+      );
+    }
+
+    let readMore3;
+    let detailLength3 = badge3.description + "\n" + badge3.comments;
+    if(detailLength3.length > 250) {
+      readMore3 = (
         <span className="read-more">...</span>
       );
     }
@@ -103,6 +123,21 @@ class RandomBadge extends Component {
               </div>
             </div>
             <h1 className="badge-tile-category" style={{color: textColor2}}>{category2}</h1>
+          </div>
+
+          <div className='badge-tile hover-hand random-badge-content' style={{backgroundColor : backgroundColor3}} onClick={() => this.props.goToBadge(badge3, this.props.searchValue)}>
+            <div className="badge-tile-image-details">
+              <img className='detail-image' src={badge3.imageUrl} alt={badge3.names}></img>
+              <div className="badge-tile-details">
+                <h1 style={{color: textColor3}}>{badge3.name}</h1>
+                <span className="badge-tile-subtitle" style={{color: textColor3}}>To do: </span>
+                <span className="badge-tile-description">{detailLength3.substring(0, 250)} {readMore3}</span>
+                <br />
+                <span className="badge-tile-subtitle" style={{color: textColor3}}>Proof: </span>
+                <span className="badge-tile-description">{badge3.proof}</span>
+              </div>
+            </div>
+            <h1 className="badge-tile-category" style={{color: textColor3}}>{category3}</h1>
           </div>
         </div>
       </div>
