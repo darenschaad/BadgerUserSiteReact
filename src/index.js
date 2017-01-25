@@ -4,14 +4,13 @@ import About from './components/About';
 import App from './components/App';
 import { BrowserRouter, Match, Miss, browserHistory } from '../node_modules/react-router/index';
 import Badge from './components/Badge';
-// import NavBar from './components/NavBar';
 import Categories from './components/Categories';
 import CategoryList from './components/CategoryList';
 import Challenges from './components/Challenges'
 import NotFound from './components/NotFound';
 import base from './base';
+import Login from './components/Login';
 
-// import './styles/normalize.css';
 import './styles/App.scss';
 import './styles/animate.css';
 
@@ -22,7 +21,10 @@ class Root extends Component {
       badges: { },
       tags: [ ],
       loading: true,
+      authenticated: false,
+      currentUser: { },
     }
+    this.login = this.login.bind(this);
   }
 
   componentDidMount(){
@@ -48,6 +50,31 @@ class Root extends Component {
     });
   }
 
+  doSomethingWithUser(user) {
+    this.setState({ authenticated: true, currentUser: user});
+  }
+
+  doSomethingWithError(error) {
+    console.log("there was an error: " + error);
+  }
+
+  login() {
+    // console.log(this);
+    // function doSomethingWithUser(user) {
+    //   this.setState({ authenticated: true, currentUser: user});
+    // }
+    //
+    // function doSomethingWithError(error) {
+    //   console.log("there was an error: " + error);
+    // }
+    var authHandler = function(error, user) {
+      // console.log(this);
+      if(error) this.doSomethingWithError(error);
+      this.doSomethingWithUser(user);
+    }
+    base.authWithOAuthPopup('facebook', authHandler.bind(this));
+  }
+
   render() {
 
     return(
@@ -61,7 +88,9 @@ class Root extends Component {
                 <App
                   badges={this.state.badges}
                   tags={this.state.tags}
-                  loading={this.state.loading} />
+                  loading={this.state.loading}
+                  authenticated={this.state.authenticated}
+                  login={this.login} />
               )}
             />
 

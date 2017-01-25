@@ -51,7 +51,10 @@ class App extends Component {
     } else {
       return (
         <div className="App">
-          <NavBar />
+          <NavBar
+            authenticated={this.props.authenticated}
+            login={this.props.login}
+          />
           <div id="intro-section">
             <img id="intro-image" src={require('../img/badgers-name.png')} alt="badgers name logo"/>
           </div>

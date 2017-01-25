@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import FontAwesome from 'react-fontawesome';
+import Login from './Login';
 
 class NavBar extends Component {
   constructor() {
@@ -38,6 +39,7 @@ class NavBar extends Component {
           <li className="navbar-clickable" onClick={this.goToPage.bind(this, "challenges")}>Challenges</li>
           <li className="navbar-clickable" onClick={this.goToPage.bind(this, "about")}>About</li>
           <li className="navbar-clickable" onClick={this.goToPage.bind(this, "categories")}>Categories</li>
+          <Login login={this.props.login} />
         </ul>
       </div>
     );
