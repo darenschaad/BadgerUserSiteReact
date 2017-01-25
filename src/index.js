@@ -24,7 +24,8 @@ class Root extends Component {
       authenticated: false,
       currentUser: { },
     }
-    this.login = this.login.bind(this);
+    this.logIn = this.logIn.bind(this);
+    this.logOut = this.logOut.bind(this);
   }
 
   componentDidMount(){
@@ -50,29 +51,28 @@ class Root extends Component {
     });
   }
 
-  doSomethingWithUser(user) {
+  displayUser(user) {
     this.setState({ authenticated: true, currentUser: user.user});
   }
 
-  doSomethingWithError(error) {
+  displayLoginError(error) {
     alert("There was an error accessing Facebook: " + error.message);
   }
 
-  login() {
-    // console.log(this);
-    // function doSomethingWithUser(user) {
-    //   this.setState({ authenticated: true, currentUser: user});
-    // }
-    //
-    // function doSomethingWithError(error) {
-    //   console.log("there was an error: " + error);
-    // }
+  logIn() {
+    //call the methods that show the error or the
     var authHandler = function(error, user) {
-      // console.log(this);
-      if(error) this.doSomethingWithError(error);
-      this.doSomethingWithUser(user);
+      if(error) this.displayLoginError(error);
+      this.displayUser(user);
     }
+    //make call to Facebook API
     base.authWithOAuthPopup('facebook', authHandler.bind(this));
+  }
+
+  logOut() {
+    //signs out currently logged in user
+    base.unauth()
+    this.setState({ authenticated: false, currentUser: { }})
   }
 
   render() {
@@ -90,7 +90,8 @@ class Root extends Component {
                   tags={this.state.tags}
                   loading={this.state.loading}
                   authenticated={this.state.authenticated}
-                  login={this.login}
+                  logIn={this.logIn}
+                  logOut={this.logOut}
                   currentUser={this.state.currentUser} />
               )}
             />

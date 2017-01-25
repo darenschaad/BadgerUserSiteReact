@@ -7,14 +7,14 @@ class Login extends Component {
     if(!this.props.authenticated) {
       return (
         <div>
-          <button onClick={this.props.login}>Login</button>
+          <button onClick={this.props.logIn}>Login</button>
         </div>
       );
     } else {
       const user = this.props.currentUser;
       return(
         <div>
-          <button>Logout</button>
+          <button onClick={this.props.logOut}>Logout</button>
           <img src={user.photoURL} />
           <h5>{user.displayName}</h5>
         </div>

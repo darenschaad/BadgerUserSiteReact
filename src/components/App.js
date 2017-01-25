@@ -53,8 +53,9 @@ class App extends Component {
         <div className="App">
           <NavBar
             authenticated={this.props.authenticated}
-            login={this.props.login}
+            logIn={this.props.logIn}
             currentUser={this.props.currentUser}
+            logOut={this.props.logOut}
           />
           <div id="intro-section">
             <img id="intro-image" src={require('../img/badgers-name.png')} alt="badgers name logo"/>
