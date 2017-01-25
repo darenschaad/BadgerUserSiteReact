@@ -11,9 +11,12 @@ class Login extends Component {
         </div>
       );
     } else {
+      const user = this.props.currentUser;
       return(
         <div>
           <button>Logout</button>
+          <img src={user.photoURL} />
+          <h5>{user.displayName}</h5>
         </div>
       );
     }
@@ -22,3 +25,6 @@ class Login extends Component {
 }
 
 export default Login;
+
+// <img src={user.user.photoURL} />
+// <h5>{user.user.displayName}</h5>

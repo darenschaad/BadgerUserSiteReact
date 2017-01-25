@@ -51,11 +51,11 @@ class Root extends Component {
   }
 
   doSomethingWithUser(user) {
-    this.setState({ authenticated: true, currentUser: user});
+    this.setState({ authenticated: true, currentUser: user.user});
   }
 
   doSomethingWithError(error) {
-    console.log("there was an error: " + error);
+    alert("There was an error accessing Facebook: " + error.message);
   }
 
   login() {
@@ -90,7 +90,8 @@ class Root extends Component {
                   tags={this.state.tags}
                   loading={this.state.loading}
                   authenticated={this.state.authenticated}
-                  login={this.login} />
+                  login={this.login}
+                  currentUser={this.state.currentUser} />
               )}
             />
 
