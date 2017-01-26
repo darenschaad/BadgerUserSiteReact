@@ -51,8 +51,15 @@ class App extends Component {
     } else {
       return (
         <div className="App">
-          <NavBar />
-          <img id="intro-image" src={require('../img/badgers-name.png')} alt="badgers name logo"/>
+          <NavBar
+            authenticated={this.props.authenticated}
+            logIn={this.props.logIn}
+            currentUser={this.props.currentUser}
+            logOut={this.props.logOut}
+          />
+          <div id="intro-section">
+            <img id="intro-image" src={require('../img/badgers-name.png')} alt="badgers name logo"/>
+          </div>
           <BadgeSearch
             badgeArray={this.props.badges}
             tagArray={this.props.tags}

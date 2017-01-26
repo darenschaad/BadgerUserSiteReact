@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import FontAwesome from 'react-fontawesome';
+import Login from './Login';
 
 class NavBar extends Component {
   constructor() {
@@ -38,6 +39,11 @@ class NavBar extends Component {
           <li className="navbar-clickable" onClick={this.goToPage.bind(this, "challenges")}>Challenges</li>
           <li className="navbar-clickable" onClick={this.goToPage.bind(this, "about")}>About</li>
           <li className="navbar-clickable" onClick={this.goToPage.bind(this, "categories")}>Categories</li>
+          <Login
+            logIn={this.props.logIn}
+            logOut={this.props.logOut}
+            authenticated={this.props.authenticated}
+            currentUser={this.props.currentUser} />
         </ul>
       </div>
     );

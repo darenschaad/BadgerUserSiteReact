@@ -13,10 +13,18 @@ body {
   background-color: #e1e5ed;
 }
 
+#intro-section {
+  // height: 60vh;
+  // width: 100%;
+  // background: #ff8d56;
+  // background: -webkit-linear-gradient(left, #ff8d56, #ff59e3);
+  // background: -moz-linear-gradient(left, #ff8d56, #ff59e3);
+  // background: -ms-linear-gradient(left, #ff8d56, #ff59e3);
+  // background: -o-linear-gradient(left, #ff8d56, #ff59e3);
+  // background: linear-gradient(to right, #ff8d56, #ff59e3);
+}
 #intro-image {
   max-width: 200px;
-  // margin-left: 15vw;
-  // margin-right: 15vw;
   @media screen and (min-width: $break-medium) {
     max-width: 300px;
     margin-left: 25vw;

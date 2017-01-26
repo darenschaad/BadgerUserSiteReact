@@ -1,3 +1,15 @@
+h3 {
+  position: fixed;
+  top: 40%;
+  left: 45%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
+  @media screen and (min-width: $break-medium) {
+    top: 35%;
+    left: 40%;
+  }
+}
+
 #loading-image {
   height: auto;
   width: auto;
@@ -7,6 +19,6 @@
 }
 
 #loading-div {
-  position: absolute;
-  margin: 25vh 25vw;
+  width: 100vw;
+  height: 100vh;
 }
