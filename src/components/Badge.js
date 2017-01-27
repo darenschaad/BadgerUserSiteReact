@@ -1,26 +1,44 @@
 import React, {Component} from 'react';
 import Linkify from 'react-linkify';
 import NavBar from './NavBar';
+import base from '../base';
+import Loading from './Loading';
 
 class Badge extends Component{
   constructor(params) {
     super();
     this.state = {
-      params: params,
+      loading : true,
+      badge : {}
     }
   }
 
 
 
 
+  componentDidMount() {
+    let id = this.props.params.pushId;
 
-  // componentDidMount() {
-  //   let height = document.getElementsByClassName('badge-detail-page-tile')[0].clientHeight;
-  //   this.setState({ height });
-  // }
+    this.ref = base.syncState(`/badges/` + id, {
+      context: this,
+      state: "badge",
+      then() {
+        this.setState({ loading: false })
+      }
+    })
 
-  render(params) {
-    console.log(params);
+  console.log((this.state.badge.tags));
+
+  }
+
+
+  render() {
+  document.body.scrollTop = 0;
+  if(this.state.loading) {
+    return(
+      <Loading />
+    );
+  } else {
     function titleCase(str) {
      var splitStr = str.split(' ');
      for (var i = 0; i < splitStr.length; i++) {
@@ -35,9 +53,13 @@ class Badge extends Component{
      // Directly return the joined string
      return splitStr.join(' ');
     }
-    const localStorageRef = localStorage.getItem('badge');
 
-    const ourBadge = JSON.parse(localStorageRef);
+
+    // const localStorageRef = localStorage.getItem('badge');
+
+    const ourBadge = this.state.badge;
+
+    // const ourBadge = this.state.badge;
 
     const categories = [0,100,200,300,400,500,600,700,800,900];
 
@@ -55,8 +77,9 @@ class Badge extends Component{
 
     const backgroundColor = backgroundColors[index];
 
-    //split tags with space separation so you don't have one long string with no space
+    //split tags and challenges with space separation so you don't have one long string with no space
     const splitTags = titleCase(ourBadge.tags.split(',').join(', '));
+    const splitChallenges = ourBadge.challenges.split(',').join(', ');
 
     //grab the height set to state and place it inside string before pixels so that it can be used below in styles
     // const categoryHeight = `${this.state.height}px`;
@@ -76,20 +99,21 @@ class Badge extends Component{
             <div className="img-wrapper">
               <img className='badge-page-image' src={ourBadge.imageUrl} alt={ourBadge.name}></img>
             </div>
-            <Linkify properties={{target: '_blank'}}>
               <h3 style={{color: textColor}}><span className="badge-page-subtitle">To do:</span> {ourBadge.description}</h3>
+            <Linkify properties={{target: '_blank'}}>
               <h3 style={{color: textColor}}>{ourBadge.comments}</h3>
               <h3 style={{color: textColor}}><span className="badge-page-subtitle">Proof:</span> {ourBadge.proof}</h3>
             </Linkify>
-            <h3 style={{color: textColor}}><span className="badge-page-subtitle">Challenges:</span> {ourBadge.challenges}</h3>
-            <h3 style={{color: textColor}}><span className="badge-page-subtitle">Keywords:</span> {splitTags}</h3>
+            <h3 style={{color: textColor}}><span className="badge-page-subtitle">Challenges:</span> {splitChallenges}</h3>
             <h3 style={{color: textColor}}><span className="badge-page-subtitle">Creator:</span> {ourBadge.creator}</h3>
             <h3 style={{color: textColor}}><span className="badge-page-subtitle">Date Created:</span> {ourBadge.date}</h3>
+            <h3 style={{color: textColor}}><span className="badge-page-subtitle">Keywords:</span> {splitTags}</h3>
           </div>
         </div>
       </div>
 
     );
+  }
   }
 }
 

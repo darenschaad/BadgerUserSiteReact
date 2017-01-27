@@ -6,9 +6,7 @@ class Login extends Component {
   render() {
     if(!this.props.authenticated) {
       return (
-
           <button onClick={this.props.logIn}>Login</button>
-
       );
     } else {
       const user = this.props.currentUser;
@@ -25,6 +23,3 @@ class Login extends Component {
 }
 
 export default Login;
-
-// <img src={user.user.photoURL} />
-// <h5>{user.user.displayName}</h5>
