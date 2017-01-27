@@ -11,8 +11,10 @@ class CategoryList extends Component {
 
   goToBadge(currentBadge){
     //pass JSON string containing information from the badge object to local storage so that the browser can help carry that information to each badge's specific route
-    localStorage.setItem(`badge`, JSON.stringify(currentBadge));
-    this.context.router.transitionTo(`/badge/${currentBadge.pushId}`);
+    // localStorage.setItem(`badge`, JSON.stringify(currentBadge));
+    const pushId = currentBadge.pushId;
+    const urlIndex = currentBadge.index.substring(1);
+    this.context.router.transitionTo(`/badge/${pushId}`);
   }
 
   render() {

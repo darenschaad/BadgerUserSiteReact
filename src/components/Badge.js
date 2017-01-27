@@ -1,26 +1,44 @@
 import React, {Component} from 'react';
 import Linkify from 'react-linkify';
 import NavBar from './NavBar';
+import base from '../base';
+import Loading from './Loading';
 
 class Badge extends Component{
   constructor() {
     super();
     this.state = {
-      height: 0,
+      loading : true,
+      badge : {}
     }
   }
 
 
 
 
-
   componentDidMount() {
-    // let height = document.getElementsByClassName('badge-detail-page-tile')[0].clientHeight;
-    // this.setState({ height });
-    document.body.scrollTop = 0;
+    let id = this.props.params.pushId;
+
+    this.ref = base.syncState(`/badges/` + id, {
+      context: this,
+      state: "badge",
+      then() {
+        this.setState({ loading: false })
+      }
+    })
+
+  console.log((this.state.badge.tags));
+
   }
 
   render() {
+  document.body.scrollTop = 0;
+  if(this.state.loading) {
+    return(
+      <Loading />
+    );
+  } else {
+
 
     function titleCase(str) {
      var splitStr = str.split(' ');
@@ -36,9 +54,13 @@ class Badge extends Component{
      // Directly return the joined string
      return splitStr.join(' ');
     }
-    const localStorageRef = localStorage.getItem('badge');
 
-    const ourBadge = JSON.parse(localStorageRef);
+
+    // const localStorageRef = localStorage.getItem('badge');
+
+    const ourBadge = this.state.badge;
+
+    // const ourBadge = this.state.badge;
 
     const categories = [0,100,200,300,400,500,600,700,800,900];
 
@@ -78,20 +100,21 @@ class Badge extends Component{
             <div className="img-wrapper">
               <img className='badge-page-image' src={ourBadge.imageUrl} alt={ourBadge.name}></img>
             </div>
-            <Linkify properties={{target: '_blank'}}>
               <h3 style={{color: textColor}}><span className="badge-page-subtitle">To do:</span> {ourBadge.description}</h3>
+            <Linkify properties={{target: '_blank'}}>
               <h3 style={{color: textColor}}>{ourBadge.comments}</h3>
               <h3 style={{color: textColor}}><span className="badge-page-subtitle">Proof:</span> {ourBadge.proof}</h3>
             </Linkify>
             <h3 style={{color: textColor}}><span className="badge-page-subtitle">Challenges:</span> {splitChallenges}</h3>
-            <h3 style={{color: textColor}}><span className="badge-page-subtitle">Keywords:</span> {splitTags}</h3>
             <h3 style={{color: textColor}}><span className="badge-page-subtitle">Creator:</span> {ourBadge.creator}</h3>
             <h3 style={{color: textColor}}><span className="badge-page-subtitle">Date Created:</span> {ourBadge.date}</h3>
+            <h3 style={{color: textColor}}><span className="badge-page-subtitle">Keywords:</span> {splitTags}</h3>
           </div>
         </div>
       </div>
 
     );
+  }
   }
 }
 
