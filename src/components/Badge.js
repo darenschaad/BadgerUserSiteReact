@@ -5,7 +5,7 @@ import base from '../base';
 import Loading from './Loading';
 
 class Badge extends Component{
-  constructor() {
+  constructor(params) {
     super();
     this.state = {
       loading : true,
@@ -31,6 +31,7 @@ class Badge extends Component{
 
   }
 
+
   render() {
   document.body.scrollTop = 0;
   if(this.state.loading) {
@@ -38,8 +39,6 @@ class Badge extends Component{
       <Loading />
     );
   } else {
-
-
     function titleCase(str) {
      var splitStr = str.split(' ');
      for (var i = 0; i < splitStr.length; i++) {

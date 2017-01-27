@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import base from '../base';
+// import base from '../base';
 
 class Login extends Component {
 
@@ -11,11 +11,11 @@ class Login extends Component {
     } else {
       const user = this.props.currentUser;
       return(
-        <div>
+        <span>
           <button onClick={this.props.logOut}>Logout</button>
-          <img src={user.photoURL} />
+          <img src={user.photoURL} role="presentation" />
           <h5>{user.displayName}</h5>
-        </div>
+        </span>
       );
     }
   }
@@ -23,6 +23,3 @@ class Login extends Component {
 }
 
 export default Login;
-
-// <img src={user.user.photoURL} />
-// <h5>{user.user.displayName}</h5>

@@ -39,13 +39,13 @@ class CategoryList extends Component {
 
       const textColors = ["#4C4C4C", "#0079A5", "#66008D", "#4D782D", "#C97100", "#25895A", "#000073", "#988967", "#76193C", "#985721"];
 
-      const backgroundColors = ["#989DA7", "#DCF0FF", "#D0C0D6", "#CEDFB0", "#EEC99A", "#9EBAAC", "#B5B5CA", "#FDE192", "#DBC2CC", "#D8C2A9"];
+      // const backgroundColors = ["#989DA7", "#DCF0FF", "#D0C0D6", "#CEDFB0", "#EEC99A", "#9EBAAC", "#B5B5CA", "#FDE192", "#DBC2CC", "#D8C2A9"];
 
       const category = categoryNames[index];
 
       const textColor = textColors[index];
 
-      const backgroundColor = backgroundColors[index];
+      // const backgroundColor = backgroundColors[index];
 
       let categoryBadgeCount = 0;
 
@@ -62,6 +62,7 @@ class CategoryList extends Component {
               </div>
             );
           }
+          return filteredByCategory;
         }
       );
       return (

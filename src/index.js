@@ -9,7 +9,7 @@ import CategoryList from './components/CategoryList';
 import Challenges from './components/Challenges'
 import NotFound from './components/NotFound';
 import base from './base';
-import Login from './components/Login';
+// import Login from './components/Login';
 
 import './styles/App.scss';
 import './styles/animate.css';
@@ -66,7 +66,7 @@ class Root extends Component {
       this.displayUser(user);
     }
     //make call to Facebook API
-    base.authWithOAuthPopup('facebook', authHandler.bind(this));
+    base.authWithOAuthPopup('facebook', authHandler.bind(this), {scope: 'public_profile, email'});
   }
 
   logOut() {
