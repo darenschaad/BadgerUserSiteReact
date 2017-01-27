@@ -3,6 +3,7 @@ import NavBar from './NavBar';
 
 class About extends Component {
   render() {
+    console.log(this.props);
     return(
       <div className="about-page">
         <NavBar />
