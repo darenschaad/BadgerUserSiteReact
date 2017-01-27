@@ -3,10 +3,10 @@ import Linkify from 'react-linkify';
 import NavBar from './NavBar';
 
 class Badge extends Component{
-  constructor() {
+  constructor(params) {
     super();
     this.state = {
-      height: 0,
+      params: params,
     }
   }
 
@@ -19,8 +19,8 @@ class Badge extends Component{
   //   this.setState({ height });
   // }
 
-  render() {
-
+  render(params) {
+    console.log(params);
     function titleCase(str) {
      var splitStr = str.split(' ');
      for (var i = 0; i < splitStr.length; i++) {

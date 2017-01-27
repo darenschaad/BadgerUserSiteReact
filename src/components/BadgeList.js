@@ -1,5 +1,12 @@
 import React, { Component } from 'react';
 
+const categories = [0,100,200,300,400,500,600,700,800,900];
+const categoryNames = ["000 - GENERAL KNOWLEDGE", "100 - PHILOSOPHY & PSYCHOLOGY", "200 - RELIGION", "300 - SOCIAL SCIENCE", "400 - LANGUAGES", "500 - SCIENCE", "600 - TECHNOLOGY", "700 - ARTS & RECREATION", "800 - LITERATURE", "900 - HISTORY & GEOGRAPHY"];
+
+const textColors = ["#4C4C4C", "#0079A5", "#66008D", "#4D782D", "#C97100", "#25895A", "#000073", "#988967", "#76193C", "#985721"];
+
+const backgroundColors = ["#989DA7", "#DCF0FF", "#D0C0D6", "#CEDFB0", "#EEC99A", "#9EBAAC", "#B5B5CA", "#FDE192", "#DBC2CC", "#D8C2A9"];
+
 
 class BadgeList extends Component {
 
@@ -8,19 +15,13 @@ class BadgeList extends Component {
     const searchTagsArray = [];
     const searchState = "standard";
 
-    const categories = [0,100,200,300,400,500,600,700,800,900];
-    const categoryNames = ["000 - GENERAL KNOWLEDGE", "100 - PHILOSOPHY & PSYCHOLOGY", "200 - RELIGION", "300 - SOCIAL SCIENCE", "400 - LANGUAGES", "500 - SCIENCE", "600 - TECHNOLOGY", "700 - ARTS & RECREATION", "800 - LITERATURE", "900 - HISTORY & GEOGRAPHY"];
-
-    const textColors = ["#4C4C4C", "#0079A5", "#66008D", "#4D782D", "#C97100", "#25895A", "#000073", "#988967", "#76193C", "#985721"];
-
-    const backgroundColors = ["#989DA7", "#DCF0FF", "#D0C0D6", "#CEDFB0", "#EEC99A", "#9EBAAC", "#B5B5CA", "#FDE192", "#DBC2CC", "#D8C2A9"];
-
     this.props.tagArray.filter(
       (tag) => {
-          if (tag.includes(this.props.searchValue.toLowerCase())) {
-            searchTagsArray.push(tag);
-            searchTagsArray.sort();
-          }
+        if (tag.includes(this.props.searchValue.toLowerCase())) {
+          searchTagsArray.push(tag);
+          searchTagsArray.sort();
+        }
+        return searchTagsArray;
       }
     );
 
@@ -31,14 +32,13 @@ class BadgeList extends Component {
             return badge;
           }
         }
-
+        return filteredByTagsArrayBadges;
       }
     );
 
     let filteredByNameBadges = this.props.badgeArray.filter(
       (badge) => {
         return badge["name"].toLowerCase().indexOf(this.props.searchValue.toLowerCase()) !== -1;
-
       }
     );
 
@@ -79,6 +79,7 @@ class BadgeList extends Component {
                             </div>
                           );
                         }
+                        return filteredByTagsArrayBadges;
                       })
                     }
                   </div>

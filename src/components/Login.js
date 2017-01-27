@@ -1,23 +1,23 @@
 import React, {Component} from 'react';
-import base from '../base';
+// import base from '../base';
 
 class Login extends Component {
 
   render() {
     if(!this.props.authenticated) {
       return (
-        <div>
+
           <button onClick={this.props.logIn}>Login</button>
-        </div>
+
       );
     } else {
       const user = this.props.currentUser;
       return(
-        <div>
+        <span>
           <button onClick={this.props.logOut}>Logout</button>
-          <img src={user.photoURL} />
+          <img src={user.photoURL} role="presentation" />
           <h5>{user.displayName}</h5>
-        </div>
+        </span>
       );
     }
   }
