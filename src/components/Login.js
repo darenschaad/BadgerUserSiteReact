@@ -6,9 +6,9 @@ class Login extends Component {
   render() {
     if(!this.props.authenticated) {
       return (
-        <div>
+      
           <button onClick={this.props.logIn}>Login</button>
-        </div>
+
       );
     } else {
       const user = this.props.currentUser;

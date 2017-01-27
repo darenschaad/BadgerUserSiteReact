@@ -100,15 +100,15 @@ class Badge extends Component{
             <div className="img-wrapper">
               <img className='badge-page-image' src={ourBadge.imageUrl} alt={ourBadge.name}></img>
             </div>
-            <Linkify properties={{target: '_blank'}}>
               <h3 style={{color: textColor}}><span className="badge-page-subtitle">To do:</span> {ourBadge.description}</h3>
+            <Linkify properties={{target: '_blank'}}>
               <h3 style={{color: textColor}}>{ourBadge.comments}</h3>
               <h3 style={{color: textColor}}><span className="badge-page-subtitle">Proof:</span> {ourBadge.proof}</h3>
             </Linkify>
             <h3 style={{color: textColor}}><span className="badge-page-subtitle">Challenges:</span> {splitChallenges}</h3>
-            <h3 style={{color: textColor}}><span className="badge-page-subtitle">Keywords:</span> {splitTags}</h3>
             <h3 style={{color: textColor}}><span className="badge-page-subtitle">Creator:</span> {ourBadge.creator}</h3>
             <h3 style={{color: textColor}}><span className="badge-page-subtitle">Date Created:</span> {ourBadge.date}</h3>
+            <h3 style={{color: textColor}}><span className="badge-page-subtitle">Keywords:</span> {splitTags}</h3>
           </div>
         </div>
       </div>
