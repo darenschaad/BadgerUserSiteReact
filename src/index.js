@@ -53,6 +53,7 @@ class Root extends Component {
 
   displayUser(user) {
     this.setState({ authenticated: true, currentUser: user.user});
+    localStorage.setItem('userId', this.state.currentUser.uid);
   }
 
   displayLoginError(error) {
@@ -72,7 +73,8 @@ class Root extends Component {
   logOut() {
     //signs out currently logged in user
     base.unauth()
-    this.setState({ authenticated: false, currentUser: { }})
+    this.setState({ authenticated: false, currentUser: { }});
+    localStorage.setItem('userId', '');
   }
 
   render() {

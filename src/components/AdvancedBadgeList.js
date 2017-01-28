@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 
-class BadgeList extends Component {
+const AdvancedBadgeList = (props) => {
 
-  render(){
+  // render(){
     const searchTagsArray = [];
     const creatorArray = [];
     const creatorBadgeArray= [];
@@ -16,21 +16,21 @@ class BadgeList extends Component {
 
     const backgroundColors = ["#989DA7", "#DCF0FF", "#D0C0D6", "#CEDFB0", "#EEC99A", "#9EBAAC", "#B5B5CA", "#FDE192", "#DBC2CC", "#D8C2A9"];
 
-    if (this.props.searchValue.length >= 3) {
+    if (props.searchValue.length >= 3) {
 
-      this.props.tagArray.filter(
+      props.tagArray.filter(
         (tag) => {
-          if (tag.includes(this.props.searchValue.toLowerCase())) {
+          if (tag.includes(props.searchValue.toLowerCase())) {
             searchTagsArray.push(tag);
             searchTagsArray.sort();
           }
         }
       );
 
-      this.props.badgeArray.filter(
+      props.badgeArray.filter(
         (badge) => {
           // console.log(badge.creator);
-          if(badge.creator.toLowerCase().includes(this.props.searchValue.toLowerCase()) && !creatorArray.includes(badge.creator)) {
+          if(badge.creator.toLowerCase().includes(props.searchValue.toLowerCase()) && !creatorArray.includes(badge.creator)) {
             creatorArray.push(badge.creator);
             creatorArray.sort();
           }
@@ -39,7 +39,7 @@ class BadgeList extends Component {
 
     }
 
-      let filteredByTagsArrayBadges = this.props.badgeArray.filter(
+      let filteredByTagsArrayBadges = props.badgeArray.filter(
         (badge) => {
           for (var i = 0; i < searchTagsArray.length; i++) {
             if (badge['tags'].toLowerCase().includes(searchTagsArray[i].toLowerCase())) {
@@ -61,7 +61,7 @@ class BadgeList extends Component {
         return counter;
       }
 
-      let filteredByCreatorBadges = this.props.badgeArray.filter(
+      let filteredByCreatorBadges = props.badgeArray.filter(
         (badge) => {
           for (var i = 0; i < creatorArray.length; i++) {
             if (badge['creator'].toLowerCase().includes(creatorArray[i].toLowerCase())) {
@@ -72,14 +72,14 @@ class BadgeList extends Component {
         }
       );
 
-      let filteredByNameBadges = this.props.badgeArray.filter(
+      let filteredByNameBadges = props.badgeArray.filter(
         (badge) => {
-          return badge["name"].toLowerCase().indexOf(this.props.searchValue.toLowerCase()) !== -1;
+          return badge["name"].toLowerCase().indexOf(props.searchValue.toLowerCase()) !== -1;
         }
       );
 
       let displayTypeSomething;
-      if (this.props.searchValue.length <= 2) {
+      if (props.searchValue.length <= 2) {
         displayTypeSomething = (
           <div  className="advanced-search-content">
             <h2>Type at least three characters to begin search</h2>
@@ -89,7 +89,7 @@ class BadgeList extends Component {
       }
 
       let displayPickSomething;
-      if (!this.props.nameCheckBox && !this.props.keywordsCheckBox && !this.props.creatorCheckBox) {
+      if (!props.nameCheckBox && !props.keywordsCheckBox && !props.creatorCheckBox) {
         displayPickSomething = (
           <div  className="advanced-search-content">
             <h2>Please check one of the options to search by</h2>
@@ -99,7 +99,7 @@ class BadgeList extends Component {
       }
 
       let displayName;
-      if (this.props.nameCheckBox && this.props.searchValue.length >= 3) {
+      if (props.nameCheckBox && props.searchValue.length >= 3) {
         if (filteredByNameBadges.length === 0) {
           displayName = (
             <div  className="advanced-search-content">
@@ -125,7 +125,7 @@ class BadgeList extends Component {
 
                   return(
                     <div key={idx} className="standard-search-individual-names">
-                      <div style={{backgroundColor: backgroundColor}} className='badge-tile hover-hand random-badge-content' onClick={() => this.props.goToBadge(badge, this.props.searchValue, searchState)}>
+                      <div style={{backgroundColor: backgroundColor}} className='badge-tile hover-hand random-badge-content' onClick={() => props.goToBadge(badge, props.searchValue, searchState)}>
                         <div className="badge-tile-image-details">
                           <img className='detail-image' src={badge.imageUrl} alt={badge.names}></img>
                           <div className="badge-tile-details">
@@ -149,7 +149,7 @@ class BadgeList extends Component {
       }
 
       let displayKeywords;
-      if (this.props.keywordsCheckBox && this.props.searchValue.length >= 3) {
+      if (props.keywordsCheckBox && props.searchValue.length >= 3) {
         if (searchTagsArray.length === 0) {
           displayKeywords = (
             <div className="advanced-search-content">
@@ -183,7 +183,7 @@ class BadgeList extends Component {
                           if (badgeTagsArray.includes(tag)) {
                             return(
                               <div key={idx} className="standard-search-individual-names">
-                                <div style={{backgroundColor: backgroundColor}} className='badge-tile hover-hand random-badge-content' onClick={() => this.props.goToBadge(badge, this.props.searchValue, searchState)}>
+                                <div style={{backgroundColor: backgroundColor}} className='badge-tile hover-hand random-badge-content' onClick={() => props.goToBadge(badge, props.searchValue, searchState)}>
                                   <div className="badge-tile-image-details">
                                     <img className='detail-image' src={badge.imageUrl} alt={badge.names}></img>
                                     <div className="badge-tile-details">
@@ -212,7 +212,7 @@ class BadgeList extends Component {
       } //close if statement
 
       let displayCreator;
-      if (this.props.creatorCheckBox && this.props.searchValue.length >= 3) {
+      if (props.creatorCheckBox && props.searchValue.length >= 3) {
         if (creatorArray.length === 0) {
           displayCreator = (
             <div className="advanced-search-content">
@@ -244,11 +244,11 @@ class BadgeList extends Component {
                           let textColor = textColors[index];
 
                           let backgroundColor = backgroundColors[index];
-                          
+
                           if (badgeCreator === creator) {
                             return(
                               <div key={idx} className="standard-search-individual-names">
-                                <div style={{backgroundColor: backgroundColor}} className='badge-tile hover-hand random-badge-content' onClick={() => this.props.goToBadge(badge, this.props.searchValue, searchState)}>
+                                <div style={{backgroundColor: backgroundColor}} className='badge-tile hover-hand random-badge-content' onClick={() => props.goToBadge(badge, props.searchValue, searchState)}>
                                   <div className="badge-tile-image-details">
                                     <img className='detail-image' src={badge.imageUrl} alt={badge.names}></img>
                                     <div className="badge-tile-details">
@@ -285,12 +285,12 @@ class BadgeList extends Component {
         {displayCreator}
       </div>
     );
-  }
+  // }
 }
 
-BadgeList.PropTypes = {
+AdvancedBadgeList.PropTypes = {
   badgeArray: React.PropTypes.array.isRequired,
   goToBadge: React.PropTypes.func.isRequired
 };
 
-export default BadgeList;
+export default AdvancedBadgeList;
