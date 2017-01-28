@@ -1,10 +1,6 @@
 import React from 'react';
-// import { categoryNames, textColors, backgroundColors } from './globals';
-
 
 const AdvancedBadgeList = (props) => {
-    // console.log(categoryNames);
-  // render(){
     const searchTagsArray = [];
     const creatorArray = [];
     const creatorBadgeArray= [];
