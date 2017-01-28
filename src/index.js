@@ -9,7 +9,6 @@ import CategoryList from './components/CategoryList';
 import Challenges from './components/Challenges'
 import NotFound from './components/NotFound';
 import base from './base';
-// import Login from './components/Login';
 
 import './styles/App.scss';
 import './styles/animate.css';
@@ -53,6 +52,7 @@ class Root extends Component {
 
   displayUser(user) {
     this.setState({ authenticated: true, currentUser: user.user});
+    localStorage.setItem('userId', this.state.currentUser.uid);
   }
 
   displayLoginError(error) {
@@ -72,11 +72,11 @@ class Root extends Component {
   logOut() {
     //signs out currently logged in user
     base.unauth()
-    this.setState({ authenticated: false, currentUser: { }})
+    this.setState({ authenticated: false, currentUser: { }});
+    localStorage.setItem('userId', '');
   }
 
   render() {
-
     return(
       <div>
         <BrowserRouter history={browserHistory}>

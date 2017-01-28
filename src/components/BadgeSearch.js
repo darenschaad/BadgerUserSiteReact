@@ -82,10 +82,10 @@ class BadgeSearch extends Component {
    });
    //Searching will remain false until the user enters more than one character to optimize speed of rendered badges — one character renders too many options
    if(event.target.value.length <= 2 ) {
-     this.setState({ searching: false })
+     this.setState({ searching: false });
    }
    else {
-     this.setState({ searching : true })
+     this.setState({ searching : true });
    }
 
 }
@@ -219,16 +219,3 @@ class BadgeSearch extends Component {
 }
 
 export default BadgeSearch;
-
-
-// dropdown search select
-//
-// <select
-//   value={this.state.optionValue}
-//   placeholder={this.state.optionValue}
-//   name={'optionValue'}
-//   onChange={this.handleInputChange}>
-//     <option value="name">Name</option>
-//     <option value="creator">Creator</option>
-// </select>
-//
