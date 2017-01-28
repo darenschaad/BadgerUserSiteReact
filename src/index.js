@@ -104,6 +104,7 @@ class Root extends Component {
                   badges={this.state.badges}
                   tags={this.state.tags}
                   loading={this.state.loading}
+                  params={this.props.params}
                  />
               )}
             />
@@ -113,7 +114,6 @@ class Root extends Component {
               component={() => (
                 <CategoryList
                   badges={this.state.badges}
-                  tags={this.state.tags}
                   loading={this.state.loading} />
               )}
             />

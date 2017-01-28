@@ -7,7 +7,9 @@ class CategoryList extends Component {
   constructor() {
     super();
     this.goToBadge = this.goToBadge.bind(this);
+
   }
+
 
   goToBadge(currentBadge){
     //pass JSON string containing information from the badge object to local storage so that the browser can help carry that information to each badge's specific route
@@ -27,7 +29,8 @@ class CategoryList extends Component {
         </div>
       );
     } else {
-      const currentCategory = Number(localStorage.getItem('category'));
+      let url = window.location.href;
+      const currentCategory = Number(url.substr(url.length - 3));
 
       const categories = [0,100,200,300,400,500,600,700,800,900];
 
