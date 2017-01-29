@@ -21,7 +21,7 @@ const DisplayByKeywords = (props) => {
           return badge;
         }
       }
-      return badgesFilteredByTags;
+      return badge;
     }
   );
 
@@ -45,7 +45,6 @@ const DisplayByKeywords = (props) => {
           </div>
         );
       }
-      // return badgesFilteredByTags;
     });
     return(
       <div key={idx}>

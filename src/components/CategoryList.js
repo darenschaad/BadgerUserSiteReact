@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import NavBar from './NavBar';
 import Loading from './Loading';
-// import base from './../base';
+
 
 class CategoryList extends Component {
   constructor() {
@@ -15,7 +15,7 @@ class CategoryList extends Component {
     //pass JSON string containing information from the badge object to local storage so that the browser can help carry that information to each badge's specific route
     // localStorage.setItem(`badge`, JSON.stringify(currentBadge));
     const pushId = currentBadge.pushId;
-    const urlIndex = currentBadge.index.substring(1);
+    // const urlIndex = currentBadge.index.substring(1);
     this.context.router.transitionTo(`/badge/${pushId}`);
   }
 

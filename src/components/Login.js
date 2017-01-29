@@ -6,15 +6,15 @@ class Login extends Component {
   render() {
     if(!this.props.authenticated) {
       return (
-          <button onClick={this.props.logIn}>Login</button>
+          <li onClick={this.props.logIn}>Login/Sign Up</li>
       );
     } else {
       const user = this.props.currentUser;
       return(
         <span>
-          <button onClick={this.props.logOut}>Logout</button>
-          <img src={user.photoURL} role="presentation" />
-          <h5>{user.displayName}</h5>
+          <div id="user-navbar-info">
+            <img id="user-photo" src={user.photoURL} role="presentation" />
+          </div>
         </span>
       );
     }
@@ -23,3 +23,5 @@ class Login extends Component {
 }
 
 export default Login;
+
+// <li onClick={this.props.logOut}>Logout</li>

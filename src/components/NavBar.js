@@ -37,8 +37,8 @@ class NavBar extends Component {
           <FontAwesome onClick={this.openMenu} className="hamburger-icon" name="bars" />
         </div>
         <ul className={this.state.className}>
-          <li className="navbar-clickable" onClick={this.goToPage.bind(this, "challenges")}>Challenges</li>
           <li className="navbar-clickable" onClick={this.goToPage.bind(this, "about")}>About</li>
+          <li className="navbar-clickable" onClick={this.goToPage.bind(this, "challenges")}>Challenges</li>
           <li className="navbar-clickable" onClick={this.goToPage.bind(this, "categories")}>Categories</li>
           <Login
             logIn={this.props.logIn}
