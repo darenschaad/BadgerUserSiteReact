@@ -25,13 +25,15 @@ const DisplayByName = (props) => {
   //map over filteredByTagsBadges to display list of everything from the database, or whatever the user is filtering with their search term.
   let badgesFilteredByNameMap = badgesFilteredByName.map((badge, idx) => {
     return(
-      <BadgeTile
-        badge={badge}
-        idx={idx}
-        searchValue={props.searchValue}
-        goToBadge={props.goToBadge}
-        searchState={props.searchState}
-      />
+      <div key={idx}>
+        <BadgeTile
+          badge={badge}
+          idx={idx}
+          searchValue={props.searchValue}
+          goToBadge={props.goToBadge}
+          searchState={props.searchState}
+        />
+      </div>
     );
   });
 

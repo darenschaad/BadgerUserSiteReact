@@ -22,7 +22,6 @@ const AdvancedBadgeList = (props) => {
 
       props.badgeArray.filter(
         (badge) => {
-          // console.log(badge.creator);
           if(badge.creator.toLowerCase().includes(props.searchValue.toLowerCase()) && !creatorArray.includes(badge.creator)) {
             creatorArray.push(badge.creator);
             creatorArray.sort();
@@ -32,96 +31,16 @@ const AdvancedBadgeList = (props) => {
     }
     //end of array creation
 
-
-    let filteredBadgesByTags = props.badgeArray.filter(
-      (badge) => {
-        for (var i = 0; i < searchTagsArray.length; i++) {
-          if (badge['tags'].toLowerCase().includes(searchTagsArray[i].toLowerCase())) {
-            return badge['tags'].toLowerCase().includes(searchTagsArray[i].toLowerCase());
-          }
-        }
-      }
-    );
-
-    let creatorBadges = (creator, badges) => {
-      var counter = 0;
-        for (var i = 0; i < badges.length; i++) {
-          if (badges[i]['creator'].toLowerCase() === creator.toLowerCase()) {
-            counter++
-        }
-      }
-      return counter;
-    }
-
-    let filteredBadgesByCreator = props.badgeArray.filter(
-      (badge) => {
-        for (var i = 0; i < creatorArray.length; i++) {
-          if (badge['creator'].toLowerCase().includes(creatorArray[i].toLowerCase())) {
-            creatorBadgeArray.push(badge);
-            return badge;
-          }
-        }
-      }
-    );
-
-    let filteredByNameBadges = props.badgeArray.filter(
+    let filteredBadgesByName = props.badgeArray.filter(
       (badge) => {
         return badge["name"].toLowerCase().indexOf(props.searchValue.toLowerCase()) !== -1;
       }
     );
 
-    //map over filterTags to display list of everything from the database, or whatever the user is filtering with their search term.
-    let searchTagsArrayMap = searchTagsArray.map((tag, idx) => {
-      let filteredBadgesByTagsMap = filteredBadgesByTags.map((badge, idx) => {
-        let badgeTagsArray = badge.tags.toLowerCase().split(',');
-
-        if (badgeTagsArray.includes(tag)) {
-          return(
-            <BadgeTile
-              badge={badge}
-              idx={idx}
-              searchValue={props.searchValue}
-              goToBadge={props.goToBadge}
-              searchState={props.searchState}
-            />
-          );
-        }
-      });
-      return(
-        <div key={idx}>
-          <h4><span className="tag-description">Badges that include the keyword </span>"{tag}"</h4>
-          {filteredBadgesByTagsMap}
-        </div>
-      );
-    });
-
-
-    //if the user hasn't typed anything or selected any of the boxes, instruct them to do so
-    let displayTypeSomething;
-    if (props.searchValue.length <= 2) {
-      displayTypeSomething = (
-        <div  className="advanced-search-content">
-          <h2>Type at least three characters to begin search</h2>
-          <hr/>
-        </div>
-      )
-    }
-
-    let displayPickSomething;
-    if (!props.nameCheckBox && !props.keywordsCheckBox && !props.creatorCheckBox) {
-      displayPickSomething = (
-        <div  className="advanced-search-content">
-          <h2>Please check one of the options to search by</h2>
-          <hr/>
-        </div>
-      )
-    }
-    //end of user instructions
-
     //either/or for the results of a user's search by name
     let displayName;
     if (props.nameCheckBox && props.searchValue.length >= 3) {
-      if (filteredByNameBadges.length === 0) {
+      if (filteredBadgesByName.length === 0) {
         displayName = (
           <div  className="advanced-search-content">
             <h2>Sorry, there are no Badges with names that match this search</h2>
@@ -144,6 +63,44 @@ const AdvancedBadgeList = (props) => {
       }
     }
 
+    //map over filterTags to display list of everything from the database, or whatever the user is filtering with their search term.
+    let filteredBadgesByTags = props.badgeArray.filter(
+      (badge) => {
+        for (var i = 0; i < searchTagsArray.length; i++) {
+          if (badge['tags'].toLowerCase().includes(searchTagsArray[i].toLowerCase())) {
+            return badge['tags'].toLowerCase().includes(searchTagsArray[i].toLowerCase());
+          }
+        }
+      }
+    );
+
+    let searchTagsArrayMap = searchTagsArray.map((tag, idx) => {
+      //this will be rendered below in the return
+      let filteredBadgesByTagsMap = filteredBadgesByTags.map((badge, idx) => {
+        let badgeTagsArray = badge.tags.toLowerCase().split(',');
+
+        if (badgeTagsArray.includes(tag)) {
+          return(
+            <div key={idx}>
+              <BadgeTile
+                badge={badge}
+                idx={idx}
+                searchValue={props.searchValue}
+                goToBadge={props.goToBadge}
+                searchState={props.searchState}
+                />
+            </div>
+          );
+        }
+      });
+      return(
+        <div key={idx}>
+          <h4><span className="tag-description">Badges that include the keyword </span>"{tag}"</h4>
+          {filteredBadgesByTagsMap}
+        </div>
+      );
+    });
+
     //either/or for the results of a user's search by keywords
     let displayKeywords;
     if (props.keywordsCheckBox && props.searchValue.length >= 3) {
@@ -161,10 +118,30 @@ const AdvancedBadgeList = (props) => {
             <div className="break"></div>
             { searchTagsArrayMap }
           </div>
-        ) //close variable
+        )
       }
-    } //close if statement
+    }
 
+    let creatorBadges = (creator, badges) => {
+      var counter = 0;
+        for (var i = 0; i < badges.length; i++) {
+          if (badges[i]['creator'].toLowerCase() === creator.toLowerCase()) {
+            counter++
+        }
+      }
+      return counter;
+    }
+
+    let filteredBadgesByCreator = props.badgeArray.filter(
+      (badge) => {
+        for (var i = 0; i < creatorArray.length; i++) {
+          if (badge['creator'].toLowerCase().includes(creatorArray[i].toLowerCase())) {
+            creatorBadgeArray.push(badge);
+            return badge;
+          }
+        }
+      }
+    );
 
     //either/or for the results of a user's search by keywords
     let displayCreator;
@@ -231,6 +208,28 @@ const AdvancedBadgeList = (props) => {
         ) //close variable
       }
     } //close if statement
+
+    //if the user hasn't typed anything or selected any of the boxes, instruct them to do so
+    let displayTypeSomething;
+    if (props.searchValue.length <= 2) {
+      displayTypeSomething = (
+        <div  className="advanced-search-content">
+          <h2>Type at least three characters to begin search</h2>
+          <hr/>
+        </div>
+      )
+    }
+
+    let displayPickSomething;
+    if (!props.nameCheckBox && !props.keywordsCheckBox && !props.creatorCheckBox) {
+      displayPickSomething = (
+        <div  className="advanced-search-content">
+          <h2>Please check one of the options to search by</h2>
+          <hr/>
+        </div>
+      )
+    }
+    //end of user instructions
 
   return(
     <div className="advancedBadgeByList">
