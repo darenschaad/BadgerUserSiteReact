@@ -9,6 +9,7 @@ import CategoryList from './components/CategoryList';
 import Challenges from './components/Challenges'
 import NotFound from './components/NotFound';
 import base from './base';
+import NavBar from './components/NavBar';
 
 import './styles/App.scss';
 import './styles/animate.css';
@@ -30,6 +31,11 @@ class Root extends Component {
   componentDidMount(){
     //after component mounts, sync with Firebase database and set the badges list equal to this.state.badges empty object
     localStorage.setItem(`searchBy`, "");
+
+    let uId = localStorage.getItem("userId");
+    if (uId !== "") {
+      this.setState({ authenticated: true });
+    }
 
     //after component mounts, sync with Firebase database and set the badges list equal to this.state.badges empty object
     this.ref = base.syncState(`/tags`, {
@@ -53,6 +59,7 @@ class Root extends Component {
   displayUser(user) {
     this.setState({ authenticated: true, currentUser: user.user});
     localStorage.setItem('userId', this.state.currentUser.uid);
+
   }
 
   displayLoginError(error) {
@@ -64,6 +71,7 @@ class Root extends Component {
     var authHandler = function(error, user) {
       if(error) this.displayLoginError(error);
       this.displayUser(user);
+      console.log(user);
     }
     //make call to Facebook API
     base.authWithOAuthPopup('facebook', authHandler.bind(this), {scope: 'public_profile, email'});
@@ -81,6 +89,19 @@ class Root extends Component {
       <div>
         <BrowserRouter history={browserHistory}>
           <div>
+            <Match
+              pattern="/"
+              component={() => (
+                <NavBar
+                  badges={this.state.badges}
+                  tags={this.state.tags}
+                  loading={this.state.loading}
+                  authenticated={this.state.authenticated}
+                  logIn={this.logIn}
+                  logOut={this.logOut}
+                  currentUser={this.state.currentUser} />
+              )}
+            />
             <Match
               exactly
               pattern="/"
@@ -101,6 +122,10 @@ class Root extends Component {
               pattern="/categories"
               component={() => (
                 <Categories
+                  authenticated={this.state.authenticated}
+                  logIn={this.logIn}
+                  logOut={this.logOut}
+                  currentUser={this.state.currentUser}
                   badges={this.state.badges}
                   tags={this.state.tags}
                   loading={this.state.loading}
@@ -113,6 +138,10 @@ class Root extends Component {
               pattern="/categories/:categoryId"
               component={() => (
                 <CategoryList
+                  authenticated={this.state.authenticated}
+                  logIn={this.logIn}
+                  logOut={this.logOut}
+                  currentUser={this.state.currentUser}
                   badges={this.state.badges}
                   loading={this.state.loading} />
               )}

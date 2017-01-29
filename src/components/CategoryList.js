@@ -24,7 +24,6 @@ class CategoryList extends Component {
     if(this.props.loading) {
       return(
         <div>
-          <NavBar />
           <Loading />
         </div>
       );
@@ -77,7 +76,6 @@ class CategoryList extends Component {
       );
       return (
         <div>
-          <NavBar />
           <h1 className="category-list-category-title">{category} ({categoryBadgeCount})</h1>
           {filteredByCategory}
         </div>

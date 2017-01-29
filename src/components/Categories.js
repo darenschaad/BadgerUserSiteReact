@@ -22,14 +22,13 @@ class Categories extends Component {
     if(this.props.loading) {
       return(
         <div>
-          <NavBar />
           <Loading />
         </div>
       );
     } else {
       return(
         <div>
-          <NavBar />
+
           <h1 className="categories-categories-title">Categories</h1>
           <div className="category-000-div">
             <div className="category-individual animated slideInRight" value={0} onClick={() => this.goToCategory(0)} >

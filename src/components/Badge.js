@@ -106,7 +106,6 @@ class Badge extends Component{
 
       return(
         <div>
-          <NavBar />
           <div
             className="badge-detail-page-tile"
             style={{backgroundColor: backgroundColor}}

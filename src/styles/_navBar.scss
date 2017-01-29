@@ -8,6 +8,9 @@
   font-family: $primary-font;
   font-size: 1.5em;
   margin-bottom: 30px;
+  &:hover {
+    cursor: pointer;
+  }
   @media screen and (min-width: $break-medium) {
     flex-direction: row;
   }
