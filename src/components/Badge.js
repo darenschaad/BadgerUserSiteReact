@@ -13,9 +13,6 @@ class Badge extends Component{
     }
   }
 
-
-
-
   componentDidMount() {
     let id = this.props.params.pushId;
 
@@ -26,8 +23,6 @@ class Badge extends Component{
         this.setState({ loading: false })
       }
     })
-
-  console.log((this.state.badge.tags));
 
   }
 

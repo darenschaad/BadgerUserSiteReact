@@ -30,6 +30,13 @@ class CategoryList extends Component {
       );
     } else {
       let url = window.location.href;
+      try {
+
+      } catch (e) {
+
+      } finally {
+
+      }
       const currentCategory = Number(url.substr(url.length - 3));
 
       const categories = [0,100,200,300,400,500,600,700,800,900];
