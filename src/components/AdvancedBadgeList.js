@@ -87,8 +87,8 @@ const AdvancedBadgeList = (props) => {
                 idx={idx}
                 searchValue={props.searchValue}
                 goToBadge={props.goToBadge}
-                searchState={props.searchState}
-                />
+                searchState={searchState}
+              />
             </div>
           );
         }
@@ -143,6 +143,36 @@ const AdvancedBadgeList = (props) => {
       }
     );
 
+    let creatorArrayMap = creatorArray.map((creator, idx) => {
+        return(
+          <div key={idx}>
+            <h2>{creator} ( {creatorBadges(creator, creatorBadgeArray)} )</h2>
+            {
+              //map over filterTags to display list of everything from the database, or whatever the user is filtering with their search term.
+              filteredBadgesByCreator.map((badge, idx) => {
+                let badgeCreator = badge.creator;
+
+                let badgeTagsArray = badge.tags.toLowerCase().split(',');
+
+                if (badgeCreator === creator) {
+                  return(
+                    <div key={idx}>
+                      <BadgeTile
+                        badge={badge}
+                        idx={idx}
+                        searchValue={props.searchValue}
+                        goToBadge={props.goToBadge}
+                        searchState={searchState}
+                      />
+                    </div>
+                  );
+                }
+              })
+            }
+          </div>
+        );
+      });
+
     //either/or for the results of a user's search by keywords
     let displayCreator;
     if (props.creatorCheckBox && props.searchValue.length >= 3) {
@@ -158,52 +188,7 @@ const AdvancedBadgeList = (props) => {
           <div className="advanced-search-content">
             <h2>Creator</h2>
             <div className="break"></div>
-            {
-              creatorArray.map((creator, idx) =>{
-                return(
-                  <div key={idx}>
-                    <h2>{creator} ( {creatorBadges(creator, creatorBadgeArray)} )</h2>
-                    {
-                      //map over filterTags to display list of everything from the database, or whatever the user is filtering with their search term.
-                      filteredBadgesByCreator.map((badge, idx) => {
-                        let badgeCreator = badge.creator;
-
-                        let badgeTagsArray = badge.tags.toLowerCase().split(',');
-
-                        let index = branding.categories.indexOf(badge.category);
-
-                        let category = branding.categoryNames[index];
-
-                        let textColor = branding.textColors[index];
-
-                        let backgroundColor = branding.backgroundColors[index];
-
-                        if (badgeCreator === creator) {
-                          return(
-                            <div key={idx} className="standard-search-individual-names">
-                              <div style={{backgroundColor: backgroundColor}} className='badge-tile hover-hand random-badge-content' onClick={() => props.goToBadge(badge, props.searchValue, searchState)}>
-                                <div className="badge-tile-image-details">
-                                  <img className='detail-image' src={badge.imageUrl} alt={badge.names}></img>
-                                  <div className="badge-tile-details">
-                                    <h1 style={{color: textColor }} >{badge.name}</h1>
-                                    <span style={{color: textColor }} className="badge-tile-subtitle">To do: </span>
-                                    <span className="badge-tile-description">{badge.description}</span>
-                                    <br />
-                                    <span style={{color: textColor }} className="badge-tile-subtitle">Proof: </span>
-                                    <span className="badge-tile-description">{badge.proof}</span>
-                                  </div>
-                                </div>
-                                <h1 style={{color: textColor }} className="badge-tile-category">{category}</h1>
-                              </div>
-                            </div>
-                          );
-                        }
-                      })
-                    }
-                  </div>
-                );
-              })
-            }
+            { creatorArrayMap }
           </div>
         ) //close variable
       }
