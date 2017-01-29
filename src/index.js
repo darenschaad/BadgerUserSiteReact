@@ -37,6 +37,13 @@ class Root extends Component {
       this.setState({ authenticated: true });
     }
 
+    if (!this.state.currentUser.uid) {
+      let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+      console.log(currentUser);
+      if (currentUser) {
+        this.setState({currentUser: currentUser});
+      }
+    }
     //after component mounts, sync with Firebase database and set the badges list equal to this.state.badges empty object
     this.ref = base.syncState(`/tags`, {
       context: this,
@@ -57,8 +64,11 @@ class Root extends Component {
   }
 
   displayUser(user) {
-    this.setState({ authenticated: true, currentUser: user.user});
-    localStorage.setItem('userId', this.state.currentUser.uid);
+    let userObject = { uid:user.user.uid, userPhoto:user.user.photoURL }
+    let userJSON = JSON.stringify(userObject);
+    console.log(userJSON);
+    localStorage.setItem('currentUser', userJSON);
+    this.setState({ authenticated: true, currentUser: userObject});
 
   }
 
@@ -71,7 +81,6 @@ class Root extends Component {
     var authHandler = function(error, user) {
       if(error) this.displayLoginError(error);
       this.displayUser(user);
-      console.log(user);
     }
     //make call to Facebook API
     base.authWithOAuthPopup('facebook', authHandler.bind(this), {scope: 'public_profile, email'});
@@ -82,6 +91,7 @@ class Root extends Component {
     base.unauth()
     this.setState({ authenticated: false, currentUser: { }});
     localStorage.setItem('userId', '');
+    localStorage.setItem('userPhoto', "");
   }
 
   render() {
@@ -110,10 +120,7 @@ class Root extends Component {
                   badges={this.state.badges}
                   tags={this.state.tags}
                   loading={this.state.loading}
-                  authenticated={this.state.authenticated}
-                  logIn={this.logIn}
-                  logOut={this.logOut}
-                  currentUser={this.state.currentUser} />
+                  />
               )}
             />
 
