@@ -41,7 +41,7 @@ class Root extends Component {
       let currentUser = JSON.parse(localStorage.getItem('currentUser'));
       console.log(currentUser);
       if (currentUser) {
-        this.setState({currentUser: currentUser});
+        this.setState({currentUser: currentUser, authenticated: true});
       }
     }
     //after component mounts, sync with Firebase database and set the badges list equal to this.state.badges empty object
@@ -90,8 +90,7 @@ class Root extends Component {
     //signs out currently logged in user
     base.unauth()
     this.setState({ authenticated: false, currentUser: { }});
-    localStorage.setItem('userId', '');
-    localStorage.setItem('userPhoto', "");
+    localStorage.setItem('currentUser', null);
   }
 
   render() {

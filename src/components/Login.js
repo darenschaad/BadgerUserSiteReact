@@ -13,7 +13,7 @@ class Login extends Component {
       return(
         <span>
           <div id="user-navbar-info">
-            <img id="user-photo" src={user.photoURL} role="presentation" />
+            <img id="user-photo" src={user.userPhoto} role="presentation" />
             <li onClick={this.props.logOut}>Log Out</li>
           </div>
         </span>
