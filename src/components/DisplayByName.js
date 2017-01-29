@@ -1,6 +1,6 @@
 import React from 'react';
 import BadgeTile from './BadgeTile';
-import * as branding from './branding';
+// import * as branding from './branding';
 
 const DisplayByName = (props) => {
 
