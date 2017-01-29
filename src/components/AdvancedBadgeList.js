@@ -1,5 +1,6 @@
 import React from 'react';
 import DisplayByName from './DisplayByName';
+import BadgeTile from './BadgeTile';
 import * as branding from './branding';
 
 const AdvancedBadgeList = (props) => {
@@ -8,6 +9,7 @@ const AdvancedBadgeList = (props) => {
     const creatorBadgeArray= [];
     const searchState = "advanced";
 
+    //if the user searches more than 3 characters, proceed to push potential badges into an array of badges and an array of tags.
     if (props.searchValue.length >= 3) {
       props.tagArray.filter(
         (tag) => {
@@ -28,19 +30,20 @@ const AdvancedBadgeList = (props) => {
         }
       )
     }
+    //end of array creation
 
-    let filteredByTagsArrayBadges = props.badgeArray.filter(
+
+    let filteredBadgesByTags = props.badgeArray.filter(
       (badge) => {
         for (var i = 0; i < searchTagsArray.length; i++) {
           if (badge['tags'].toLowerCase().includes(searchTagsArray[i].toLowerCase())) {
             return badge['tags'].toLowerCase().includes(searchTagsArray[i].toLowerCase());
           }
         }
-
       }
     );
 
-    function creatorBadges(creator, badges) {
+    let creatorBadges = (creator, badges) => {
       var counter = 0;
         for (var i = 0; i < badges.length; i++) {
           if (badges[i]['creator'].toLowerCase() === creator.toLowerCase()) {
@@ -50,7 +53,7 @@ const AdvancedBadgeList = (props) => {
       return counter;
     }
 
-    let filteredByCreatorBadges = props.badgeArray.filter(
+    let filteredBadgesByCreator = props.badgeArray.filter(
       (badge) => {
         for (var i = 0; i < creatorArray.length; i++) {
           if (badge['creator'].toLowerCase().includes(creatorArray[i].toLowerCase())) {
@@ -67,6 +70,33 @@ const AdvancedBadgeList = (props) => {
       }
     );
 
+    //map over filterTags to display list of everything from the database, or whatever the user is filtering with their search term.
+    let searchTagsArrayMap = searchTagsArray.map((tag, idx) => {
+      let filteredBadgesByTagsMap = filteredBadgesByTags.map((badge, idx) => {
+        let badgeTagsArray = badge.tags.toLowerCase().split(',');
+
+        if (badgeTagsArray.includes(tag)) {
+          return(
+            <BadgeTile
+              badge={badge}
+              idx={idx}
+              searchValue={props.searchValue}
+              goToBadge={props.goToBadge}
+              searchState={props.searchState}
+            />
+          );
+        }
+      });
+      return(
+        <div key={idx}>
+          <h4><span className="tag-description">Badges that include the keyword </span>"{tag}"</h4>
+          {filteredBadgesByTagsMap}
+        </div>
+      );
+    });
+
+
+    //if the user hasn't typed anything or selected any of the boxes, instruct them to do so
     let displayTypeSomething;
     if (props.searchValue.length <= 2) {
       displayTypeSomething = (
@@ -86,7 +116,9 @@ const AdvancedBadgeList = (props) => {
         </div>
       )
     }
+    //end of user instructions
 
+    //either/or for the results of a user's search by name
     let displayName;
     if (props.nameCheckBox && props.searchValue.length >= 3) {
       if (filteredByNameBadges.length === 0) {
@@ -112,6 +144,7 @@ const AdvancedBadgeList = (props) => {
       }
     }
 
+    //either/or for the results of a user's search by keywords
     let displayKeywords;
     if (props.keywordsCheckBox && props.searchValue.length >= 3) {
       if (searchTagsArray.length === 0) {
@@ -126,55 +159,14 @@ const AdvancedBadgeList = (props) => {
           <div className="advanced-search-content">
             <h2>Keywords</h2>
             <div className="break"></div>
-            {
-              searchTagsArray.map((tag, idx) =>{
-                return(
-                  <div key={idx}>
-                    <h4>"{tag}"</h4>
-                    {
-                      //map over filterTags to display list of everything from the database, or whatever the user is filtering with their search term.
-                      filteredByTagsArrayBadges.map((badge, idx) => {
-                        let badgeTagsArray = badge.tags.toLowerCase().split(',');
-
-                        let index = branding.categories.indexOf(badge.category);
-
-                        let category = branding.categoryNames[index];
-
-                        let textColor = branding.textColors[index];
-
-                        let backgroundColor = branding.backgroundColors[index];
-
-                        if (badgeTagsArray.includes(tag)) {
-                          return(
-                            <div key={idx} className="standard-search-individual-names">
-                              <div style={{backgroundColor: backgroundColor}} className='badge-tile hover-hand random-badge-content' onClick={() => props.goToBadge(badge, props.searchValue, searchState)}>
-                                <div className="badge-tile-image-details">
-                                  <img className='detail-image' src={badge.imageUrl} alt={badge.names}></img>
-                                  <div className="badge-tile-details">
-                                    <h1 style={{color: textColor }} >{badge.name}</h1>
-                                    <span style={{color: textColor }} className="badge-tile-subtitle">To do: </span>
-                                    <span className="badge-tile-description">{badge.description}</span>
-                                    <br />
-                                    <span style={{color: textColor }} className="badge-tile-subtitle">Proof: </span>
-                                    <span className="badge-tile-description">{badge.proof}</span>
-                                  </div>
-                                </div>
-                                <h1 style={{color: textColor }} className="badge-tile-category">{category}</h1>
-                              </div>
-                            </div>
-                          );
-                        }
-                      })
-                    }
-                  </div>
-                );
-              })
-            }
+            { searchTagsArrayMap }
           </div>
         ) //close variable
       }
     } //close if statement
 
+
+    //either/or for the results of a user's search by keywords
     let displayCreator;
     if (props.creatorCheckBox && props.searchValue.length >= 3) {
       if (creatorArray.length === 0) {
@@ -196,7 +188,7 @@ const AdvancedBadgeList = (props) => {
                     <h2>{creator} ( {creatorBadges(creator, creatorBadgeArray)} )</h2>
                     {
                       //map over filterTags to display list of everything from the database, or whatever the user is filtering with their search term.
-                      filteredByCreatorBadges.map((badge, idx) => {
+                      filteredBadgesByCreator.map((badge, idx) => {
                         let badgeCreator = badge.creator;
 
                         let badgeTagsArray = badge.tags.toLowerCase().split(',');
