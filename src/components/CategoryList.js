@@ -5,8 +5,11 @@ import Loading from './Loading';
 class CategoryList extends Component {
   constructor() {
     super();
+    this.state = {
+      category : ""
+    }
     this.goToBadge = this.goToBadge.bind(this);
-
+    this.handleChange = this.handleChange.bind(this);
   }
 
 
@@ -16,6 +19,10 @@ class CategoryList extends Component {
     const pushId = currentBadge.pushId;
     // const urlIndex = currentBadge.index.substring(1);
     this.context.router.transitionTo(`/badge/${pushId}`);
+  }
+
+  handleChange(event) {
+    this.context.router.transitionTo(`/categories/${event.target.value}`);
   }
 
   render() {
@@ -75,7 +82,18 @@ class CategoryList extends Component {
       );
       return (
         <div>
-          <h1 className="category-list-category-title">{category} ({categoryBadgeCount})</h1>
+          <select value={currentCategory} onChange={this.handleChange} className="category-list-category-title">
+            <option value="000">000 - General Knowledge</option>
+            <option value="100">100</option>
+            <option value="200">200</option>
+            <option value="300">300</option>
+            <option value="400">400</option>
+            <option value="500">500</option>
+            <option value="600">600</option>
+            <option value="700">700</option>
+            <option value="800">800</option>
+            <option value="900">900</option>
+          </select>
           {filteredByCategory}
         </div>
       );
