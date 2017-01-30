@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import Linkify from 'react-linkify';
-import NavBar from './NavBar';
 import base from '../base';
 import Loading from './Loading';
 import FontAwesome from 'react-fontawesome';

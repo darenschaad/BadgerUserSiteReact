@@ -10,6 +10,7 @@ import Challenges from './components/Challenges'
 import NotFound from './components/NotFound';
 import base from './base';
 import NavBar from './components/NavBar';
+import SignUp from './components/SignUp';
 
 import './styles/App.scss';
 import './styles/animate.css';
@@ -39,7 +40,6 @@ class Root extends Component {
 
     if (!this.state.currentUser.uid) {
       let currentUser = JSON.parse(localStorage.getItem('currentUser'));
-      console.log(currentUser);
       if (currentUser) {
         this.setState({currentUser: currentUser, authenticated: true});
       }
@@ -158,6 +158,13 @@ class Root extends Component {
             <Match exactly pattern="/challenges" component={Challenges} />
 
             <Match pattern="/badge/:pushId" component={Badge} />
+
+            <Match pattern="/signup"
+              component={() => (
+                <SignUp
+                  currentUser={this.state.currentUser}/>
+              )}
+            />
 
             <Miss component={NotFound} />
           </div>

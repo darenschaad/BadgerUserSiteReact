@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import BadgeSearch from './BadgeSearch';
-import NavBar from './NavBar';
 import Loading from './Loading';
 
 class App extends Component {
