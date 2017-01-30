@@ -26,6 +26,7 @@ class CategoryList extends Component {
   }
 
   render() {
+    document.body.scrollTop = 0;
 
     if(this.props.loading) {
       return(
