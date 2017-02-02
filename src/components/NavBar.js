@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import FontAwesome from 'react-fontawesome';
 import Login from './Login';
+import { WindowResizeListener } from 'react-window-resize-listener'
 
 class NavBar extends Component {
   constructor() {
@@ -28,10 +29,17 @@ class NavBar extends Component {
     }
   }
 
+  windowResize(windowSize) {
+    if(windowSize.windowWidth >= 750){
+      this.setState({ className: 'closed' });
+    }
+  }
+
 
   render(){
     return(
       <div className="navbar-div">
+        <WindowResizeListener onResize={windowSize => this.windowResize(windowSize)} />
         <div className="navbar-icons">
           <img className="navbar-clickable" onClick={this.goToPage.bind(this, "")} id="navbar-image"  src={require('../img/badgey.png')} alt="badger logo"/>
           <FontAwesome onClick={this.openMenu} className="hamburger-icon" name="bars" />
