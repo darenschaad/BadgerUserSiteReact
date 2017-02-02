@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import NavBar from './NavBar';
 import Loading from './Loading';
 
 class Categories extends Component {
@@ -11,21 +10,24 @@ class Categories extends Component {
   goToCategory(currentCategory) {
     // console.log(value);
     localStorage.setItem(`category`, JSON.stringify(currentCategory));
-    this.context.router.transitionTo(`/categories/${currentCategory}`);
+    if (currentCategory === 0) {
+      this.context.router.transitionTo(`/categories/${currentCategory}00`);
+    } else{
+      this.context.router.transitionTo(`/categories/${currentCategory}`);
+    }
   }
 
   render() {
     if(this.props.loading) {
       return(
         <div>
-          <NavBar />
           <Loading />
         </div>
       );
     } else {
       return(
         <div>
-          <NavBar />
+
           <h1 className="categories-categories-title">Categories</h1>
           <div className="category-000-div">
             <div className="category-individual animated slideInRight" value={0} onClick={() => this.goToCategory(0)} >

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import BadgeSearch from './BadgeSearch';
-import NavBar from './NavBar';
 import Loading from './Loading';
 
 class App extends Component {
@@ -26,12 +25,6 @@ class App extends Component {
     } else {
       return (
         <div className="App">
-          <NavBar
-            authenticated={this.props.authenticated}
-            logIn={this.props.logIn}
-            currentUser={this.props.currentUser}
-            logOut={this.props.logOut}
-          />
           <div id="intro-section">
             <img id="intro-image" src={require('../img/badgers-name.png')} alt="badgers name logo"/>
           </div>

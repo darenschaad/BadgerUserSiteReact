@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import Linkify from 'react-linkify';
-import NavBar from './NavBar';
 import base from '../base';
 import Loading from './Loading';
 import FontAwesome from 'react-fontawesome';
@@ -16,9 +15,6 @@ class Badge extends Component{
     }
     this.bookmark = this.bookmark.bind(this);
   }
-
-
-
 
   componentDidMount() {
     let id = this.props.params.pushId;
@@ -109,7 +105,6 @@ class Badge extends Component{
 
       return(
         <div>
-          <NavBar />
           <div
             className="badge-detail-page-tile"
             style={{backgroundColor: backgroundColor}}

@@ -1,12 +1,10 @@
 import React, {Component} from 'react';
-import NavBar from './NavBar';
 
 class About extends Component {
   render() {
     console.log(this.props);
     return(
       <div className="about-page">
-        <NavBar />
         <div className="about-page-content">
           <div className="about-page-left-col">
             <h1 className="about-title">About our group</h1>
