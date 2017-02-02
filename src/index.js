@@ -27,6 +27,8 @@ class Root extends Component {
     }
     this.logIn = this.logIn.bind(this);
     this.logOut = this.logOut.bind(this);
+    this.getUser = this.getUser.bind(this);
+    this.signUp = this.signUp.bind(this);
   }
 
   componentDidMount(){
@@ -66,7 +68,7 @@ class Root extends Component {
   displayUser(user) {
     let userObject = { uid:user.user.uid, userPhoto:user.user.photoURL }
     let userJSON = JSON.stringify(userObject);
-    console.log(userJSON);
+    // console.log(user);
     localStorage.setItem('currentUser', userJSON);
     this.setState({ authenticated: true, currentUser: userObject});
 
@@ -76,11 +78,46 @@ class Root extends Component {
     alert("There was an error accessing Facebook: " + error.message);
   }
 
+  getUser(uid) {
+    base.fetch(`users/${uid}`,{
+      context:this,
+      then(data){
+        return data;
+      }
+    });
+  }
+
+  signUp(user) {
+    // var authHandler = function(error, user) {
+    let uid = user.user.uid;
+    let name = user.user.displayName;
+    let photoURL = user.user.photoURL;
+    let newUser = {name:name, photoURL:photoURL, pushId:uid}
+    base.post(`users/${uid}`, {
+      data: newUser,
+      then(err){
+        if (!err){
+          console.log(!err);
+        }else {
+          this.context.router.transitionTo(`/`);
+        }
+      }
+    })
+  }
+
   logIn() {
     //call the methods that show the error or the
     var authHandler = function(error, user) {
       if(error) this.displayLoginError(error);
       this.displayUser(user);
+      console.log(user);
+      let uid = user.user.uid;
+      let test = this.getUser(uid);
+      if (test === undefined) {
+        this.signUp(user);
+      }
+
+
     }
     //make call to Facebook API
     base.authWithOAuthPopup('facebook', authHandler.bind(this), {scope: 'public_profile, email'});
