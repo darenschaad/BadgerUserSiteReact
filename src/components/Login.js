@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-// import base from '../base';
 
 class Login extends Component {
 
@@ -24,5 +23,3 @@ class Login extends Component {
 }
 
 export default Login;
-
-// <li onClick={this.props.logOut}>Logout</li>
