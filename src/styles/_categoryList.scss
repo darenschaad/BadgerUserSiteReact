@@ -44,7 +44,17 @@
 
 .category-list-category-title {
   font-family: $primary-font;
+  font-size: 2em;
+  border: 1px solid $badger-black;
+  border-radius: 5px;
+  background-color: $background-color;
   text-align: center;
+  -webkit-appearance: none;
+   -moz-appearance: none;
+   appearance: none;
+
+
+
 }
 
 @media screen and (min-width: $break-medium) {

@@ -85,15 +85,15 @@ class CategoryList extends Component {
         <div>
           <select value={currentCategory} onChange={this.handleChange} className="category-list-category-title">
             <option value="000">000 - General Knowledge</option>
-            <option value="100">100</option>
-            <option value="200">200</option>
-            <option value="300">300</option>
-            <option value="400">400</option>
-            <option value="500">500</option>
-            <option value="600">600</option>
-            <option value="700">700</option>
-            <option value="800">800</option>
-            <option value="900">900</option>
+            <option value="100">100 - PHILOSOPHY & PSYCHOLOGY</option>
+            <option value="200">200 - RELIGION</option>
+            <option value="300">300 - SOCIAL SCIENCE</option>
+            <option value="400">400 - LANGUAGES</option>
+            <option value="500">500 - SCIENCE</option>
+            <option value="600">600 - TECHNOLOGY</option>
+            <option value="700">700 - ARTS & RECREATION</option>
+            <option value="800">800 - LITERATURE</option>
+            <option value="900">900 - HISTORY & GEOGRAPHY</option>
           </select>
           {filteredByCategory}
         </div>
