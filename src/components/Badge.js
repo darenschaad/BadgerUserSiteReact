@@ -11,12 +11,15 @@ class Badge extends Component{
       loading : true,
       badge : {},
       bookmarkColor : '#EEEEEE',
-      bookmarkBorder: true
+      bookmarkBorder: true,
+      uid: ''
     }
     this.bookmark = this.bookmark.bind(this);
   }
 
   componentDidMount() {
+
+
     let id = this.props.params.pushId;
     this.ref = base.syncState(`/badges/` + id, {
       context: this,
@@ -25,9 +28,23 @@ class Badge extends Component{
         this.setState({ loading: false })
       }
     });
+    let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (currentUser !== null) {
+      let uid = currentUser['uid'];
+      this.setState({uid:uid})
+    }else {
+      this.setState({uid:''});
+    }
+
   }
 
+
+
   bookmark() {
+
+    if (this.state.uid === '') {
+      console.log("hi");
+    }
     if(this.state.bookmarkColor === '#EEEEEE') {
       this.setState({
         bookmarkColor: '#20A282'
@@ -42,6 +59,7 @@ class Badge extends Component{
 
   render() {
     document.body.scrollTop = 0;
+
     if(this.state.loading) {
       return(
         <Loading />
@@ -127,6 +145,11 @@ class Badge extends Component{
               <h3 style={{color: textColor}}><span className="badge-page-subtitle">Creator:</span> {ourBadge.creator}</h3>
               <h3 style={{color: textColor}}><span className="badge-page-subtitle">Date Created:</span> {ourBadge.date}</h3>
               <h3 style={{color: textColor}}><span className="badge-page-subtitle">Keywords:</span> {splitTags}</h3>
+                <div>
+                  <form onSubmit={this.bookmark}>
+                    <input type="submit" value="Bookmark this Badge"></input>
+                  </form>
+                </div>
             </div>
           </div>
         </div>
