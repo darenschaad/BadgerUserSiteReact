@@ -2,16 +2,16 @@ import React, {Component} from 'react';
 import Linkify from 'react-linkify';
 import base from '../base';
 import Loading from './Loading';
-import FontAwesome from 'react-fontawesome';
+// import FontAwesome from 'react-fontawesome';
 
 class Badge extends Component{
   constructor(params) {
     super();
     this.state = {
       loading : true,
-      badge : {},
-      bookmarkColor : '#EEEEEE',
-      bookmarkBorder: true
+      // badge : {},
+      // bookmarkColor : '#EEEEEE',
+      // bookmarkBorder: true
     }
     this.bookmark = this.bookmark.bind(this);
   }
@@ -27,18 +27,18 @@ class Badge extends Component{
     });
   }
 
-  bookmark() {
-    if(this.state.bookmarkColor === '#EEEEEE') {
-      this.setState({
-        bookmarkColor: '#20A282'
-        // bookmarkBorder: false
-      });
-    } else {
-      this.setState({
-        bookmarkColor: '#EEEEEE'
-      })
-    }
-  }
+  // bookmark() {
+  //   if(this.state.bookmarkColor === '#EEEEEE') {
+  //     this.setState({
+  //       bookmarkColor: '#20A282'
+  //       // bookmarkBorder: false
+  //     });
+  //   } else {
+  //     this.setState({
+  //       bookmarkColor: '#EEEEEE'
+  //     })
+  //   }
+  // }
 
   render() {
     document.body.scrollTop = 0;
@@ -89,19 +89,19 @@ class Badge extends Component{
       const splitTags = titleCase(ourBadge.tags.split(',').join(', '));
       const splitChallenges = ourBadge.challenges.split(',').join(', ');
 
-      let displayBookmark
-      if(!this.props.authenticated) {
-        displayBookmark = (
-          <FontAwesome
-            className="bookmark-icon hover-hand"
-            name="bookmark"
-            size="2x"
-            border={this.state.bookmarkBorder}
-            style={{ color: this.state.bookmarkColor}}
-            onClick={this.bookmark}
-          />
-        );
-      }
+      // let displayBookmark
+      // if(!this.props.authenticated) {
+      //   displayBookmark = (
+      //     <FontAwesome
+      //       className="bookmark-icon hover-hand"
+      //       name="bookmark"
+      //       size="2x"
+      //       border={this.state.bookmarkBorder}
+      //       style={{ color: this.state.bookmarkColor}}
+      //       onClick={this.bookmark}
+      //     />
+      //   );
+      // }
 
       return(
         <div>
@@ -111,7 +111,7 @@ class Badge extends Component{
           >
             <div className="category-div">
               <h1 style={{color: textColor}} className="category-name">{ category }</h1>
-              {displayBookmark}
+
             </div>
             <div className="detail-body">
               <h1 className="badge-title" style={{color: textColor}}>{ourBadge.name}</h1>

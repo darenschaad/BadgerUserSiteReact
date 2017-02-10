@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import FontAwesome from 'react-fontawesome';
-import Login from './Login';
+// import Login from './Login';
 import { WindowResizeListener } from 'react-window-resize-listener'
 
 class NavBar extends Component {
@@ -46,14 +46,10 @@ class NavBar extends Component {
         </div>
         <ul className={this.state.className}>
           <li className="navbar-clickable" onClick={this.goToPage.bind(this, "about")}>About</li>
-          <li className="navbar-clickable" onClick={this.goToPage.bind(this, "challenges")}>Challenges</li>
           <li className="navbar-clickable" onClick={this.goToPage.bind(this, "categories")}>Categories</li>
-          <li className="navbar-clickable" onClick={this.goToPage.bind(this, "signup")}>Sign Up</li>
-          <Login
-            logIn={this.props.logIn}
-            logOut={this.props.logOut}
-            authenticated={this.props.authenticated}
-            currentUser={this.props.currentUser} />
+          <li className="navbar-clickable" onClick={this.goToPage.bind(this, "challenges")}>Challenges</li>
+
+
         </ul>
       </div>
     );
