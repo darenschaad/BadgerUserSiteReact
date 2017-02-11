@@ -27,8 +27,8 @@ class Badge extends Component{
     let bookmarkedBadges = this.state.bookmarkedBadges;
 
     for (var key in bookmarkedBadges) {
+      console.log(key);
       if (key === badgeId) {
-        console.log();
         this.setState({bookmarked:true, bookmarkColor: '#20A282'});
 
       }
@@ -83,7 +83,6 @@ class Badge extends Component{
     let bookmarkBadgeId = badge.pushId;
     let dateBookmarked = new Date();
     let bookmarkBadgeObject= {dateBookmarked:dateBookmarked.toString(), pushId:bookmarkBadgeId};
-    console.log(bookmarkBadgeObject);
     if (this.state.uid === '') {
       alert("You must be logged in to bookmark badges.");
     }
