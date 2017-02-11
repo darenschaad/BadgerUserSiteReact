@@ -18,6 +18,21 @@ class Badge extends Component{
       complete: false,
     }
     this.bookmark = this.bookmark.bind(this);
+    this.loadingDone = this.loadingDone.bind(this);
+  }
+
+  loadingDone() {
+    this.setState({ loading: false });
+    let badgeId = this.props.params.pushId;
+    let bookmarkedBadges = this.state.bookmarkedBadges;
+
+    for (var key in bookmarkedBadges) {
+      if (key === badgeId) {
+        console.log();
+        this.setState({bookmarked:true, bookmarkColor: '#20A282'});
+
+      }
+    }
   }
 
   componentDidMount() {
@@ -29,9 +44,9 @@ class Badge extends Component{
     }else {
       this.setState({uid:''});
     }
-    let id = this.props.params.pushId;
-    uid = this.state.uid;
-    this.ref = base.syncState(`/badges/` + id, {
+    let badgeId = this.props.params.pushId;
+    //uid = this.state.uid;
+    this.ref = base.syncState(`/badges/` + badgeId, {
       context: this,
       state: "badge",
       then(){
@@ -40,15 +55,19 @@ class Badge extends Component{
             context: this,
             state: "bookmarkedBadges",
             then(){
-              this.setState({ loading: false })
+              this.loadingDone();
             }
           })
         }else{
-          this.setState({ loading: false })
+          this.loadingDone();
         }
       }
     });
 
+    // for (var i = 0; i < array.length; i++) {
+    //   array[i]
+    // }
+    //
 
   }
 
@@ -81,11 +100,18 @@ class Badge extends Component{
       })
         // bookmarkBorder: false
         this.setState({
-          bookmarkColor: '#20A282'
+          bookmarkColor: '#20A282',
+          bookmarked:true
         });
     } else if (this.state.bookmarkColor === '#20A282' && this.state.uid !== '') {
       this.setState({
-        bookmarkColor: '#EEEEEE'
+        bookmarkColor: '#EEEEEE',
+        bookmarked: false
+      })
+      base.remove(`bookmarkedBadges/${uid}/${bookmarkBadgeId}`, function(err){
+        if(!err){
+          console.log("it worked");
+        }
       })
     }
   }
