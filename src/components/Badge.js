@@ -18,8 +18,6 @@ class Badge extends Component{
   }
 
   componentDidMount() {
-
-
     let id = this.props.params.pushId;
     this.ref = base.syncState(`/badges/` + id, {
       context: this,
@@ -35,22 +33,18 @@ class Badge extends Component{
     }else {
       this.setState({uid:''});
     }
-
   }
 
-
-
   bookmark() {
-
     if (this.state.uid === '') {
-      console.log("hi");
+      alert("You must be logged in to bookmark badges.");
     }
-    if(this.state.bookmarkColor === '#EEEEEE') {
+    if(this.state.bookmarkColor === '#EEEEEE' && this.state.uid !== '') {
       this.setState({
         bookmarkColor: '#20A282'
         // bookmarkBorder: false
       });
-    } else {
+    } else if (this.state.bookmarkColor === '#20A282' && this.state.uid !== '') {
       this.setState({
         bookmarkColor: '#EEEEEE'
       })
@@ -147,7 +141,7 @@ class Badge extends Component{
               <h3 style={{color: textColor}}><span className="badge-page-subtitle">Keywords:</span> {splitTags}</h3>
                 <div>
                   <form onSubmit={this.bookmark}>
-                    <input type="submit" value="Bookmark this Badge"></input>
+                    <input type="submit" value="Mark Badge as Complete"></input>
                   </form>
                 </div>
             </div>

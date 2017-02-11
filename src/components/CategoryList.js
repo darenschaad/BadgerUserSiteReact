@@ -6,7 +6,6 @@ class CategoryList extends Component {
   constructor() {
     super();
     this.state = {
-      category : ""
     }
     this.goToBadge = this.goToBadge.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -56,8 +55,8 @@ class CategoryList extends Component {
       const textColors = ["#4C4C4C", "#0079A5", "#66008D", "#4D782D", "#C97100", "#25895A", "#000073", "#988967", "#76193C", "#985721"];
 
       // const backgroundColors = ["#989DA7", "#DCF0FF", "#D0C0D6", "#CEDFB0", "#EEC99A", "#9EBAAC", "#B5B5CA", "#FDE192", "#DBC2CC", "#D8C2A9"];
-
-      const category = categoryNames[index];
+      // 
+      // const category = categoryNames[index];
 
       const textColor = textColors[index];
 
@@ -84,7 +83,7 @@ class CategoryList extends Component {
       return (
         <div>
           <select value={currentCategory} onChange={this.handleChange} className="category-list-category-title">
-            <option value="000">000 - General Knowledge</option>
+            <option value="000">000 - GENERAL KNOWLEDGE</option>
             <option value="100">100 - PHILOSOPHY & PSYCHOLOGY</option>
             <option value="200">200 - RELIGION</option>
             <option value="300">300 - SOCIAL SCIENCE</option>
@@ -95,6 +94,7 @@ class CategoryList extends Component {
             <option value="800">800 - LITERATURE</option>
             <option value="900">900 - HISTORY & GEOGRAPHY</option>
           </select>
+          ({categoryBadgeCount})
           {filteredByCategory}
         </div>
       );
