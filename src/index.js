@@ -116,11 +116,12 @@ class Root extends Component {
       if (test === undefined) {
         this.signUp(user);
       }
-
+      location.reload();
 
     }
     //make call to Facebook API
     base.authWithOAuthPopup('facebook', authHandler.bind(this), {scope: 'public_profile, email'});
+
   }
 
   logOut() {
@@ -128,6 +129,7 @@ class Root extends Component {
     base.unauth()
     this.setState({ authenticated: false, currentUser: { }});
     localStorage.setItem('currentUser', null);
+    location.reload();
   }
 
   render() {
@@ -194,7 +196,9 @@ class Root extends Component {
 
             <Match exactly pattern="/challenges" component={Challenges} />
 
-            <Match pattern="/badge/:pushId" component={Badge} />
+            <Match
+              pattern="/badge/:pushId"
+              component={Badge} />
 
             <Match pattern="/signup"
               component={() => (
