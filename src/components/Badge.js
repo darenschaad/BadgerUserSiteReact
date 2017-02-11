@@ -10,40 +10,79 @@ class Badge extends Component{
     this.state = {
       loading : true,
       badge : {},
+      bookmarkedBadges: {},
+      bookmarked: false,
       bookmarkColor : '#EEEEEE',
       bookmarkBorder: true,
-      uid: ''
+      uid: '',
+      complete: false,
     }
     this.bookmark = this.bookmark.bind(this);
   }
 
   componentDidMount() {
-    let id = this.props.params.pushId;
-    this.ref = base.syncState(`/badges/` + id, {
-      context: this,
-      state: "badge",
-      then() {
-        this.setState({ loading: false })
-      }
-    });
     let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    let uid;
     if (currentUser !== null) {
-      let uid = currentUser['uid'];
+      uid = currentUser['uid'];
       this.setState({uid:uid})
     }else {
       this.setState({uid:''});
     }
+    let id = this.props.params.pushId;
+    uid = this.state.uid;
+    this.ref = base.syncState(`/badges/` + id, {
+      context: this,
+      state: "badge",
+      then(){
+        if (uid !== '') {
+          this.ref = base.syncState(`/bookmarkedBadges/${uid}`, {
+            context: this,
+            state: "bookmarkedBadges",
+            then(){
+              this.setState({ loading: false })
+            }
+          })
+        }else{
+          this.setState({ loading: false })
+        }
+      }
+    });
+
+
+  }
+
+  markComplete() {
+    if (this.state.uid === '') {
+      alert("You must be logged in to mark badges as complete.");
+    }
   }
 
   bookmark() {
+    let uid = this.state.uid;
+    const badge = this.state.badge;
+    let bookmarkBadgeId = badge.pushId;
+    let dateBookmarked = new Date();
+    let bookmarkBadgeObject= {dateBookmarked:dateBookmarked.toString(), pushId:bookmarkBadgeId};
+    console.log(bookmarkBadgeObject);
     if (this.state.uid === '') {
       alert("You must be logged in to bookmark badges.");
     }
     if(this.state.bookmarkColor === '#EEEEEE' && this.state.uid !== '') {
-      this.setState({
-        bookmarkColor: '#20A282'
+      base.post(`bookmarkedBadges/${uid}/${bookmarkBadgeId}`, {
+        data: bookmarkBadgeObject,
+        then(err){
+          if (!err){
+            console.log(!err);
+          }else {
+            console.log("badge bookmarked!");;
+          }
+        }
+      })
         // bookmarkBorder: false
-      });
+        this.setState({
+          bookmarkColor: '#20A282'
+        });
     } else if (this.state.bookmarkColor === '#20A282' && this.state.uid !== '') {
       this.setState({
         bookmarkColor: '#EEEEEE'
@@ -140,7 +179,7 @@ class Badge extends Component{
               <h3 style={{color: textColor}}><span className="badge-page-subtitle">Date Created:</span> {ourBadge.date}</h3>
               <h3 style={{color: textColor}}><span className="badge-page-subtitle">Keywords:</span> {splitTags}</h3>
                 <div>
-                  <form onSubmit={this.bookmark}>
+                  <form onSubmit={this.markComplete}>
                     <input type="submit" value="Mark Badge as Complete"></input>
                   </form>
                 </div>
