@@ -165,13 +165,9 @@ module.exports = {
     ]
   },
 
-<<<<<<< HEAD
-=======
   sassLoader: {
     includePaths: bourbon,
   },
-
->>>>>>> master
   // We use PostCSS for autoprefixing only.
   postcss: function() {
     return [
