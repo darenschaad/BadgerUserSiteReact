@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import base from '../base';
+
 class SignUp extends Component {
   constructor() {
     super();
@@ -12,28 +13,29 @@ class SignUp extends Component {
   }
   signUp(e) {
     e.preventDefault();
-    var authHandler = function(error, user) {
-      let uid = user.user.uid;
+    console.log(this.props.currentUser.uid);
+    // var authHandler = function(error, user) {
+      let uid = this.props.currentUser.uid;
       let newUser = {firstName:this.state.firstName, lastName:this.state.lastName, pushId:uid}
+      console.log(newUser);
       base.post(`users/${uid}`, {
         data: newUser,
         then(err){
-          if (err){
-            console.log(err);
+          if (!err){
+            console.log(!err);
           }else {
             this.context.router.transitionTo(`/`);
           }
         }
       })
-    }
+    // }
     //make call to Facebook API
-    base.authWithOAuthPopup('facebook', authHandler.bind(this), {scope: 'public_profile, email'});
+    // base.authWithOAuthPopup('facebook', authHandler.bind(this), {scope: 'public_profile, email'});
   }
 
 
   handleChange(event) {
     const name = event.target.name;
-
     this.setState({[name]: event.target.value})
   }
   render() {
@@ -50,7 +52,6 @@ class SignUp extends Component {
           </label>
           <input type="submit" value="Submit"></input>
         </form>
-        <h1>SignUp Form</h1>
       </div>
     );
   }

@@ -9,7 +9,9 @@ body {
   width: 100vw;
   padding: 5vh 7.5vw;
   margin: 0;
-  background-color: #e1e5ed;
+  background-color: $background-color;
+
+  
 }
 
 #intro-image {
