@@ -157,8 +157,7 @@ class Root extends Component {
                 <App
                   badges={this.state.badges}
                   tags={this.state.tags}
-                  loading={this.state.loading}
-                  />
+                  loading={this.state.loading} />
               )}
             />
 
@@ -175,7 +174,7 @@ class Root extends Component {
                   tags={this.state.tags}
                   loading={this.state.loading}
                   params={this.props.params}
-                 />
+                />
               )}
             />
 
@@ -200,10 +199,11 @@ class Root extends Component {
               pattern="/badge/:pushId"
               component={Badge} />
 
-            <Match pattern="/signup"
+            <Match
+              pattern="/signup"
               component={() => (
                 <SignUp
-                  currentUser={this.state.currentUser}/>
+                  currentUser={this.state.currentUser} />
               )}
             />
 
