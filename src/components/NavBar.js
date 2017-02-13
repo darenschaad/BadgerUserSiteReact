@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import FontAwesome from 'react-fontawesome';
 // import Login from './Login';
-import { WindowResizeListener } from 'react-window-resize-listener'
+import { WindowResizeListener } from 'react-window-resize-listener';
 
 class NavBar extends Component {
   constructor() {
