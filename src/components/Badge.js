@@ -10,49 +10,107 @@ class Badge extends Component{
     this.state = {
       loading : true,
       badge : {},
+      bookmarkedBadges: {},
+      bookmarked: false,
       bookmarkColor : '#EEEEEE',
       bookmarkBorder: true,
-      uid: ''
+      uid: '',
+      complete: false,
     }
     this.bookmark = this.bookmark.bind(this);
+    this.loadingDone = this.loadingDone.bind(this);
+  }
+
+  loadingDone() {
+    this.setState({ loading: false });
+    let badgeId = this.props.params.pushId;
+    let bookmarkedBadges = this.state.bookmarkedBadges;
+
+    for (var key in bookmarkedBadges) {
+      console.log(key);
+      if (key === badgeId) {
+        this.setState({bookmarked:true, bookmarkColor: '#20A282'});
+
+      }
+    }
   }
 
   componentDidMount() {
-
-
-    let id = this.props.params.pushId;
-    this.ref = base.syncState(`/badges/` + id, {
-      context: this,
-      state: "badge",
-      then() {
-        this.setState({ loading: false })
-      }
-    });
     let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    let uid;
     if (currentUser !== null) {
-      let uid = currentUser['uid'];
+      uid = currentUser['uid'];
       this.setState({uid:uid})
     }else {
       this.setState({uid:''});
     }
+    let badgeId = this.props.params.pushId;
+    //uid = this.state.uid;
+    this.ref = base.syncState(`/badges/` + badgeId, {
+      context: this,
+      state: "badge",
+      then(){
+        if (uid !== '') {
+          this.ref = base.syncState(`/bookmarkedBadges/${uid}`, {
+            context: this,
+            state: "bookmarkedBadges",
+            then(){
+              this.loadingDone();
+            }
+          })
+        }else{
+          this.loadingDone();
+        }
+      }
+    });
+
+    // for (var i = 0; i < array.length; i++) {
+    //   array[i]
+    // }
+    //
 
   }
 
-
+  markComplete() {
+    if (this.state.uid === '') {
+      alert("You must be logged in to mark badges as complete.");
+    }
+  }
 
   bookmark() {
-
+    let uid = this.state.uid;
+    const badge = this.state.badge;
+    let bookmarkBadgeId = badge.pushId;
+    let dateBookmarked = new Date();
+    let bookmarkBadgeObject= {dateBookmarked:dateBookmarked.toString(), pushId:bookmarkBadgeId};
     if (this.state.uid === '') {
-      console.log("hi");
+      alert("You must be logged in to bookmark badges.");
     }
-    if(this.state.bookmarkColor === '#EEEEEE') {
-      this.setState({
-        bookmarkColor: '#20A282'
+    if(this.state.bookmarkColor === '#EEEEEE' && this.state.uid !== '') {
+      base.post(`bookmarkedBadges/${uid}/${bookmarkBadgeId}`, {
+        data: bookmarkBadgeObject,
+        then(err){
+          if (!err){
+            console.log(!err);
+          }else {
+            console.log("badge bookmarked!");;
+          }
+        }
+      })
         // bookmarkBorder: false
-      });
-    } else {
+        this.setState({
+          bookmarkColor: '#20A282',
+          bookmarked:true
+        });
+    } else if (this.state.bookmarkColor === '#20A282' && this.state.uid !== '') {
       this.setState({
-        bookmarkColor: '#EEEEEE'
+        bookmarkColor: '#EEEEEE',
+        bookmarked: false
+      })
+      base.remove(`bookmarkedBadges/${uid}/${bookmarkBadgeId}`, function(err){
+        if(!err){
+          console.log("it worked");
+        }
       })
     }
   }
@@ -146,8 +204,8 @@ class Badge extends Component{
               <h3 style={{color: textColor}}><span className="badge-page-subtitle">Date Created:</span> {ourBadge.date}</h3>
               <h3 style={{color: textColor}}><span className="badge-page-subtitle">Keywords:</span> {splitTags}</h3>
                 <div>
-                  <form onSubmit={this.bookmark}>
-                    <input type="submit" value="Bookmark this Badge"></input>
+                  <form onSubmit={this.markComplete}>
+                    <input type="submit" value="Mark Badge as Complete"></input>
                   </form>
                 </div>
             </div>
