@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import About from './components/About';
 import App from './components/App';
-import { BrowserRouter, Match, Miss, browserHistory } from '../node_modules/react-router/index';
+import { BrowserRouter, Match, Miss, browserHistory } from './react-router/index';
 import Badge from './components/Badge';
 import Categories from './components/Categories';
 import CategoryList from './components/CategoryList';
