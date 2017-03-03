@@ -37,7 +37,7 @@ class Root extends Component {
 
     let uId = localStorage.getItem("userId");
     if (uId !== "") {
-      this.setState({ authenticated: true });
+      this.setState({ authenticated: false });
     }
 
     if (!this.state.currentUser.uid) {
@@ -92,7 +92,7 @@ class Root extends Component {
     let uid = user.user.uid;
     let name = user.user.displayName;
     let photoURL = user.user.photoURL;
-    let newUser = {name:name, photoURL:photoURL, pushId:uid}
+    let newUser = {name:name, photoURL:photoURL, pushId:uid};
     base.post(`users/${uid}`, {
       data: newUser,
       then(err){
@@ -102,7 +102,7 @@ class Root extends Component {
           this.context.router.transitionTo(`/`);
         }
       }
-    })
+    });
   }
 
   logIn() {
@@ -117,7 +117,6 @@ class Root extends Component {
         this.signUp(user);
       }
       location.reload();
-
     }
     //make call to Facebook API
     base.authWithOAuthPopup('facebook', authHandler.bind(this), {scope: 'public_profile, email'});
@@ -157,8 +156,7 @@ class Root extends Component {
                 <App
                   badges={this.state.badges}
                   tags={this.state.tags}
-                  loading={this.state.loading}
-                  />
+                  loading={this.state.loading} />
               )}
             />
 
@@ -175,7 +173,7 @@ class Root extends Component {
                   tags={this.state.tags}
                   loading={this.state.loading}
                   params={this.props.params}
-                 />
+                />
               )}
             />
 
@@ -200,10 +198,11 @@ class Root extends Component {
               pattern="/badge/:pushId"
               component={Badge} />
 
-            <Match pattern="/signup"
+            <Match
+              pattern="/signup"
               component={() => (
                 <SignUp
-                  currentUser={this.state.currentUser}/>
+                  currentUser={this.state.currentUser} />
               )}
             />
 

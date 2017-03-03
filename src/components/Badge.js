@@ -21,6 +21,15 @@ class Badge extends Component{
     this.loadingDone = this.loadingDone.bind(this);
   }
 
+// <<<<<<< HEAD
+//   componentDidMount() {
+//     let id = this.props.params.pushId;
+//     this.ref = base.syncState(`/badges/` + id, {
+//       context: this,
+//       state: "badge",
+//       then() {
+//         this.setState({ loading: false })
+
   loadingDone() {
     this.setState({ loading: false });
     let badgeId = this.props.params.pushId;
@@ -30,7 +39,6 @@ class Badge extends Component{
       console.log(key);
       if (key === badgeId) {
         this.setState({bookmarked:true, bookmarkColor: '#20A282'});
-
       }
     }
   }
@@ -44,6 +52,10 @@ class Badge extends Component{
     }else {
       this.setState({uid:''});
     }
+// <<<<<<< HEAD
+//   }
+//
+// =======
     let badgeId = this.props.params.pushId;
     //uid = this.state.uid;
     this.ref = base.syncState(`/badges/` + badgeId, {
@@ -77,6 +89,7 @@ class Badge extends Component{
     }
   }
 
+// >>>>>>> 586d6f9e3ee83939c35a795816ff9ac4aed3cb68
   bookmark() {
     let uid = this.state.uid;
     const badge = this.state.badge;

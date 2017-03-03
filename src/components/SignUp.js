@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import base from '../base';
+
 class SignUp extends Component {
   constructor() {
     super();

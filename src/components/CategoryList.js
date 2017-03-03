@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import Loading from './Loading';
 
-
 class CategoryList extends Component {
   constructor() {
     super();
