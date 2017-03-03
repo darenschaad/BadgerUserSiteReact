@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import About from './components/About';
 import App from './components/App';
-import { BrowserRouter, Match, Miss, browserHistory } from '../node_modules/react-router/index';
+import { BrowserRouter, Match, Miss, browserHistory } from './react-router/index';
 import Badge from './components/Badge';
 import Categories from './components/Categories';
 import CategoryList from './components/CategoryList';
@@ -27,6 +27,8 @@ class Root extends Component {
     }
     this.logIn = this.logIn.bind(this);
     this.logOut = this.logOut.bind(this);
+    this.getUser = this.getUser.bind(this);
+    this.signUp = this.signUp.bind(this);
   }
 
   componentDidMount(){
@@ -66,7 +68,7 @@ class Root extends Component {
   displayUser(user) {
     let userObject = { uid:user.user.uid, userPhoto:user.user.photoURL }
     let userJSON = JSON.stringify(userObject);
-    console.log(userJSON);
+    // console.log(user);
     localStorage.setItem('currentUser', userJSON);
     this.setState({ authenticated: true, currentUser: userObject});
 
@@ -76,14 +78,50 @@ class Root extends Component {
     alert("There was an error accessing Facebook: " + error.message);
   }
 
+  getUser(uid) {
+    base.fetch(`users/${uid}`,{
+      context:this,
+      then(data){
+        return data;
+      }
+    });
+  }
+
+  signUp(user) {
+    // var authHandler = function(error, user) {
+    let uid = user.user.uid;
+    let name = user.user.displayName;
+    let photoURL = user.user.photoURL;
+    let newUser = {name:name, photoURL:photoURL, pushId:uid};
+    base.post(`users/${uid}`, {
+      data: newUser,
+      then(err){
+        if (!err){
+          console.log(!err);
+        }else {
+          this.context.router.transitionTo(`/`);
+        }
+      }
+    });
+  }
+
   logIn() {
     //call the methods that show the error or the
     var authHandler = function(error, user) {
       if(error) this.displayLoginError(error);
       this.displayUser(user);
+      console.log(user);
+      let uid = user.user.uid;
+      let test = this.getUser(uid);
+      if (test === undefined) {
+        this.signUp(user);
+      }
+      location.reload();
+
     }
     //make call to Facebook API
     base.authWithOAuthPopup('facebook', authHandler.bind(this), {scope: 'public_profile, email'});
+
   }
 
   logOut() {
@@ -91,6 +129,7 @@ class Root extends Component {
     base.unauth()
     this.setState({ authenticated: false, currentUser: { }});
     localStorage.setItem('currentUser', null);
+    location.reload();
   }
 
   render() {
@@ -118,8 +157,7 @@ class Root extends Component {
                 <App
                   badges={this.state.badges}
                   tags={this.state.tags}
-                  loading={this.state.loading}
-                  />
+                  loading={this.state.loading} />
               )}
             />
 
@@ -136,7 +174,7 @@ class Root extends Component {
                   tags={this.state.tags}
                   loading={this.state.loading}
                   params={this.props.params}
-                 />
+                />
               )}
             />
 
@@ -157,12 +195,15 @@ class Root extends Component {
 
             <Match exactly pattern="/challenges" component={Challenges} />
 
-            <Match pattern="/badge/:pushId" component={Badge} />
+            <Match
+              pattern="/badge/:pushId"
+              component={Badge} />
 
-            <Match pattern="/signup"
+            <Match
+              pattern="/signup"
               component={() => (
                 <SignUp
-                  currentUser={this.state.currentUser}/>
+                  currentUser={this.state.currentUser} />
               )}
             />
 

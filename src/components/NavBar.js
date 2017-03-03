@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import FontAwesome from 'react-fontawesome';
-// import Login from './Login';
-import { WindowResizeListener } from 'react-window-resize-listener'
+import Login from './Login';
+import { WindowResizeListener } from 'react-window-resize-listener';
 
 class NavBar extends Component {
   constructor() {
@@ -48,8 +48,12 @@ class NavBar extends Component {
           <li className="navbar-clickable" onClick={this.goToPage.bind(this, "about")}>About</li>
           <li className="navbar-clickable" onClick={this.goToPage.bind(this, "categories")}>Categories</li>
           <li className="navbar-clickable" onClick={this.goToPage.bind(this, "challenges")}>Challenges</li>
-
-
+          <li className="navbar-clickable" onClick={this.goToPage.bind(this, "signup")}>My Account</li>
+          <Login
+            logIn={this.props.logIn}
+            logOut={this.props.logOut}
+            authenticated={this.props.authenticated}
+            currentUser={this.props.currentUser} />
         </ul>
       </div>
     );

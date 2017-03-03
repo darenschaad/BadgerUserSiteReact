@@ -152,7 +152,6 @@ const AdvancedBadgeList = (props) => {
           //map over filterTags to display list of everything from the database, or whatever the user is filtering with their search term.
           filteredBadgesByCreator.map((badge, idx) => {
             let badgeCreator = badge.creator;
-            let badgeTagsArray = badge.tags.toLowerCase().split(',');
 
             if (badgeCreator === creator) {
               return(
