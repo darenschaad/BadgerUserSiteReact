@@ -37,7 +37,7 @@ class Root extends Component {
 
     let uId = localStorage.getItem("userId");
     if (uId !== "") {
-      this.setState({ authenticated: true });
+      this.setState({ authenticated: false });
     }
 
     if (!this.state.currentUser.uid) {
@@ -117,7 +117,6 @@ class Root extends Component {
         this.signUp(user);
       }
       location.reload();
-
     }
     //make call to Facebook API
     base.authWithOAuthPopup('facebook', authHandler.bind(this), {scope: 'public_profile, email'});
