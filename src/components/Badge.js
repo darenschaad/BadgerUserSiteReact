@@ -18,31 +18,10 @@ class Badge extends Component{
       complete: false,
     }
     this.bookmark = this.bookmark.bind(this);
-    this.loadingDone = this.loadingDone.bind(this);
-  }
-
-//   componentDidMount() {
-//     let id = this.props.params.pushId;
-//     this.ref = base.syncState(`/badges/` + id, {
-//       context: this,
-//       state: "badge",
-//       then() {
-//         this.setState({ loading: false })
-
-  loadingDone() {
-    this.setState({ loading: false });
-    let badgeId = this.props.currentBadge.pushId;
-    let bookmarkedBadges = this.state.bookmarkedBadges;
-
-    for (var key in bookmarkedBadges) {
-      if (key === badgeId) {
-        this.setState({bookmarked:true, bookmarkColor: '#20A282'});
-      }
-    }
   }
 
   componentDidMount() {
-    if (this.props.currentBadge === undefined) {
+    if (this.props.currentBadge.category === undefined) {
       var url = window.location.pathname;
       var urlBadgeId = "";
       for (var i = url.length - 1; i > 0; i--) {
@@ -52,55 +31,26 @@ class Badge extends Component{
           break;
         }
       }
-      console.log(urlBadgeId);
       this.props.getBadgeById(urlBadgeId);
     }
-
-    let currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    let uid;
-    if (currentUser !== null) {
-      uid = currentUser['uid'];
-      this.setState({uid:uid})
-    }else {
-      this.setState({uid:''});
-    }
-    // let badgeId = this.props.params.pushId;
-    //uid = this.state.uid;
-    // this.ref = base.syncState(`/badges/` + urlBadgeId, {
-    //   context: this,
-    //   state: "badge",
-    //   then(){
-        if (uid !== '') {
-          this.ref = base.syncState(`/bookmarkedBadges/${uid}`, {
-            context: this,
-            state: "bookmarkedBadges",
-            then(){
-              this.loadingDone();
-            }
-          })
-        }else{
-          this.loadingDone();
-        }
-      // }
-    // });
   }
 
   markComplete() {
-    if (this.state.uid === '') {
+    if (this.props.currentUser.uid === '') {
       alert("You must be logged in to mark badges as complete.");
     }
   }
 
   bookmark() {
-    let uid = this.state.uid;
-    const badge = this.state.badge;
+    let uid = this.props.currentUser.uid;
+    const badge = this.props.currentBadge;
     let bookmarkBadgeId = badge.pushId;
     let dateBookmarked = new Date();
     let bookmarkBadgeObject= {dateBookmarked:dateBookmarked.toString(), pushId:bookmarkBadgeId};
-    if (this.state.uid === '') {
+    if (this.props.currentUser.uid === '') {
       alert("You must be logged in to bookmark badges.");
     }
-    if(!this.state.bookmarked && this.state.uid !== '') {
+    if(!this.state.bookmarked && this.props.currentUser.uid !== '') {
       base.post(`bookmarkedBadges/${uid}/${bookmarkBadgeId}`, {
         data: bookmarkBadgeObject,
         then(err){
@@ -116,7 +66,7 @@ class Badge extends Component{
           bookmarkColor: '#20A282',
           bookmarked:true
         });
-    } else if (this.state.bookmarked && this.state.uid !== '') {
+    } else if (this.state.bookmarked && this.props.currentUser.uid !== '') {
       this.setState({
         bookmarkColor: '#eeeeee',
         bookmarked: false
@@ -132,7 +82,7 @@ class Badge extends Component{
   render() {
     document.body.scrollTop = 0;
 
-    if(this.state.loading) {
+    if(this.props.loading) {
       return(
         <Loading />
       );
@@ -152,12 +102,7 @@ class Badge extends Component{
        return splitStr.join(' ');
       }
 
-
-      // const localStorageRef = localStorage.getItem('badge');
-
-      const ourBadge = this.state.badge;
-
-      // const ourBadge = this.state.badge;
+      let ourBadge = this.props.currentBadge;
 
       const categories = [0,100,200,300,400,500,600,700,800,900];
 
@@ -176,29 +121,32 @@ class Badge extends Component{
       const backgroundColor = backgroundColors[index];
 
       //split tags and challenges with space separation so you don't have one long string with no space
-      const splitTags = titleCase(ourBadge.tags.split(',').join(', '));
-      const splitChallenges = ourBadge.challenges.split(',').join(', ');
+      let splitTags;
+      let splitChallenges;
+      if(ourBadge.tags !== undefined) {
+        splitTags = titleCase(ourBadge.tags.split(',').join(', '));
+        splitChallenges = ourBadge.challenges.split(',').join(', ');
+      }
 
-      let displayBookmark
+      let displayBookmark;
 
-        displayBookmark = (
-          <FontAwesome
-            className="bookmark-icon hover-hand"
-            name="bookmark"
-            size="2x"
-            border={this.state.bookmarkBorder}
-            style={{ color: this.state.bookmarkColor}}
-            onClick={this.bookmark}
+      displayBookmark = (
+        <FontAwesome
+          className="bookmark-icon hover-hand"
+          name="bookmark"
+          size="2x"
+          border={this.state.bookmarkBorder}
+          style={{ color: this.state.bookmarkColor}}
+          onClick={this.bookmark}
           />
-        );
-
+      );
 
       return(
         <div>
           <div
             className="badge-detail-page-tile"
             style={{backgroundColor: backgroundColor}}
-          >
+            >
             <div className="category-div">
               <h1 style={{color: textColor}} className="category-name">{ category }</h1>
               {displayBookmark}
@@ -208,7 +156,7 @@ class Badge extends Component{
               <div className="img-wrapper">
                 <img className='badge-page-image' src={ourBadge.imageUrl} alt={ourBadge.name}></img>
               </div>
-                <h3 style={{color: textColor}}><span className="badge-page-subtitle">To do:</span> {ourBadge.description}</h3>
+              <h3 style={{color: textColor}}><span className="badge-page-subtitle">To do:</span> {ourBadge.description}</h3>
               <Linkify properties={{target: '_blank'}}>
                 <h3 style={{color: textColor}}>{ourBadge.comments}</h3>
                 <h3 style={{color: textColor}}><span className="badge-page-subtitle">Proof:</span> {ourBadge.proof}</h3>
@@ -217,11 +165,11 @@ class Badge extends Component{
               <h3 style={{color: textColor}}><span className="badge-page-subtitle">Creator:</span> {ourBadge.creator}</h3>
               <h3 style={{color: textColor}}><span className="badge-page-subtitle">Date Created:</span> {ourBadge.date}</h3>
               <h3 style={{color: textColor}}><span className="badge-page-subtitle">Keywords:</span> {splitTags}</h3>
-                <div>
-                  <form onSubmit={this.markComplete}>
-                    <input type="submit" value="Mark Badge as Complete"></input>
-                  </form>
-                </div>
+              <div>
+                <form onSubmit={this.markComplete}>
+                  <input type="submit" value="Mark Badge as Complete"></input>
+                </form>
+              </div>
             </div>
           </div>
         </div>

@@ -24,7 +24,8 @@ class Root extends Component {
       tags: [ ],
       loading: true,
       authenticated: false,
-      currentUser: { }
+      currentUser: { },
+
     }
     this.logIn = this.logIn.bind(this);
     this.logOut = this.logOut.bind(this);
@@ -53,8 +54,15 @@ class Root extends Component {
     this.ref = base.syncState(`/tags`, {
       context: this,
       state: "tags",
-      assArray: true
+      asArray: true
     })
+
+    if(uId !== "") {
+      this.ref = base.syncState(`/bookmarkedBadges/${uId}`, {
+        context: this,
+        state: "bookmarkedBadges"
+      });
+    }
 
     this.ref = base.syncState(`/badges`, {
       context: this,
@@ -223,8 +231,18 @@ class Root extends Component {
               component={() => (
                 <Badge
                   authenticated={this.state.authenticated}
-                  currentBadge={this.state.badges[this.state.currentBadgeId]}
+                  bookmarked={() => {
+                    for(var key in this.state.bookmarkedBadged) {
+                      if(key === this.state.badges[this.state.currentBadgeId].pushId) {
+                        return true;
+                      }
+                    }
+                    return false;
+                  }}
+                  currentBadge={this.state.badges[this.state.currentBadgeId] || {}}
+                  currentUser={this.state.currentUser}
                   getBadgeById={this.getBadgeById}
+                  loading={this.state.loading}
                 />
                 )}
                 />
