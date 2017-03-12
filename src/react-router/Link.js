@@ -1,4 +1,3 @@
-'use strict';
 
 exports.__esModule = true;
 
@@ -24,6 +23,65 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+var createLocationDescriptor = function createLocationDescriptor(to) {
+  return (typeof to === 'undefined' ? 'undefined' : _typeof(to)) === 'object' ? to : { pathname: to };
+};
+
+var pathIsActive = function pathIsActive(to, pathname, activeOnlyWhenExact) {
+  return activeOnlyWhenExact ? pathname === to : pathname.indexOf(to) === 0;
+};
+
+var deepEqual = function deepEqual(a, b) {
+  if (a === b) return true;
+
+  if (a == null || b == null) return false;
+
+  if (Array.isArray(a)) {
+    return Array.isArray(b) && a.length === b.length && a.every(function (item, index) {
+      return deepEqual(item, b[index]);
+    });
+  }
+
+  if ((typeof a === 'undefined' ? 'undefined' : _typeof(a)) === 'object') {
+    for (var p in a) {
+      if (!Object.prototype.hasOwnProperty.call(a, p)) {
+        continue;
+      }
+
+      if (a[p] === undefined) {
+        if (b[p] !== undefined) {
+          return false;
+        }
+      } else if (!Object.prototype.hasOwnProperty.call(b, p)) {
+        return false;
+      } else if (!deepEqual(a[p], b[p])) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  return String(a) === String(b);
+};
+
+var queryIsActive = function queryIsActive(query, activeQuery) {
+  if (activeQuery == null) return query == null;
+
+  if (query == null) return true;
+
+  return deepEqual(query, activeQuery);
+};
+
+var isLeftClickEvent = function isLeftClickEvent(event) {
+  return event.button === 0;
+};
+
+var isModifiedEvent = function isModifiedEvent(event) {
+  return !!(event.metaKey || event.altKey || event.ctrlKey || event.shiftKey);
+};
+
+
 var Link = function (_React$Component) {
   _inherits(Link, _React$Component);
 
@@ -36,7 +94,7 @@ var Link = function (_React$Component) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _React$Component.call.apply(_React$Component, [this].concat(args))), _this), _this.handleClick = function (event) {
+    return _ret = ((_temp = (_this = _possibleConstructorReturn(this, _React$Component.call.apply(_React$Component, [this].concat(args))), _this), _this.handleClick = function (event) {
       if (_this.props.onClick) _this.props.onClick(event);
 
       if (!event.defaultPrevented && // onClick prevented default
@@ -53,7 +111,7 @@ var Link = function (_React$Component) {
 
       var navigate = replace ? router.replaceWith : router.transitionTo;
       navigate(to);
-    }, _temp), _possibleConstructorReturn(_this, _ret);
+    }, _temp), _possibleConstructorReturn(_this, _ret));
   }
 
   Link.prototype.render = function render() {
@@ -68,8 +126,8 @@ var Link = function (_React$Component) {
         className = _props.className,
         activeClassName = _props.activeClassName,
         getIsActive = _props.isActive,
-        activeOnlyWhenExact = _props.activeOnlyWhenExact,
-        replace = _props.replace,
+        // activeOnlyWhenExact = _props.activeOnlyWhenExact,
+        // replace = _props.replace,
         children = _props.children,
         rest = _objectWithoutProperties(_props, ['to', 'style', 'activeStyle', 'className', 'activeClassName', 'isActive', 'activeOnlyWhenExact', 'replace', 'children']);
 
@@ -81,7 +139,7 @@ var Link = function (_React$Component) {
 
         // If children is a function, we are using a Function as Children Component
         // so useful values will be passed down to the children function.
-        if (typeof children == 'function') {
+        if (typeof children === 'function') {
           return children({
             isActive: isActive,
             location: location,
@@ -145,62 +203,6 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 // we should probably use LocationUtils.createLocationDescriptor
-var createLocationDescriptor = function createLocationDescriptor(to) {
-  return (typeof to === 'undefined' ? 'undefined' : _typeof(to)) === 'object' ? to : { pathname: to };
-};
 
-var pathIsActive = function pathIsActive(to, pathname, activeOnlyWhenExact) {
-  return activeOnlyWhenExact ? pathname === to : pathname.indexOf(to) === 0;
-};
-
-var queryIsActive = function queryIsActive(query, activeQuery) {
-  if (activeQuery == null) return query == null;
-
-  if (query == null) return true;
-
-  return deepEqual(query, activeQuery);
-};
-
-var isLeftClickEvent = function isLeftClickEvent(event) {
-  return event.button === 0;
-};
-
-var isModifiedEvent = function isModifiedEvent(event) {
-  return !!(event.metaKey || event.altKey || event.ctrlKey || event.shiftKey);
-};
-
-var deepEqual = function deepEqual(a, b) {
-  if (a == b) return true;
-
-  if (a == null || b == null) return false;
-
-  if (Array.isArray(a)) {
-    return Array.isArray(b) && a.length === b.length && a.every(function (item, index) {
-      return deepEqual(item, b[index]);
-    });
-  }
-
-  if ((typeof a === 'undefined' ? 'undefined' : _typeof(a)) === 'object') {
-    for (var p in a) {
-      if (!Object.prototype.hasOwnProperty.call(a, p)) {
-        continue;
-      }
-
-      if (a[p] === undefined) {
-        if (b[p] !== undefined) {
-          return false;
-        }
-      } else if (!Object.prototype.hasOwnProperty.call(b, p)) {
-        return false;
-      } else if (!deepEqual(a[p], b[p])) {
-        return false;
-      }
-    }
-
-    return true;
-  }
-
-  return String(a) === String(b);
-};
 
 exports.default = Link;

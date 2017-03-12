@@ -1,4 +1,3 @@
-'use strict';
 
 exports.__esModule = true;
 exports.LocationSubscriber = exports.LocationBroadcast = undefined;
@@ -15,10 +14,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var LocationChannel = 'location';
 
-var LocationBroadcast = exports.LocationBroadcast = function LocationBroadcast(props) {
+exports.LocationBroadcast = function LocationBroadcast(props) {
   return _react2.default.createElement(_reactBroadcast.Broadcast, _extends({}, props, { channel: LocationChannel }));
 };
 
-var LocationSubscriber = exports.LocationSubscriber = function LocationSubscriber(props) {
+exports.LocationSubscriber = function LocationSubscriber(props) {
   return _react2.default.createElement(_reactBroadcast.Subscriber, _extends({}, props, { channel: LocationChannel }));
 };

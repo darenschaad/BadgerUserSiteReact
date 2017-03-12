@@ -1,4 +1,3 @@
-'use strict';
 
 exports.__esModule = true;
 exports.createRouterPath = exports.createRouterLocation = exports.locationsAreEqual = undefined;
@@ -16,7 +15,7 @@ Object.defineProperty(exports, 'locationsAreEqual', {
 
 var _PathUtils = require('history/PathUtils');
 
-var createRouterLocation = exports.createRouterLocation = function createRouterLocation(input, parseQueryString, stringifyQuery) {
+exports.createRouterLocation = function createRouterLocation(input, parseQueryString, stringifyQuery) {
   if (typeof input === 'string') {
     var location = (0, _PathUtils.parsePath)(input);
     location.query = location.search !== '' ? parseQueryString(location.search) : null;
@@ -34,7 +33,7 @@ var createRouterLocation = exports.createRouterLocation = function createRouterL
   }
 };
 
-var createRouterPath = exports.createRouterPath = function createRouterPath(input, stringifyQuery) {
+exports.createRouterPath = function createRouterPath(input, stringifyQuery) {
   return typeof input === 'string' ? input : (0, _PathUtils.createPath)(_extends({}, input, {
     search: input.search || (input.query ? '?' + stringifyQuery(input.query) : '')
   }));

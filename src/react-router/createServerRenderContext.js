@@ -1,4 +1,3 @@
-"use strict";
 
 exports.__esModule = true;
 var k = function k() {};
@@ -26,6 +25,11 @@ var createServerRenderContext = function createServerRenderContext() {
   var registerMissPresence = flushed ? k : function (index) {
     matchContexts[index].hasMissComponent = true;
   };
+  
+  var missedAtIndex = function missedAtIndex(index) {
+    var context = matchContexts[index];
+    return context.matchesByIdentity.length === 0 && context.hasMissComponent;
+  };
 
   var getResult = function getResult() {
     flushed = true;
@@ -39,10 +43,6 @@ var createServerRenderContext = function createServerRenderContext() {
     };
   };
 
-  var missedAtIndex = function missedAtIndex(index) {
-    var context = matchContexts[index];
-    return context.matchesByIdentity.length === 0 && context.hasMissComponent;
-  };
 
   return {
     setRedirect: setRedirect,

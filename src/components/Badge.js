@@ -12,7 +12,7 @@ class Badge extends Component{
       badge : {},
       bookmarkedBadges: {},
       bookmarked: false,
-      bookmarkColor : '#EEEEEE',
+      bookmarkColor : '#eeeeee',
       bookmarkBorder: true,
       uid: '',
       complete: false,
@@ -21,7 +21,6 @@ class Badge extends Component{
     this.loadingDone = this.loadingDone.bind(this);
   }
 
-// <<<<<<< HEAD
 //   componentDidMount() {
 //     let id = this.props.params.pushId;
 //     this.ref = base.syncState(`/badges/` + id, {
@@ -32,11 +31,10 @@ class Badge extends Component{
 
   loadingDone() {
     this.setState({ loading: false });
-    let badgeId = this.props.params.pushId;
+    let badgeId = this.props.currentBadge.pushId;
     let bookmarkedBadges = this.state.bookmarkedBadges;
 
     for (var key in bookmarkedBadges) {
-      console.log(key);
       if (key === badgeId) {
         this.setState({bookmarked:true, bookmarkColor: '#20A282'});
       }
@@ -44,6 +42,20 @@ class Badge extends Component{
   }
 
   componentDidMount() {
+    if (this.props.currentBadge === undefined) {
+      var url = window.location.pathname;
+      var urlBadgeId = "";
+      for (var i = url.length - 1; i > 0; i--) {
+        if (url[i] !== '/' ) {
+          urlBadgeId = url[i] + urlBadgeId;
+        } else {
+          break;
+        }
+      }
+      console.log(urlBadgeId);
+      this.props.getBadgeById(urlBadgeId);
+    }
+
     let currentUser = JSON.parse(localStorage.getItem('currentUser'));
     let uid;
     if (currentUser !== null) {
@@ -52,16 +64,12 @@ class Badge extends Component{
     }else {
       this.setState({uid:''});
     }
-// <<<<<<< HEAD
-//   }
-//
-// =======
-    let badgeId = this.props.params.pushId;
+    // let badgeId = this.props.params.pushId;
     //uid = this.state.uid;
-    this.ref = base.syncState(`/badges/` + badgeId, {
-      context: this,
-      state: "badge",
-      then(){
+    // this.ref = base.syncState(`/badges/` + urlBadgeId, {
+    //   context: this,
+    //   state: "badge",
+    //   then(){
         if (uid !== '') {
           this.ref = base.syncState(`/bookmarkedBadges/${uid}`, {
             context: this,
@@ -73,14 +81,8 @@ class Badge extends Component{
         }else{
           this.loadingDone();
         }
-      }
-    });
-
-    // for (var i = 0; i < array.length; i++) {
-    //   array[i]
-    // }
-    //
-
+      // }
+    // });
   }
 
   markComplete() {
@@ -89,7 +91,6 @@ class Badge extends Component{
     }
   }
 
-// >>>>>>> 586d6f9e3ee83939c35a795816ff9ac4aed3cb68
   bookmark() {
     let uid = this.state.uid;
     const badge = this.state.badge;
@@ -99,7 +100,7 @@ class Badge extends Component{
     if (this.state.uid === '') {
       alert("You must be logged in to bookmark badges.");
     }
-    if(this.state.bookmarkColor === '#EEEEEE' && this.state.uid !== '') {
+    if(!this.state.bookmarked && this.state.uid !== '') {
       base.post(`bookmarkedBadges/${uid}/${bookmarkBadgeId}`, {
         data: bookmarkBadgeObject,
         then(err){
@@ -115,9 +116,9 @@ class Badge extends Component{
           bookmarkColor: '#20A282',
           bookmarked:true
         });
-    } else if (this.state.bookmarkColor === '#20A282' && this.state.uid !== '') {
+    } else if (this.state.bookmarked && this.state.uid !== '') {
       this.setState({
-        bookmarkColor: '#EEEEEE',
+        bookmarkColor: '#eeeeee',
         bookmarked: false
       })
       base.remove(`bookmarkedBadges/${uid}/${bookmarkBadgeId}`, function(err){
@@ -179,7 +180,7 @@ class Badge extends Component{
       const splitChallenges = ourBadge.challenges.split(',').join(', ');
 
       let displayBookmark
-      if(!this.props.authenticated) {
+
         displayBookmark = (
           <FontAwesome
             className="bookmark-icon hover-hand"
@@ -190,7 +191,7 @@ class Badge extends Component{
             onClick={this.bookmark}
           />
         );
-      }
+
 
       return(
         <div>

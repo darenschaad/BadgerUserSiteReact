@@ -27,6 +27,7 @@ const AdvancedBadgeList = (props) => {
           creatorArray.push(badge.creator);
           creatorArray.sort();
         }
+        return badge;
       }
     );
   }
@@ -69,9 +70,10 @@ const AdvancedBadgeList = (props) => {
     (badge) => {
       for (var i = 0; i < searchTagsArray.length; i++) {
         if (badge['tags'].toLowerCase().includes(searchTagsArray[i].toLowerCase())) {
-          return badge['tags'].toLowerCase().includes(searchTagsArray[i].toLowerCase());
+          return true;
         }
       }
+      return false;
     }
   );
 
@@ -93,6 +95,7 @@ const AdvancedBadgeList = (props) => {
           </div>
         );
       }
+      return null;
     });
     return(
       <div key={idx}>
@@ -141,6 +144,7 @@ const AdvancedBadgeList = (props) => {
           return badge;
         }
       }
+      return null;
     }
   );
 
@@ -166,6 +170,7 @@ const AdvancedBadgeList = (props) => {
                 </div>
               );
             }
+            return null;
           })
         }
       </div>

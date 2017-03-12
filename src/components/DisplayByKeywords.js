@@ -45,6 +45,7 @@ const DisplayByKeywords = (props) => {
           </div>
         );
       }
+      return null;
     });
     return(
       <div key={idx}>
