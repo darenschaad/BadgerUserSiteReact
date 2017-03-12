@@ -13,6 +13,7 @@ class CategoryList extends Component {
 
 
   goToBadge(currentBadge){
+    this.props.setCurrentBadgeId(currentBadge.pushId);
     //pass JSON string containing information from the badge object to local storage so that the browser can help carry that information to each badge's specific route
     // localStorage.setItem(`badge`, JSON.stringify(currentBadge));
     const pushId = currentBadge.pushId;
@@ -55,7 +56,7 @@ class CategoryList extends Component {
       const textColors = ["#4C4C4C", "#0079A5", "#66008D", "#4D782D", "#C97100", "#25895A", "#000073", "#988967", "#76193C", "#985721"];
 
       // const backgroundColors = ["#989DA7", "#DCF0FF", "#D0C0D6", "#CEDFB0", "#EEC99A", "#9EBAAC", "#B5B5CA", "#FDE192", "#DBC2CC", "#D8C2A9"];
-      // 
+      //
       // const category = categoryNames[index];
 
       const textColor = textColors[index];

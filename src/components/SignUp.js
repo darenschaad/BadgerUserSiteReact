@@ -9,6 +9,7 @@ class SignUp extends Component {
     }
     this.handleChange = this.handleChange.bind(this);
     this.signUp = this.signUp.bind(this);
+    this.goToBookmarkedBadges = this.goToBookmarkedBadges.bind(this);
   }
   signUp(e) {
     e.preventDefault();
@@ -37,6 +38,10 @@ class SignUp extends Component {
     const name = event.target.name;
     this.setState({[name]: event.target.value})
   }
+
+  goToBookmarkedBadges() {
+    this.context.router.transitionTo(`/my-bookmarks`);
+  }
   render() {
     return(
       <div>
@@ -51,9 +56,14 @@ class SignUp extends Component {
           </label>
           <input type="submit" value="Submit"></input>
         </form>
+        <button type="submit" onClick={this.goToBookmarkedBadges}>View Bookmarked Badges</button>
       </div>
     );
   }
 }
 
+
+SignUp.contextTypes = {
+  router: React.PropTypes.object
+}
 export default SignUp;
