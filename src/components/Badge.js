@@ -22,6 +22,7 @@ class Badge extends Component{
   }
 
   componentDidMount() {
+    console.log('mounted');
     if (this.props.currentBadge.category === undefined) {
       var url = window.location.pathname;
       var urlBadgeId = "";
@@ -34,6 +35,12 @@ class Badge extends Component{
       }
       this.props.getBadgeById(urlBadgeId);
     }
+    if(this.props.bookmarked) {
+      this.setState({
+        bookmarkColor: '#20A282',
+        bookmarked:true
+      });
+    }
   }
 
   markComplete() {
@@ -44,7 +51,8 @@ class Badge extends Component{
   }
 
   bookmark() {
-    debugger;
+    console.log("clicked");
+    let that = this;
     let uid = this.props.currentUser.uid;
     const badge = this.props.currentBadge;
     let bookmarkBadgeId = badge.pushId;
@@ -57,18 +65,18 @@ class Badge extends Component{
       base.post(`bookmarkedBadges/${uid}/${bookmarkBadgeId}`, {
         data: bookmarkBadgeObject,
         then(err){
+          debugger;
           if (err){
             console.log(err);
           }else {
             console.log("badge bookmarked!");;
+            that.setState({
+              bookmarkColor: '#20A282',
+              bookmarked:true
+            });
           }
         }
-      })
-        // bookmarkBorder: false
-        this.setState({
-          bookmarkColor: '#20A282',
-          bookmarked:true
-        });
+      });
     } else if (this.state.bookmarked && this.props.currentUser.uid !== '') {
       this.setState({
         bookmarkColor: '#eeeeee',
@@ -82,9 +90,13 @@ class Badge extends Component{
     }
   }
 
+  componentWillUnmount() {
+    console.log('unmounting');
+  }
+
   render() {
     document.body.scrollTop = 0;
-
+    console.log(this.props.loading);
     if(this.props.loading) {
       return(
         <Loading />

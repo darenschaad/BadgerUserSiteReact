@@ -33,6 +33,7 @@ class Root extends Component {
     this.signUp = this.signUp.bind(this);
     this.setCurrentBadgeId = this.setCurrentBadgeId.bind(this);
     this.getBadgeById = this.getBadgeById.bind(this);
+    this.isBadgeBookmarked = this.isBadgeBookmarked.bind(this);
   }
 
   componentDidMount(){
@@ -81,7 +82,6 @@ class Root extends Component {
     var refresh = setInterval(function() {
       if(!component.state.loading) {
         var currentBadge = component.state.badges[badgeId];
-        console.log(currentBadge);
         component.setState({currentBadgeId: currentBadge.pushId});
         clearInterval(refresh);
       }
@@ -139,6 +139,7 @@ class Root extends Component {
       this.displayUser(user);
       console.log(user);
       let uid = user.user.uid;
+      localStorage.setItem(`userId`, uid);
       let test = this.getUser(uid);
       if (test === undefined) {
         this.signUp(user);
@@ -155,7 +156,23 @@ class Root extends Component {
     base.unauth()
     this.setState({ authenticated: false, currentUser: { }});
     localStorage.setItem('currentUser', null);
+    localStorage.setItem(`userId`, "");
     location.reload();
+  }
+
+  isBadgeBookmarked() {
+    for(var key in this.state.bookmarkedBadges) {
+      console.log(key);
+      try {
+        console.log(this.state.badges[this.state.currentBadgeId].pushId)
+      } catch(e) {
+        return false;
+      }
+      if(Number(key) === Number(this.state.badges[this.state.currentBadgeId].pushId)) {
+        return true;
+      }
+    }
+    return false;
   }
 
   render() {
@@ -231,14 +248,7 @@ class Root extends Component {
               component={() => (
                 <Badge
                   authenticated={this.state.authenticated}
-                  bookmarked={() => {
-                    for(var key in this.state.bookmarkedBadged) {
-                      if(key === this.state.badges[this.state.currentBadgeId].pushId) {
-                        return true;
-                      }
-                    }
-                    return false;
-                  }}
+                  bookmarked={this.isBadgeBookmarked()}
                   currentBadge={this.state.badges[this.state.currentBadgeId] || {}}
                   currentUser={this.state.currentUser}
                   getBadgeById={this.getBadgeById}
