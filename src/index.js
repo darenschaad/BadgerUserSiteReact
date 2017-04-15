@@ -11,6 +11,7 @@ import NotFound from './components/NotFound';
 import base from './base';
 import NavBar from './components/NavBar';
 import SignUp from './components/SignUp';
+import BookmarkedBadges from './components/BookmarkedBadges';
 
 import './styles/App.scss';
 import './styles/animate.css';
@@ -24,11 +25,15 @@ class Root extends Component {
       loading: true,
       authenticated: false,
       currentUser: { },
+      bookmarkedBadges: { }
     }
     this.logIn = this.logIn.bind(this);
     this.logOut = this.logOut.bind(this);
     this.getUser = this.getUser.bind(this);
     this.signUp = this.signUp.bind(this);
+    this.setCurrentBadgeId = this.setCurrentBadgeId.bind(this);
+    this.getBadgeById = this.getBadgeById.bind(this);
+    this.isBadgeBookmarked = this.isBadgeBookmarked.bind(this);
   }
 
   componentDidMount(){
@@ -50,8 +55,15 @@ class Root extends Component {
     this.ref = base.syncState(`/tags`, {
       context: this,
       state: "tags",
-      assArray: true
+      asArray: true
     })
+
+    if(uId !== "") {
+      this.ref = base.syncState(`/bookmarkedBadges/${uId}`, {
+        context: this,
+        state: "bookmarkedBadges"
+      });
+    }
 
     this.ref = base.syncState(`/badges`, {
       context: this,
@@ -63,6 +75,21 @@ class Root extends Component {
         this.setState({ loading: false })
       }
     });
+  }
+
+  getBadgeById(badgeId) {
+    var component = this;
+    var refresh = setInterval(function() {
+      if(!component.state.loading) {
+        var currentBadge = component.state.badges[badgeId];
+        component.setState({currentBadgeId: currentBadge.pushId});
+        clearInterval(refresh);
+      }
+    }, 500);
+  }
+
+  setCurrentBadgeId(badgeId) {
+    this.setState({currentBadgeId : badgeId});
   }
 
   displayUser(user) {
@@ -112,6 +139,7 @@ class Root extends Component {
       this.displayUser(user);
       console.log(user);
       let uid = user.user.uid;
+      localStorage.setItem(`userId`, uid);
       let test = this.getUser(uid);
       if (test === undefined) {
         this.signUp(user);
@@ -128,7 +156,23 @@ class Root extends Component {
     base.unauth()
     this.setState({ authenticated: false, currentUser: { }});
     localStorage.setItem('currentUser', null);
+    localStorage.setItem(`userId`, "");
     location.reload();
+  }
+
+  isBadgeBookmarked() {
+    for(var key in this.state.bookmarkedBadges) {
+      console.log(key);
+      try {
+        console.log(this.state.badges[this.state.currentBadgeId].pushId)
+      } catch(e) {
+        return false;
+      }
+      if(Number(key) === Number(this.state.badges[this.state.currentBadgeId].pushId)) {
+        return true;
+      }
+    }
+    return false;
   }
 
   render() {
@@ -156,7 +200,9 @@ class Root extends Component {
                 <App
                   badges={this.state.badges}
                   tags={this.state.tags}
-                  loading={this.state.loading} />
+                  loading={this.state.loading}
+                  setCurrentBadgeId={this.setCurrentBadgeId}
+                  />
               )}
             />
 
@@ -186,7 +232,8 @@ class Root extends Component {
                   logOut={this.logOut}
                   currentUser={this.state.currentUser}
                   badges={this.state.badges}
-                  loading={this.state.loading} />
+                  loading={this.state.loading}
+                  setCurrentBadgeId={this.setCurrentBadgeId}/>
               )}
             />
 
@@ -194,9 +241,21 @@ class Root extends Component {
 
             <Match exactly pattern="/challenges" component={Challenges} />
 
+            <Match exactly pattern="/my-bookmarks" component={BookmarkedBadges} />
+
             <Match
               pattern="/badge/:pushId"
-              component={Badge} />
+              component={() => (
+                <Badge
+                  authenticated={this.state.authenticated}
+                  bookmarked={this.isBadgeBookmarked()}
+                  currentBadge={this.state.badges[this.state.currentBadgeId] || {}}
+                  currentUser={this.state.currentUser}
+                  getBadgeById={this.getBadgeById}
+                  loading={this.state.loading}
+                />
+                )}
+                />
 
             <Match
               pattern="/signup"

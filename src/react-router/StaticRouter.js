@@ -1,4 +1,3 @@
-'use strict';
 
 exports.__esModule = true;
 
@@ -42,7 +41,7 @@ var StaticRouter = function (_React$Component) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _React$Component.call.apply(_React$Component, [this].concat(args))), _this), _this.transitionTo = function (location) {
+    return _ret = ((_temp = (_this = _possibleConstructorReturn(this, _React$Component.call.apply(_React$Component, [this].concat(args))), _this), _this.transitionTo = function (location) {
       _this.props.onPush(_this.createLocation(location));
     }, _this.replaceWith = function (location) {
       _this.props.onReplace(_this.createLocation(location));
@@ -56,7 +55,7 @@ var StaticRouter = function (_React$Component) {
       return _this.props.createHref(path);
     }, _this.state = {
       location: null
-    }, _temp), _possibleConstructorReturn(_this, _ret);
+    }, _temp), _possibleConstructorReturn(_this, _ret));
   }
 
   StaticRouter.prototype.createLocation = function createLocation(location) {
