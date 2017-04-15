@@ -18,6 +18,7 @@ class Badge extends Component{
       complete: false,
     }
     this.bookmark = this.bookmark.bind(this);
+    this.markComplete = this.markComplete.bind(this);
   }
 
   componentDidMount() {
@@ -36,12 +37,14 @@ class Badge extends Component{
   }
 
   markComplete() {
+    debugger;
     if (this.props.currentUser.uid === '') {
       alert("You must be logged in to mark badges as complete.");
     }
   }
 
   bookmark() {
+    debugger;
     let uid = this.props.currentUser.uid;
     const badge = this.props.currentBadge;
     let bookmarkBadgeId = badge.pushId;
@@ -54,8 +57,8 @@ class Badge extends Component{
       base.post(`bookmarkedBadges/${uid}/${bookmarkBadgeId}`, {
         data: bookmarkBadgeObject,
         then(err){
-          if (!err){
-            console.log(!err);
+          if (err){
+            console.log(err);
           }else {
             console.log("badge bookmarked!");;
           }
@@ -93,7 +96,6 @@ class Badge extends Component{
            // You do not need to check if i is larger than splitStr length, as your for does that for you
            // Assign it back to the array
            if (splitStr[i] !== "of" && splitStr[i] !== "for" && splitStr[i] !== "the" && splitStr[i] !== "in") {
-
              splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
            }
        }
@@ -166,9 +168,7 @@ class Badge extends Component{
               <h3 style={{color: textColor}}><span className="badge-page-subtitle">Date Created:</span> {ourBadge.date}</h3>
               <h3 style={{color: textColor}}><span className="badge-page-subtitle">Keywords:</span> {splitTags}</h3>
               <div>
-                <form onSubmit={this.markComplete}>
-                  <input type="submit" value="Mark Badge as Complete"></input>
-                </form>
+              <button onClick={this.markComplete}>Mark Badge as Complete</button>
               </div>
             </div>
           </div>

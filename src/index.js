@@ -25,7 +25,7 @@ class Root extends Component {
       loading: true,
       authenticated: false,
       currentUser: { },
-
+      bookmarkedBadges: { }
     }
     this.logIn = this.logIn.bind(this);
     this.logOut = this.logOut.bind(this);
