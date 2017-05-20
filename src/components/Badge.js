@@ -44,49 +44,77 @@ class Badge extends Component{
   }
 
   markComplete() {
-    debugger;
     if (this.props.currentUser.uid === '') {
       alert("You must be logged in to mark badges as complete.");
+    }
+    else {
+      let that = this;
+      let uid = this.props.currentUser.uid;
+      const badge = this.props.currentBadge;
+      let completedBadgeId = badge.pushId;
+      let dateCompleted = new Date();
+      let completedBadgeObject= {dateCompleted:dateCompleted.toString(), pushId:completedBadgeId};
+      if (!this.state.bookmarked) {
+        base.post(`completedBadges/${uid}/${completedBadgeId}`, {
+          data: completedBadgeObject,
+          then(err){
+            if (err){
+            // }else {
+            //   that.setState({
+            //     bookmarkColor: '#20A282',
+            //     completed:true
+            //   });
+            }
+          }
+        });
+      } else  {
+        // this.setState({
+        //   bookmarkColor: '#eeeeee',
+        //   bookmarked: false
+        // })
+        base.remove(`completedBadges/${uid}/${completedBadgeId}`, function(err){
+          if(!err){
+            // console.log("it worked");
+          }
+        })
+      }
     }
   }
 
   bookmark() {
-    console.log("clicked");
-    let that = this;
-    let uid = this.props.currentUser.uid;
-    const badge = this.props.currentBadge;
-    let bookmarkBadgeId = badge.pushId;
-    let dateBookmarked = new Date();
-    let bookmarkBadgeObject= {dateBookmarked:dateBookmarked.toString(), pushId:bookmarkBadgeId};
     if (this.props.currentUser.uid === '') {
       alert("You must be logged in to bookmark badges.");
     }
-    if(!this.state.bookmarked && this.props.currentUser.uid !== '') {
-      base.post(`bookmarkedBadges/${uid}/${bookmarkBadgeId}`, {
-        data: bookmarkBadgeObject,
-        then(err){
-          debugger;
-          if (err){
-            console.log(err);
-          }else {
-            console.log("badge bookmarked!");;
-            that.setState({
-              bookmarkColor: '#20A282',
-              bookmarked:true
-            });
+    else {
+      let that = this;
+      let uid = this.props.currentUser.uid;
+      const badge = this.props.currentBadge;
+      let bookmarkBadgeId = badge.pushId;
+      let dateBookmarked = new Date();
+      let bookmarkBadgeObject= {dateBookmarked:dateBookmarked.toString(), pushId:bookmarkBadgeId};
+      if (!this.state.bookmarked) {
+        base.post(`bookmarkedBadges/${uid}/${bookmarkBadgeId}`, {
+          data: bookmarkBadgeObject,
+          then(err){
+            if (err){
+            }else {
+              that.setState({
+                bookmarkColor: '#20A282',
+                bookmarked:true
+              });
+            }
           }
-        }
-      });
-    } else if (this.state.bookmarked && this.props.currentUser.uid !== '') {
-      this.setState({
-        bookmarkColor: '#eeeeee',
-        bookmarked: false
-      })
-      base.remove(`bookmarkedBadges/${uid}/${bookmarkBadgeId}`, function(err){
-        if(!err){
-          console.log("it worked");
-        }
-      })
+        });
+      } else  {
+        this.setState({
+          bookmarkColor: '#eeeeee',
+          bookmarked: false
+        })
+        base.remove(`bookmarkedBadges/${uid}/${bookmarkBadgeId}`, function(err){
+          if(!err){
+          }
+        })
+      }
     }
   }
 
