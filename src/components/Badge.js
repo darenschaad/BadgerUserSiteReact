@@ -3,6 +3,7 @@ import Linkify from 'react-linkify';
 import base from '../base';
 import Loading from './Loading';
 import FontAwesome from 'react-fontawesome';
+import Modal from './Modal';
 
 class Badge extends Component{
   constructor(params) {
@@ -16,9 +17,11 @@ class Badge extends Component{
       bookmarkBorder: true,
       uid: '',
       complete: false,
+      modalOpen: false,
     }
     this.bookmark = this.bookmark.bind(this);
     this.markComplete = this.markComplete.bind(this);
+    this.onModalClose = this.onModalClose.bind(this);
   }
 
   componentDidMount() {
@@ -44,50 +47,83 @@ class Badge extends Component{
   }
 
   markComplete() {
-    debugger;
     if (this.props.currentUser.uid === '') {
       alert("You must be logged in to mark badges as complete.");
+    }
+    else {
+      this.setState({modalOpen : true});
+      let that = this;
+      let uid = this.props.currentUser.uid;
+      const badge = this.props.currentBadge;
+      let completedBadgeId = badge.pushId;
+      let dateCompleted = new Date();
+      let completedBadgeObject= {dateCompleted:dateCompleted.toString(), pushId:completedBadgeId};
+      if (!this.state.bookmarked) {
+        base.post(`completedBadges/${uid}/${completedBadgeId}`, {
+          data: completedBadgeObject,
+          then(err){
+            if (err){
+            // }else {
+            //   that.setState({
+            //     bookmarkColor: '#20A282',
+            //     completed:true
+            //   });
+            }
+          }
+        });
+      } else  {
+        // this.setState({
+        //   bookmarkColor: '#eeeeee',
+        //   bookmarked: false
+        // })
+        base.remove(`completedBadges/${uid}/${completedBadgeId}`, function(err){
+          if(!err){
+            // console.log("it worked");
+          }
+        })
+      }
     }
   }
 
   bookmark() {
-    console.log("clicked");
-    let that = this;
-    let uid = this.props.currentUser.uid;
-    const badge = this.props.currentBadge;
-    let bookmarkBadgeId = badge.pushId;
-    let dateBookmarked = new Date();
-    let bookmarkBadgeObject= {dateBookmarked:dateBookmarked.toString(), pushId:bookmarkBadgeId};
     if (this.props.currentUser.uid === '') {
       alert("You must be logged in to bookmark badges.");
     }
-    if(!this.state.bookmarked && this.props.currentUser.uid !== '') {
-      base.post(`bookmarkedBadges/${uid}/${bookmarkBadgeId}`, {
-        data: bookmarkBadgeObject,
-        then(err){
-          debugger;
-          if (err){
-            console.log(err);
-          }else {
-            console.log("badge bookmarked!");;
-            that.setState({
-              bookmarkColor: '#20A282',
-              bookmarked:true
-            });
+    else {
+      let that = this;
+      let uid = this.props.currentUser.uid;
+      const badge = this.props.currentBadge;
+      let bookmarkBadgeId = badge.pushId;
+      let dateBookmarked = new Date();
+      let bookmarkBadgeObject= {dateBookmarked:dateBookmarked.toString(), pushId:bookmarkBadgeId};
+      if (!this.state.bookmarked) {
+        base.post(`bookmarkedBadges/${uid}/${bookmarkBadgeId}`, {
+          data: bookmarkBadgeObject,
+          then(err){
+            if (err){
+            }else {
+              that.setState({
+                bookmarkColor: '#20A282',
+                bookmarked:true
+              });
+            }
           }
-        }
-      });
-    } else if (this.state.bookmarked && this.props.currentUser.uid !== '') {
-      this.setState({
-        bookmarkColor: '#eeeeee',
-        bookmarked: false
-      })
-      base.remove(`bookmarkedBadges/${uid}/${bookmarkBadgeId}`, function(err){
-        if(!err){
-          console.log("it worked");
-        }
-      })
+        });
+      } else  {
+        this.setState({
+          bookmarkColor: '#eeeeee',
+          bookmarked: false
+        })
+        base.remove(`bookmarkedBadges/${uid}/${bookmarkBadgeId}`, function(err){
+          if(!err){
+          }
+        })
+      }
     }
+  }
+
+  onModalClose() {
+    this.setState({modalOpen: false});
   }
 
   componentWillUnmount() {
@@ -157,6 +193,11 @@ class Badge extends Component{
 
       return(
         <div>
+          {this.state.modalOpen &&
+            <Modal onModalClose={this.onModalClose}>
+              <p>Hello</p>
+            </Modal>
+          }
           <div
             className="badge-detail-page-tile"
             style={{backgroundColor: backgroundColor}}
