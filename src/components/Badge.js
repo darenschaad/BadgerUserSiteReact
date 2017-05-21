@@ -3,6 +3,7 @@ import Linkify from 'react-linkify';
 import base from '../base';
 import Loading from './Loading';
 import FontAwesome from 'react-fontawesome';
+import Modal from './Modal';
 
 class Badge extends Component{
   constructor(params) {
@@ -16,9 +17,11 @@ class Badge extends Component{
       bookmarkBorder: true,
       uid: '',
       complete: false,
+      modalOpen: false,
     }
     this.bookmark = this.bookmark.bind(this);
     this.markComplete = this.markComplete.bind(this);
+    this.onModalClose = this.onModalClose.bind(this);
   }
 
   componentDidMount() {
@@ -48,6 +51,7 @@ class Badge extends Component{
       alert("You must be logged in to mark badges as complete.");
     }
     else {
+      this.setState({modalOpen : true});
       let that = this;
       let uid = this.props.currentUser.uid;
       const badge = this.props.currentBadge;
@@ -118,6 +122,10 @@ class Badge extends Component{
     }
   }
 
+  onModalClose() {
+    this.setState({modalOpen: false});
+  }
+
   componentWillUnmount() {
     console.log('unmounting');
   }
@@ -185,6 +193,11 @@ class Badge extends Component{
 
       return(
         <div>
+          {this.state.modalOpen &&
+            <Modal onModalClose={this.onModalClose}>
+              <p>Hello</p>
+            </Modal>
+          }
           <div
             className="badge-detail-page-tile"
             style={{backgroundColor: backgroundColor}}
