@@ -251,6 +251,18 @@ class Root extends Component {
               )}
             />
 
+            <Match exactly pattern="/my-completed-badges"
+              component={() => (
+                <CompletedBadges
+                  authenticated={this.state.authenticated}
+                  bookmarkedBadges={this.state.bookmarkedBadges}
+                  currentUser={this.state.currentUser}
+                  loading={this.state.loading}
+                  badges={this.state.badges}
+                  setCurrentBadgeId={this.setCurrentBadgeId}/>
+              )}
+            />
+
             <Match
               pattern="/badge/:pushId"
               component={() => (

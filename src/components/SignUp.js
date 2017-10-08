@@ -11,6 +11,7 @@ class SignUp extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.signUp = this.signUp.bind(this);
     this.goToBookmarkedBadges = this.goToBookmarkedBadges.bind(this);
+    this.goToCompletedBadges = this.goToCompletedBadges.bind(this);
   }
   signUp(e) {
     e.preventDefault();
@@ -43,6 +44,9 @@ class SignUp extends Component {
   goToBookmarkedBadges() {
     this.context.router.transitionTo(`/my-bookmarks`);
   }
+  goToCompletedBadges() {
+    this.context.router.transitionTo(`/my-completed-badges`);
+  }
   render() {
     return(
       <div>
@@ -58,6 +62,7 @@ class SignUp extends Component {
           <input type="submit" value="Submit"></input>
         </form>
         <button type="submit" onClick={this.goToBookmarkedBadges}>View Bookmarked Badges</button>
+        <button type="submit" onClick={this.goToCompletedBadges}>View Completed Badges</button>
       </div>
     );
   }
