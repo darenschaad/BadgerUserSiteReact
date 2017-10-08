@@ -25,7 +25,6 @@ class Badge extends Component{
   }
 
   componentDidMount() {
-    console.log('mounted');
     if (this.props.currentBadge.category === undefined) {
       var url = window.location.pathname;
       var urlBadgeId = "";
@@ -51,7 +50,6 @@ class Badge extends Component{
       alert("You must be logged in to mark badges as complete.");
     }
     else {
-      this.setState({modalOpen : true});
       let that = this;
       let uid = this.props.currentUser.uid;
       const badge = this.props.currentBadge;
@@ -72,7 +70,8 @@ class Badge extends Component{
             }
             else {
               that.setState({
-                complete: true
+                complete: true,
+                modalOpen : true
               });
             }
           }
@@ -84,9 +83,9 @@ class Badge extends Component{
         // })
         base.remove(`completedBadges/${uid}/${completedBadgeId}`, function(err){
           if(!err){
-            console.log("it worked");
             that.setState({
-              complete: false
+              complete: false,
+              modalOpen : true
             });
           } else {
             console.log(err);
@@ -138,12 +137,10 @@ class Badge extends Component{
   }
 
   componentWillUnmount() {
-    console.log('unmounting');
   }
 
   render() {
     document.body.scrollTop = 0;
-    console.log(this.props.loading);
     if(this.props.loading) {
       return(
         <Loading />
@@ -206,8 +203,16 @@ class Badge extends Component{
         <div>
           {this.state.modalOpen &&
             <Modal onModalClose={this.onModalClose}>
-              <p>Congratulations!</p>
-              <p>Your badge has been marked as complete!</p>
+            {this.state.complete ? (
+              <div>
+                <h3>Congratulations!</h3>
+                <p>Your badge has been marked as complete!</p>
+              </div>
+            ) : (
+              <h3> Badge has been been removed from your list of completed badges </h3>
+            )
+
+          }
             </Modal>
           }
           <div

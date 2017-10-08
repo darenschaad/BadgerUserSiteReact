@@ -95,7 +95,6 @@ class Root extends Component {
   displayUser(user) {
     let userObject = { uid:user.user.uid, userPhoto:user.user.photoURL }
     let userJSON = JSON.stringify(userObject);
-    // console.log(user);
     localStorage.setItem('currentUser', userJSON);
     this.setState({ authenticated: true, currentUser: userObject});
 
@@ -137,7 +136,6 @@ class Root extends Component {
     var authHandler = function(error, user) {
       if(error) this.displayLoginError(error);
       this.displayUser(user);
-      console.log(user);
       let uid = user.user.uid;
       localStorage.setItem(`userId`, uid);
       let test = this.getUser(uid);
@@ -162,7 +160,7 @@ class Root extends Component {
 
   isBadgeBookmarked() {
     for(var key in this.state.bookmarkedBadges) {
-      console.log(key);
+      // console.log(key);
       try {
         console.log(this.state.badges[this.state.currentBadgeId].pushId)
       } catch(e) {
