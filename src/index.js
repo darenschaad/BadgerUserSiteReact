@@ -179,6 +179,21 @@ class Root extends Component {
     return false;
   }
 
+  isBadgeCompleted() {
+    for(var key in this.state.completedBadges) {
+      // console.log(key);
+      try {
+        console.log(this.state.badges[this.state.currentBadgeId].pushId)
+      } catch(e) {
+        return false;
+      }
+      if(Number(key) === Number(this.state.badges[this.state.currentBadgeId].pushId)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   render() {
     return(
       <div>
@@ -275,6 +290,7 @@ class Root extends Component {
                 <Badge
                   authenticated={this.state.authenticated}
                   bookmarked={this.isBadgeBookmarked()}
+                  completed={this.isBadgeCompleted()}
                   currentBadge={this.state.badges[this.state.currentBadgeId] || {}}
                   currentUser={this.state.currentUser}
                   getBadgeById={this.getBadgeById}

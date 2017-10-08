@@ -16,7 +16,7 @@ class Badge extends Component{
       bookmarkColor : '#eeeeee',
       bookmarkBorder: true,
       uid: '',
-      complete: false,
+      completed: false,
       modalOpen: false,
     }
     this.bookmark = this.bookmark.bind(this);
@@ -40,8 +40,13 @@ class Badge extends Component{
     if(this.props.bookmarked) {
       this.setState({
         bookmarkColor: '#20A282',
-        bookmarked:true
+        bookmarked : true
       });
+    }
+    if(this.props.completed) {
+      this.setState({
+        completed : true
+      })
     }
   }
 
@@ -57,7 +62,7 @@ class Badge extends Component{
       let dateCompleted = new Date();
       let completedBadgeObject= {dateCompleted:dateCompleted.toString(), pushId:completedBadgeId};
 
-      if (!this.state.complete) {
+      if (!this.state.completed) {
         base.post(`completedBadges/${uid}/${completedBadgeId}`, {
           data: completedBadgeObject,
           then(err){
@@ -70,7 +75,7 @@ class Badge extends Component{
             }
             else {
               that.setState({
-                complete: true,
+                completed: true,
                 modalOpen : true
               });
             }
@@ -84,7 +89,7 @@ class Badge extends Component{
         base.remove(`completedBadges/${uid}/${completedBadgeId}`, function(err){
           if(!err){
             that.setState({
-              complete: false,
+              completed: false,
               modalOpen : true
             });
           } else {
@@ -203,7 +208,7 @@ class Badge extends Component{
         <div>
           {this.state.modalOpen &&
             <Modal onModalClose={this.onModalClose}>
-            {this.state.complete ? (
+            {this.state.completed ? (
               <div>
                 <h3>Congratulations!</h3>
                 <p>Your badge has been marked as complete!</p>
@@ -238,7 +243,7 @@ class Badge extends Component{
               <h3 style={{color: textColor}}><span className="badge-page-subtitle">Date Created:</span> {ourBadge.date}</h3>
               <h3 style={{color: textColor}}><span className="badge-page-subtitle">Keywords:</span> {splitTags}</h3>
               <div>
-              <button onClick={this.markComplete}>Mark Badge as {this.state.complete ? 'Incomplete' : 'Complete'}</button>
+              <button onClick={this.markComplete}>Mark Badge as {this.state.completed ? 'Incomplete' : 'Complete'}</button>
               </div>
             </div>
           </div>
