@@ -6,12 +6,13 @@ import { BrowserRouter, Match, Miss, browserHistory } from './react-router/index
 import Badge from './components/Badge';
 import Categories from './components/Categories';
 import CategoryList from './components/CategoryList';
-import Challenges from './components/Challenges'
+import Challenges from './components/Challenges';
 import NotFound from './components/NotFound';
 import base from './base';
 import NavBar from './components/NavBar';
 import SignUp from './components/SignUp';
 import BookmarkedBadges from './components/BookmarkedBadges';
+import CompletedBadges from './components/CompletedBadges';
 
 import './styles/App.scss';
 import './styles/animate.css';
@@ -25,7 +26,8 @@ class Root extends Component {
       loading: true,
       authenticated: false,
       currentUser: { },
-      bookmarkedBadges: { }
+      bookmarkedBadges: { },
+      completedBadges : { }
     }
     this.logIn = this.logIn.bind(this);
     this.logOut = this.logOut.bind(this);
@@ -62,6 +64,10 @@ class Root extends Component {
       this.ref = base.syncState(`/bookmarkedBadges/${uId}`, {
         context: this,
         state: "bookmarkedBadges"
+      });
+      this.ref = base.syncState(`/completedBadges/${uId}`, {
+        context: this,
+        state: "completedBadges"
       });
     }
 
@@ -255,7 +261,7 @@ class Root extends Component {
               component={() => (
                 <CompletedBadges
                   authenticated={this.state.authenticated}
-                  bookmarkedBadges={this.state.bookmarkedBadges}
+                  completedBadges={this.state.completedBadges}
                   currentUser={this.state.currentUser}
                   loading={this.state.loading}
                   badges={this.state.badges}
