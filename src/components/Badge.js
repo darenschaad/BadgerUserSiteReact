@@ -58,7 +58,8 @@ class Badge extends Component{
       let completedBadgeId = badge.pushId;
       let dateCompleted = new Date();
       let completedBadgeObject= {dateCompleted:dateCompleted.toString(), pushId:completedBadgeId};
-      if (!this.state.bookmarked) {
+
+      if (!this.state.complete) {
         base.post(`completedBadges/${uid}/${completedBadgeId}`, {
           data: completedBadgeObject,
           then(err){
@@ -69,6 +70,11 @@ class Badge extends Component{
             //     completed:true
             //   });
             }
+            else {
+              that.setState({
+                complete: true
+              });
+            }
           }
         });
       } else  {
@@ -78,7 +84,12 @@ class Badge extends Component{
         // })
         base.remove(`completedBadges/${uid}/${completedBadgeId}`, function(err){
           if(!err){
-            // console.log("it worked");
+            console.log("it worked");
+            that.setState({
+              complete: false
+            });
+          } else {
+            console.log(err);
           }
         })
       }
@@ -195,7 +206,8 @@ class Badge extends Component{
         <div>
           {this.state.modalOpen &&
             <Modal onModalClose={this.onModalClose}>
-              <p>Hello</p>
+              <p>Congratulations!</p>
+              <p>Your badge has been marked as complete!</p>
             </Modal>
           }
           <div
@@ -221,7 +233,7 @@ class Badge extends Component{
               <h3 style={{color: textColor}}><span className="badge-page-subtitle">Date Created:</span> {ourBadge.date}</h3>
               <h3 style={{color: textColor}}><span className="badge-page-subtitle">Keywords:</span> {splitTags}</h3>
               <div>
-              <button onClick={this.markComplete}>Mark Badge as Complete</button>
+              <button onClick={this.markComplete}>Mark Badge as {this.state.complete ? 'Incomplete' : 'Complete'}</button>
               </div>
             </div>
           </div>
