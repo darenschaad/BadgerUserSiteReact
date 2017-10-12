@@ -7,6 +7,7 @@ import Badge from './components/Badge';
 import Categories from './components/Categories';
 import CategoryList from './components/CategoryList';
 import Challenges from './components/Challenges';
+import ChallengeList from './components/ChallengeList';
 import NotFound from './components/NotFound';
 import base from './base';
 import NavBar from './components/NavBar';
@@ -226,8 +227,7 @@ class Root extends Component {
             />
 
             <Match
-              exactly
-              pattern="/categories"
+              exactly pattern="/categories"
               component={() => (
                 <Categories
                   authenticated={this.state.authenticated}
@@ -258,7 +258,33 @@ class Root extends Component {
 
             <Match exactly pattern="/about" component={About} />
 
-            <Match exactly pattern="/challenges" component={Challenges} />
+            <Match exactly pattern="/challenges"
+              component={() => (
+                <Challenges
+                  authenticated={this.state.authenticated}
+                  logIn={this.logIn}
+                  logOut={this.logOut}
+                  currentUser={this.state.currentUser}
+                  badges={this.state.badges}
+                  tags={this.state.tags}
+                  loading={this.state.loading}
+                  params={this.props.params} />
+              )}
+            />
+
+            <Match
+              pattern="/challenges/:challengeName"
+              component={() => (
+                <ChallengeList
+                  authenticated={this.state.authenticated}
+                  logIn={this.logIn}
+                  logOut={this.logOut}
+                  currentUser={this.state.currentUser}
+                  badges={this.state.badges}
+                  loading={this.state.loading}
+                  setCurrentBadgeId={this.setCurrentBadgeId}/>
+              )}
+            />
 
             <Match exactly pattern="/my-bookmarks"
               component={() => (
