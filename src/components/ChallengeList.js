@@ -40,7 +40,7 @@ class ChallengeList extends Component {
       let url = window.location.href;
       let urlSplit = (url.split("challenges/"));
       let currentChallenge = urlSplit[1];
-            
+
       try {
 
       } catch (e) {
@@ -79,16 +79,18 @@ class ChallengeList extends Component {
       return(
         <div>
           <select value={currentChallenge} onChange={this.handleChange} className="category-list-category-title">
-            <option value="000">000 - GENERAL KNOWLEDGE</option>
-            <option value="100">100 - PHILOSOPHY & PSYCHOLOGY</option>
-            <option value="200">200 - RELIGION</option>
-            <option value="300">300 - SOCIAL SCIENCE</option>
-            <option value="400">400 - LANGUAGES</option>
-            <option value="500">500 - SCIENCE</option>
-            <option value="600">600 - TECHNOLOGY</option>
-            <option value="700">700 - ARTS & RECREATION</option>
-            <option value="800">800 - LITERATURE</option>
-            <option value="900">900 - HISTORY & GEOGRAPHY</option>
+            <option value="good-sport">Good Sport</option>
+            <option value="kitchen-sciences">Kitchen Sciences</option>
+            <option value="know-it-all">Know It All</option>
+            <option value="master-gardener">Master Gardener</option>
+            <option value="media-consumption">Media Consumption</option>
+            <option value="media-production">Media Production</option>
+            <option value="model-citizen">Model Citizen</option>
+            <option value="party-animal">Party Animal</option>
+            <option value="professional-development">Professional Development</option>
+            <option value="survival-skills">Survival Skills</option>
+            <option value="textiles">TEXTILES</option>
+
           </select>
           ({challengeBadgeCount})
           {filteredByChallenge}
