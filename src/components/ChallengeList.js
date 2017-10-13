@@ -10,6 +10,13 @@ class ChallengeList extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
+  componentDidMount(){
+    let url = window.location.href;
+    var urlSplit = (url.split("challenges/"));
+    var currentChallenge = urlSplit[1];
+    console.log(currentChallenge);
+  }
+
 
   goToBadge(currentBadge){
     this.props.setCurrentBadgeId(currentBadge.pushId);
@@ -21,11 +28,25 @@ class ChallengeList extends Component {
   }
 
   handleChange(event) {
-    this.context.router.transitionTo(`/categories/${event.target.value}`);
+    this.context.router.transitionTo(`/challenges/${event.target.value}`);
   }
 
   render() {
+    document.body.scrollTop = 0;
 
+    if(this.props.loading) {
+      return(
+        <div>
+          <Loading />
+        </div>
+      );
+    }else {
+      return(
+        <div>
+          <p> Hello</p>
+        </div>
+      )
+    }
   }
 
 }

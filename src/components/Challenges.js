@@ -10,7 +10,7 @@ class Challenges extends Component {
   goToChallenge(currentChallenge) {
     // console.log(value);
     // localStorage.setItem(`category`, JSON.stringify(currentChallenge));
-      this.context.router.transitionTo(`/categories/${currentChallenge}`);
+      this.context.router.transitionTo(`/challenges/${currentChallenge}`);
 
   }
 
