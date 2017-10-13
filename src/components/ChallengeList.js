@@ -11,10 +11,6 @@ class ChallengeList extends Component {
   }
 
   componentDidMount(){
-    let url = window.location.href;
-    var urlSplit = (url.split("challenges/"));
-    var currentChallenge = urlSplit[1];
-    console.log(currentChallenge);
   }
 
 
@@ -41,11 +37,30 @@ class ChallengeList extends Component {
         </div>
       );
     }else {
+      let url = window.location.href;
+      var urlSplit = (url.split("challenges/"));
+      var currentChallenge = urlSplit[1];
+      try {
+
+      } catch (e) {
+
+      } finally {
+
+      }
+      const challenges = ['good-sport', 'kitchen-sciences', 'know-it-all', 'master-gardener', 'media-consumption', 'media-production', 'model-citizen', 'party-animal', 'professional-development', 'survival-skills', 'textiles'];
+
+      const index = challenges.indexOf(currentChallenge);
+      console.log(index);
+
+
+
+
       return(
         <div>
           <p> Hello</p>
         </div>
       )
+
     }
   }
 
