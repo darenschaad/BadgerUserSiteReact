@@ -9,7 +9,7 @@ class Categories extends Component {
 
   goToCategory(currentCategory) {
     // console.log(value);
-    localStorage.setItem(`category`, JSON.stringify(currentCategory));
+    // localStorage.setItem(`category`, JSON.stringify(currentCategory));
     if (currentCategory === 0) {
       this.context.router.transitionTo(`/categories/${currentCategory}00`);
     } else{

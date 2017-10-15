@@ -6,12 +6,14 @@ import { BrowserRouter, Match, Miss, browserHistory } from './react-router/index
 import Badge from './components/Badge';
 import Categories from './components/Categories';
 import CategoryList from './components/CategoryList';
-import Challenges from './components/Challenges'
+import Challenges from './components/Challenges';
+import ChallengeList from './components/ChallengeList';
 import NotFound from './components/NotFound';
 import base from './base';
 import NavBar from './components/NavBar';
 import SignUp from './components/SignUp';
 import BookmarkedBadges from './components/BookmarkedBadges';
+import CompletedBadges from './components/CompletedBadges';
 
 import './styles/App.scss';
 import './styles/animate.css';
@@ -25,7 +27,8 @@ class Root extends Component {
       loading: true,
       authenticated: false,
       currentUser: { },
-      bookmarkedBadges: { }
+      bookmarkedBadges: { },
+      completedBadges : { }
     }
     this.logIn = this.logIn.bind(this);
     this.logOut = this.logOut.bind(this);
@@ -63,6 +66,10 @@ class Root extends Component {
         context: this,
         state: "bookmarkedBadges"
       });
+      this.ref = base.syncState(`/completedBadges/${uId}`, {
+        context: this,
+        state: "completedBadges"
+      });
     }
 
     this.ref = base.syncState(`/badges`, {
@@ -95,7 +102,6 @@ class Root extends Component {
   displayUser(user) {
     let userObject = { uid:user.user.uid, userPhoto:user.user.photoURL }
     let userJSON = JSON.stringify(userObject);
-    // console.log(user);
     localStorage.setItem('currentUser', userJSON);
     this.setState({ authenticated: true, currentUser: userObject});
 
@@ -137,7 +143,6 @@ class Root extends Component {
     var authHandler = function(error, user) {
       if(error) this.displayLoginError(error);
       this.displayUser(user);
-      console.log(user);
       let uid = user.user.uid;
       localStorage.setItem(`userId`, uid);
       let test = this.getUser(uid);
@@ -162,7 +167,22 @@ class Root extends Component {
 
   isBadgeBookmarked() {
     for(var key in this.state.bookmarkedBadges) {
-      console.log(key);
+      // console.log(key);
+      try {
+        console.log(this.state.badges[this.state.currentBadgeId].pushId)
+      } catch(e) {
+        return false;
+      }
+      if(Number(key) === Number(this.state.badges[this.state.currentBadgeId].pushId)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  isBadgeCompleted() {
+    for(var key in this.state.completedBadges) {
+      // console.log(key);
       try {
         console.log(this.state.badges[this.state.currentBadgeId].pushId)
       } catch(e) {
@@ -207,8 +227,7 @@ class Root extends Component {
             />
 
             <Match
-              exactly
-              pattern="/categories"
+              exactly pattern="/categories"
               component={() => (
                 <Categories
                   authenticated={this.state.authenticated}
@@ -239,7 +258,33 @@ class Root extends Component {
 
             <Match exactly pattern="/about" component={About} />
 
-            <Match exactly pattern="/challenges" component={Challenges} />
+            <Match exactly pattern="/challenges"
+              component={() => (
+                <Challenges
+                  authenticated={this.state.authenticated}
+                  logIn={this.logIn}
+                  logOut={this.logOut}
+                  currentUser={this.state.currentUser}
+                  badges={this.state.badges}
+                  tags={this.state.tags}
+                  loading={this.state.loading}
+                  params={this.props.params} />
+              )}
+            />
+
+            <Match
+              pattern="/challenges/:challengeName"
+              component={() => (
+                <ChallengeList
+                  authenticated={this.state.authenticated}
+                  logIn={this.logIn}
+                  logOut={this.logOut}
+                  currentUser={this.state.currentUser}
+                  badges={this.state.badges}
+                  loading={this.state.loading}
+                  setCurrentBadgeId={this.setCurrentBadgeId}/>
+              )}
+            />
 
             <Match exactly pattern="/my-bookmarks"
               component={() => (
@@ -253,12 +298,25 @@ class Root extends Component {
               )}
             />
 
+            <Match exactly pattern="/my-completed-badges"
+              component={() => (
+                <CompletedBadges
+                  authenticated={this.state.authenticated}
+                  completedBadges={this.state.completedBadges}
+                  currentUser={this.state.currentUser}
+                  loading={this.state.loading}
+                  badges={this.state.badges}
+                  setCurrentBadgeId={this.setCurrentBadgeId}/>
+              )}
+            />
+
             <Match
               pattern="/badge/:pushId"
               component={() => (
                 <Badge
                   authenticated={this.state.authenticated}
                   bookmarked={this.isBadgeBookmarked()}
+                  completed={this.isBadgeCompleted()}
                   currentBadge={this.state.badges[this.state.currentBadgeId] || {}}
                   currentUser={this.state.currentUser}
                   getBadgeById={this.getBadgeById}

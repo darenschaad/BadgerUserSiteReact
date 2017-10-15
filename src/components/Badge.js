@@ -16,7 +16,7 @@ class Badge extends Component{
       bookmarkColor : '#eeeeee',
       bookmarkBorder: true,
       uid: '',
-      complete: false,
+      completed: false,
       modalOpen: false,
     }
     this.bookmark = this.bookmark.bind(this);
@@ -25,7 +25,6 @@ class Badge extends Component{
   }
 
   componentDidMount() {
-    console.log('mounted');
     if (this.props.currentBadge.category === undefined) {
       var url = window.location.pathname;
       var urlBadgeId = "";
@@ -41,8 +40,13 @@ class Badge extends Component{
     if(this.props.bookmarked) {
       this.setState({
         bookmarkColor: '#20A282',
-        bookmarked:true
+        bookmarked : true
       });
+    }
+    if(this.props.completed) {
+      this.setState({
+        completed : true
+      })
     }
   }
 
@@ -51,14 +55,14 @@ class Badge extends Component{
       alert("You must be logged in to mark badges as complete.");
     }
     else {
-      this.setState({modalOpen : true});
       let that = this;
       let uid = this.props.currentUser.uid;
       const badge = this.props.currentBadge;
       let completedBadgeId = badge.pushId;
       let dateCompleted = new Date();
       let completedBadgeObject= {dateCompleted:dateCompleted.toString(), pushId:completedBadgeId};
-      if (!this.state.bookmarked) {
+
+      if (!this.state.completed) {
         base.post(`completedBadges/${uid}/${completedBadgeId}`, {
           data: completedBadgeObject,
           then(err){
@@ -69,6 +73,12 @@ class Badge extends Component{
             //     completed:true
             //   });
             }
+            else {
+              that.setState({
+                completed: true,
+                modalOpen : true
+              });
+            }
           }
         });
       } else  {
@@ -78,7 +88,12 @@ class Badge extends Component{
         // })
         base.remove(`completedBadges/${uid}/${completedBadgeId}`, function(err){
           if(!err){
-            // console.log("it worked");
+            that.setState({
+              completed: false,
+              modalOpen : true
+            });
+          } else {
+            console.log(err);
           }
         })
       }
@@ -127,12 +142,10 @@ class Badge extends Component{
   }
 
   componentWillUnmount() {
-    console.log('unmounting');
   }
 
   render() {
     document.body.scrollTop = 0;
-    console.log(this.props.loading);
     if(this.props.loading) {
       return(
         <Loading />
@@ -195,7 +208,16 @@ class Badge extends Component{
         <div>
           {this.state.modalOpen &&
             <Modal onModalClose={this.onModalClose}>
-              <p>Hello</p>
+            {this.state.completed ? (
+              <div>
+                <h3>Congratulations!</h3>
+                <p>Your badge has been marked as complete!</p>
+              </div>
+            ) : (
+              <h3> Badge has been been removed from your list of completed badges </h3>
+            )
+
+          }
             </Modal>
           }
           <div
@@ -221,7 +243,7 @@ class Badge extends Component{
               <h3 style={{color: textColor}}><span className="badge-page-subtitle">Date Created:</span> {ourBadge.date}</h3>
               <h3 style={{color: textColor}}><span className="badge-page-subtitle">Keywords:</span> {splitTags}</h3>
               <div>
-              <button onClick={this.markComplete}>Mark Badge as Complete</button>
+              <button onClick={this.markComplete}>Mark Badge as {this.state.completed ? 'Incomplete' : 'Complete'}</button>
               </div>
             </div>
           </div>
