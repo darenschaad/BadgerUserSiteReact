@@ -64,8 +64,9 @@ class ChallengeList extends Component {
         (badge, idx) => {
           if(badge.challenges.toLowerCase().replace(" ","-").includes(currentChallenge)){
             challengeBadgeCount++;
+            let badgeCategory = "category-list-index-" + (badge.category / 100);
             return (
-              <div className={divIndex}  key={idx} >
+              <div className={badgeCategory}  key={idx} >
                 <div className="category-list-div" onClick={() => this.goToBadge(badge)}>
                   <img className='category-list-image' src={badge.imageUrl} alt={badge.name}></img>
                   <h4 className="category-list-text" style={{color: textColor}}>{badge.name}</h4>
@@ -78,21 +79,23 @@ class ChallengeList extends Component {
       );
       return(
         <div>
-          <select value={currentChallenge} onChange={this.handleChange} className="category-list-category-title">
-            <option value="good-sport">Good Sport</option>
-            <option value="kitchen-sciences">Kitchen Sciences</option>
-            <option value="know-it-all">Know It All</option>
-            <option value="master-gardener">Master Gardener</option>
-            <option value="media-consumption">Media Consumption</option>
-            <option value="media-production">Media Production</option>
-            <option value="model-citizen">Model Citizen</option>
-            <option value="party-animal">Party Animal</option>
-            <option value="professional-development">Professional Development</option>
-            <option value="survival-skills">Survival Skills</option>
-            <option value="textiles">TEXTILES</option>
+          <h3>
+            <select value={currentChallenge} onChange={this.handleChange} className="category-list-category-title">
+              <option value="good-sport">Good Sport</option>
+              <option value="kitchen-sciences">Kitchen Sciences</option>
+              <option value="know-it-all">Know It All</option>
+              <option value="master-gardener">Master Gardener</option>
+              <option value="media-consumption">Media Consumption</option>
+              <option value="media-production">Media Production</option>
+              <option value="model-citizen">Model Citizen</option>
+              <option value="party-animal">Party Animal</option>
+              <option value="professional-development">Professional Development</option>
+              <option value="survival-skills">Survival Skills</option>
+              <option value="textiles">TEXTILES</option>
 
-          </select>
-          ({challengeBadgeCount})
+            </select>
+              {challengeBadgeCount} badges
+          </h3>
           {filteredByChallenge}
         </div>
       )
