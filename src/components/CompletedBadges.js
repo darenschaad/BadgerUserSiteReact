@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import BadgeTile from './BadgeTile'
+import BadgeTile from './BadgeTile';
+import moment from 'moment';
 
 class CompletedBadges extends Component {
   constructor(params){
@@ -13,19 +14,23 @@ class CompletedBadges extends Component {
 
   componentDidMount() {
     let completedBadgeArray = [];
-    let completedbadgeKeys = Object.keys(this.props.completedBadges);
+    let orderedCompletedBadgeArray = Object.values(this.props.completedBadges);
+    orderedCompletedBadgeArray.sort(function(a,b){
+      return (b.dateCompleted - a.dateCompleted);
+    })
     let badgeKeys = Object.keys(this.props.badges);
 
-    for (let j = 0; j < completedbadgeKeys.length; j++) {
+    for (let j = 0; j < orderedCompletedBadgeArray.length; j++) {
       for (let i = 0; i < badgeKeys.length; i++) {
-        if (completedbadgeKeys[j] === badgeKeys[i]) {
-          completedBadgeArray.push(this.props.badges[i]);
+        if (orderedCompletedBadgeArray[j].pushId === Number(badgeKeys[i])){
+          orderedCompletedBadgeArray[j].badge = this.props.badges[i];
           break;
         }
       }
     }
+
     this.setState({
-      "completedBadgeArray" : completedBadgeArray
+      "completedBadgeArray" : orderedCompletedBadgeArray
     });
   }
 
@@ -41,11 +46,13 @@ class CompletedBadges extends Component {
     return(
       <div>
         <h1>CompletedBadges</h1>
-          {this.state.completedBadgeArray.map((badge, idx) => {
+          {this.state.completedBadgeArray.map((completedBadge, idx) => {
+            console.log(completedBadge);
             return(
               <div key={idx}>
                 <BadgeTile
-                  badge={badge}
+                  badge={completedBadge.badge}
+                  date={moment(completedBadge.dateCompleted).format('MMM Do YYYY')}
                   idx={idx}
                   searchValue={this.props.searchValue}
                   goToBadge={this.goToBadge}

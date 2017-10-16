@@ -16,6 +16,7 @@ const BadgeTile = (props) => {
         <div className="badge-tile-image-details">
           <img className='detail-image' src={props.badge.imageUrl} alt={props.badge.names}></img>
           <div className="badge-tile-details">
+            <span>{props.date}</span>
             <h1 style={{color: textColor }} >{props.badge.name}</h1>
             <span style={{color: textColor }} className="badge-tile-subtitle">To do: </span>
             <span className="badge-tile-description">{props.badge.description}</span>

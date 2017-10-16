@@ -66,6 +66,8 @@ class Root extends Component {
         context: this,
         state: "bookmarkedBadges"
       });
+    }
+    if(uId !== "") {
       this.ref = base.syncState(`/completedBadges/${uId}`, {
         context: this,
         state: "completedBadges"

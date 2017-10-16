@@ -4,6 +4,7 @@ import base from '../base';
 import Loading from './Loading';
 import FontAwesome from 'react-fontawesome';
 import Modal from './Modal';
+import moment from 'moment';
 
 class Badge extends Component{
   constructor(params) {
@@ -59,8 +60,12 @@ class Badge extends Component{
       let uid = this.props.currentUser.uid;
       const badge = this.props.currentBadge;
       let completedBadgeId = badge.pushId;
-      let dateCompleted = new Date();
-      let completedBadgeObject= {dateCompleted:dateCompleted.toString(), pushId:completedBadgeId};
+      let dateCompleted = Date.now();
+      let completedBadgeObject= {dateCompleted:dateCompleted, pushId:completedBadgeId};
+      that.setState({
+        completed: true,
+        modalOpen : true
+      });
 
       if (!this.state.completed) {
         base.post(`completedBadges/${uid}/${completedBadgeId}`, {
@@ -74,10 +79,7 @@ class Badge extends Component{
             //   });
             }
             else {
-              that.setState({
-                completed: true,
-                modalOpen : true
-              });
+
             }
           }
         });
@@ -86,12 +88,13 @@ class Badge extends Component{
         //   bookmarkColor: '#eeeeee',
         //   bookmarked: false
         // })
+        that.setState({
+          completed: false,
+          modalOpen : true
+        });
         base.remove(`completedBadges/${uid}/${completedBadgeId}`, function(err){
           if(!err){
-            that.setState({
-              completed: false,
-              modalOpen : true
-            });
+
           } else {
             console.log(err);
           }
@@ -111,16 +114,17 @@ class Badge extends Component{
       let bookmarkBadgeId = badge.pushId;
       let dateBookmarked = new Date();
       let bookmarkBadgeObject= {dateBookmarked:dateBookmarked.toString(), pushId:bookmarkBadgeId};
+      that.setState({
+        bookmarkColor: '#20A282',
+        bookmarked:true,
+        modalOpen : true
+      });
       if (!this.state.bookmarked) {
         base.post(`bookmarkedBadges/${uid}/${bookmarkBadgeId}`, {
           data: bookmarkBadgeObject,
           then(err){
             if (err){
             }else {
-              that.setState({
-                bookmarkColor: '#20A282',
-                bookmarked:true
-              });
             }
           }
         });
@@ -138,6 +142,7 @@ class Badge extends Component{
   }
 
   onModalClose() {
+    console.log("modal fired");
     this.setState({modalOpen: false});
   }
 
