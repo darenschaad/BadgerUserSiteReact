@@ -34,6 +34,18 @@ class SignUp extends Component {
     //make call to Facebook API
     // base.authWithOAuthPopup('facebook', authHandler.bind(this), {scope: 'public_profile, email'});
   }
+  //Not in use Form for changing the users name
+  // <form onSubmit={this.signUp}>
+  //   <label>
+  //     First Name:
+  //     <input type="text" value={this.state.firstName} name="firstName" onChange={this.handleChange}></input>
+  //   </label>
+  //   <label>
+  //     Last Name:
+  //     <input type="text" value={this.state.lastName}  name="lastName" onChange={this.handleChange}></input>
+  //   </label>
+  //   <input type="submit" value="Submit"></input>
+  // </form>
 
 
   handleChange(event) {
@@ -50,19 +62,9 @@ class SignUp extends Component {
   render() {
     return(
       <div>
-        <form onSubmit={this.signUp}>
-          <label>
-            First Name:
-            <input type="text" value={this.state.firstName} name="firstName" onChange={this.handleChange}></input>
-          </label>
-          <label>
-            Last Name:
-            <input type="text" value={this.state.lastName}  name="lastName" onChange={this.handleChange}></input>
-          </label>
-          <input type="submit" value="Submit"></input>
-        </form>
-        <button type="submit" onClick={this.goToBookmarkedBadges}>View Bookmarked Badges</button>
-        <button type="submit" onClick={this.goToCompletedBadges}>View Completed Badges</button>
+
+        <button type="submit" className="searchButton" onClick={this.goToBookmarkedBadges}>View Bookmarked Badges</button>
+        <button type="submit" className="searchButton" onClick={this.goToCompletedBadges}>View Completed Badges</button>
       </div>
     );
   }
