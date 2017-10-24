@@ -50,7 +50,7 @@ class NavBar extends Component {
           <li className="navbar-clickable" onClick={this.goToPage.bind(this, "about")}>About</li>
           <li className="navbar-clickable" onClick={this.goToPage.bind(this, "categories")}>Categories</li>
           <li className="navbar-clickable" onClick={this.goToPage.bind(this, "challenges")}>Challenges</li>
-          <li className="navbar-clickable" onClick={this.goToPage.bind(this, "signup")}>My Account</li>
+          <li className="navbar-clickable" onClick={this.goToPage.bind(this, "my-account")}>My Account</li>
           <Login
             logIn={this.props.logIn}
             logOut={this.props.logOut}

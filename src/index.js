@@ -328,7 +328,7 @@ class Root extends Component {
                 />
 
             <Match
-              pattern="/signup"
+              pattern="/my-account"
               component={() => (
                 <SignUp
                   currentUser={this.state.currentUser} />
