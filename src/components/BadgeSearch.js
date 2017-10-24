@@ -51,13 +51,15 @@ class BadgeSearch extends Component {
   advancedSearch(event) {
     this.setState({
       standardSearch : false,
-    })
+    });
+    window.scrollTo(0, 0);
   }
 
   standardSearch(event) {
     this.setState({
       standardSearch: true,
-    })
+    });
+    window.scrollTo(0, 0);
   }
 
   onChange(event) {
