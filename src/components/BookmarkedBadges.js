@@ -40,7 +40,7 @@ class BookmarkedBadges extends Component {
   render() {
     return(
       <div>
-        <h1>BookmarkedBadges</h1>
+        <h1>My Bookmarked Badges</h1>
           {this.state.bookmarkedBadgeArray.map((badge, idx) => {
             return(
               <div key={idx}>

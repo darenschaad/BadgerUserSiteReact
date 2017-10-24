@@ -45,7 +45,7 @@ class CompletedBadges extends Component {
   render() {
     return(
       <div>
-        <h1>CompletedBadges</h1>
+        <h1>My Completed Badges</h1>
           {this.state.completedBadgeArray.map((completedBadge, idx) => {
             console.log(completedBadge);
             return(

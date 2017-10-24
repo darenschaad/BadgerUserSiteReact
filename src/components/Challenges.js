@@ -26,10 +26,6 @@ class Challenges extends Component {
       return(
         <div>
           <h1 className="categories-categories-title">Challenges</h1>
-          <br></br>
-          <br></br>
-          <br></br>
-          <h3 className="categories-categories-title">...Coming Soon...</h3>
           <div className="category-000-div">
             <div className="category-individual animated slideInRight" value={'good-sport'} onClick={() => this.goToChallenge('good-sport')}>
               <img className="category-image" id="category-000-image"  src="https://spcilk.github.io/badger-badge-images/images/goodsport.png" alt="Good Sport Challenge"/>

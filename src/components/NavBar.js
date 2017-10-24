@@ -18,6 +18,8 @@ class NavBar extends Component {
     if (destination === "") {
       localStorage.setItem(`searchBy`, "");
     }
+    window.scrollTo(0, 0);
+    this.setState({ className: 'closed' });
     this.context.router.transitionTo(`/${destination}`);
   }
 
