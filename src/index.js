@@ -14,6 +14,7 @@ import NavBar from './components/NavBar';
 import SignUp from './components/SignUp';
 import BookmarkedBadges from './components/BookmarkedBadges';
 import CompletedBadges from './components/CompletedBadges';
+import BadgerProfiles from './components/BadgerProfiles';
 
 import './styles/App.scss';
 import './styles/animate.css';
@@ -28,7 +29,8 @@ class Root extends Component {
       authenticated: false,
       currentUser: { },
       bookmarkedBadges: { },
-      completedBadges : { }
+      completedBadges : { },
+      users : { },
     }
     this.logIn = this.logIn.bind(this);
     this.logOut = this.logOut.bind(this);
@@ -67,10 +69,18 @@ class Root extends Component {
         state: "bookmarkedBadges"
       });
     }
+
     if(uId !== "") {
       this.ref = base.syncState(`/completedBadges/${uId}`, {
         context: this,
-        state: "completedBadges"
+        state: "completedBadges",
+      });
+    }
+
+    if(uId !== "") {
+      this.ref = base.syncState(`/users`, {
+        context: this,
+        state: "users",
       });
     }
 
@@ -332,6 +342,17 @@ class Root extends Component {
               component={() => (
                 <SignUp
                   currentUser={this.state.currentUser} />
+              )}
+            />
+
+            <Match
+              pattern="/badger-profiles"
+              component={() => (
+                <BadgerProfiles
+                  currentUser={this.state.currentUser}
+                  users={this.state.users}
+                  getBadgeById={this.getBadgeById}
+                  loading={this.state.loading} />
               )}
             />
 

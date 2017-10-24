@@ -47,7 +47,6 @@ class CompletedBadges extends Component {
       <div>
         <h1>My Completed Badges</h1>
           {this.state.completedBadgeArray.map((completedBadge, idx) => {
-            console.log(completedBadge);
             return(
               <div key={idx}>
                 <BadgeTile
@@ -61,7 +60,6 @@ class CompletedBadges extends Component {
               </div>
             );
           })}
-
       </div>
     );
   }
