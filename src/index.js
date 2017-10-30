@@ -112,7 +112,7 @@ class Root extends Component {
   }
 
   displayUser(user) {
-    let userObject = { uid:user.user.uid, userPhoto:user.user.photoURL }
+    let userObject = { uid:user.user.uid, userPhoto:user.user.photoURL , userName:user.user.displayName}
     let userJSON = JSON.stringify(userObject);
     localStorage.setItem('currentUser', userJSON);
     this.setState({ authenticated: true, currentUser: userObject});
@@ -158,10 +158,12 @@ class Root extends Component {
       let uid = user.user.uid;
       localStorage.setItem(`userId`, uid);
       let test = this.getUser(uid);
+      console.log(user);
       if (test === undefined) {
         this.signUp(user);
+        console.log(user);
       }
-      location.reload();
+      // location.reload();
     }
     //make call to Facebook API
     base.authWithOAuthPopup('facebook', authHandler.bind(this), {scope: 'public_profile, email'});
@@ -341,7 +343,8 @@ class Root extends Component {
               pattern="/my-account"
               component={() => (
                 <SignUp
-                  currentUser={this.state.currentUser} />
+                  currentUser={this.state.currentUser}
+                  users={this.state.users} />
               )}
             />
 

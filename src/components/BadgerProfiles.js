@@ -62,7 +62,7 @@ class BadgerProfiles extends Component {
             return(
               <div key={idx}>
                 <p>
-                  {badger.name}
+                  {badger.name}{badger.firstName} {badger.lastName}
                 </p>
               </div>
             );
